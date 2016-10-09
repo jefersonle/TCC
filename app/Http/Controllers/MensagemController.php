@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\Mensagem;
 
 class MensagemController extends Controller
 {
@@ -14,9 +15,10 @@ class MensagemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function getIndex()
     {
-        //
+        $mensagens = Mensagem::all();
+        dd($mensagens);
     }
 
     /**
@@ -37,7 +39,14 @@ class MensagemController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $mensagem = new Mensagem();
+        $mensagem->de = $request->de;
+        $mensagem->para = $request->para;
+        $mensagem->status_id = 0;
+        $mensagem->msg = $request->msg;
+        $mensagem->save();
+
+        return redirect('/mensagem');
     }
 
     /**
@@ -46,9 +55,10 @@ class MensagemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function getShow($id)
     {
-        //
+        $mensagem = Mensagem::find($id);
+        dd($mensagem);
     }
 
     /**
@@ -71,7 +81,14 @@ class MensagemController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $mensagem = Mensagem::find($id);
+        $mensagem->de = $request->de;
+        $mensagem->para = $request->para;
+        $mensagem->status_id = 0;
+        $mensagem->msg = $request->msg;
+        $mensagem->save();
+
+        return redirect('/mensagem');
     }
 
     /**
@@ -82,6 +99,9 @@ class MensagemController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $mensagem = Mensagem::find($id);
+        $mensagem->delete();
+
+        return redirect('/mensagem');
     }
 }

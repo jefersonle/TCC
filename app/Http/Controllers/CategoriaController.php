@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Models\Categoria;
+use App\Models\Anuncio;
 
 
 class CategoriaController extends Controller
@@ -17,7 +18,7 @@ class CategoriaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function getIndex()
     {
         $categorias = Categoria::all();
         dd($categorias);
@@ -30,7 +31,7 @@ class CategoriaController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -41,7 +42,13 @@ class CategoriaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $categoria = new Categoria();
+        $categoria->nome = $request->nome;
+        $categoria->categoria_pai = $request->categoria_pai;
+        $categoria->save();
+
+        return redirect('/categoria');
+
     }
 
     /**
@@ -50,9 +57,11 @@ class CategoriaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function getShow($id)
     {
-        //
+        $categoria = Categoria::find($id);
+        dd($categoria);
+        
     }
 
     /**
@@ -75,7 +84,12 @@ class CategoriaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $categoria = Categoria::find($id);
+        $categoria->nome = $request->nome;
+        $categoria->categoria_pai = $request->categoria_pai;
+        $categoria->save();
+
+        return redirect('/categoria');
     }
 
     /**
@@ -86,6 +100,9 @@ class CategoriaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $categoria = Categoria::find($id);
+        $categoria->delete();
+
+        return redirect('/categoria');
     }
 }

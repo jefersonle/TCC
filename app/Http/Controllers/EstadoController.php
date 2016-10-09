@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\Estado;
 
 class EstadoController extends Controller
 {
@@ -14,9 +15,10 @@ class EstadoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function getIndex()
     {
-        //
+        $estados = Estado::all();
+        dd($estados);
     }
 
     /**
@@ -37,7 +39,13 @@ class EstadoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $estado = new Estado();
+        $estado->nome = $request->nome;
+        $estado->uf = $request->uf;
+        $estado->save();
+
+        return redirect('/estado');
+
     }
 
     /**
@@ -46,9 +54,10 @@ class EstadoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function getShow($id)
     {
-        //
+        $estado = Estado::find($id);
+        dd($estado);
     }
 
     /**
@@ -71,7 +80,13 @@ class EstadoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $estado = Estado::find($id);
+        $estado->nome = $request->nome;
+        $estado->uf = $request->uf;
+        $estado->save();
+
+        return redirect('/estado');
+
     }
 
     /**
@@ -82,6 +97,9 @@ class EstadoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $estado = Estado::find($id);
+        $estado->delete();
+
+        return redirect('/estado');
     }
 }

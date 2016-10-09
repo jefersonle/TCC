@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\Cidade;
 
 class CidadeController extends Controller
 {
@@ -14,9 +15,10 @@ class CidadeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function getIndex()
     {
-        //
+        $cidades = Cidade::all();
+        dd($cidades);
     }
 
     /**
@@ -37,7 +39,13 @@ class CidadeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $cidade = new Cidade();
+        $cidade->estado_id = $request->estado_id;
+        $cidade->nome = $request->nome;
+        $cidade->ddd = $request->ddd;
+        $cidade->save();
+
+        return redirect('/cidade');
     }
 
     /**
@@ -46,9 +54,10 @@ class CidadeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function getShow($id)
     {
-        //
+        $cidade = Cidade::find($id);
+        dd($cidade);
     }
 
     /**
@@ -71,7 +80,13 @@ class CidadeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $cidade = Cidade::find($id);
+        $cidade->estado_id = $request->estado_id;
+        $cidade->nome = $request->nome;
+        $cidade->ddd = $request->ddd;
+        $cidade->save();
+
+        return redirect('/cidade');
     }
 
     /**
@@ -82,6 +97,9 @@ class CidadeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $cidade = Cidade::find($id);
+        $cidade->delete();
+
+        return redirect('/cidade');
     }
 }

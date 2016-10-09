@@ -14,7 +14,7 @@ class ComentarioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function getIndex()
     {
         //
     }
@@ -37,7 +37,14 @@ class ComentarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $comentario = Comentario();
+        $comentario->anuncio_id = $request_id;
+        $comentario->user_id = $request->user_id;
+        $comentario->comentario = $request->comentario;
+        $comentario->save();
+
+        return redirect('/comentario');
+        
     }
 
     /**
@@ -46,7 +53,7 @@ class ComentarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function getShow($id)
     {
         //
     }
@@ -71,7 +78,13 @@ class ComentarioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $comentario = Comentario::find($id);
+        $comentario->anuncio_id = $request_id;
+        $comentario->user_id = $request->user_id;
+        $comentario->comentario = $request->comentario;
+        $comentario->save();
+
+        return redirect('/comentario');
     }
 
     /**
@@ -82,6 +95,9 @@ class ComentarioController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $comentario = Comentario::find($id);
+        $comentario->delete();
+
+        return redirect('/comentario');
     }
 }

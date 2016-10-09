@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\User;
 
 class UsuarioController extends Controller
 {
@@ -14,9 +15,10 @@ class UsuarioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function getIndex()
     {
-        //
+        $usuarios = User::all();
+        dd($usuarios);
     }
 
     /**
@@ -46,9 +48,10 @@ class UsuarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function getShow($id)
     {
-        //
+        $usuario = User::find($id);
+        dd($usuario);
     }
 
     /**

@@ -16,78 +16,70 @@ class AnuncioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function getIndex()
     {
         $anuncios = Anuncio::all();
 
-        foreach ($anuncios as $anuncio) {
-            dd($anuncio->comentarios);    
-        }
+        dd($anuncios);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function create(Request $request)
     {
-        //
+        $anuncio = new Anuncio();
+        $anuncio->cidade_id = $request->cidade_id;
+        $anuncio->user_id = $request->user_id;
+        $anuncio->categoria_id = $request->categoria_id;
+        $anuncio->titulo = $request->titulo;
+        $anuncio->descricao = $request->descricao;
+        $anuncio->valor = $request->valor;
+        $anuncio->save();
+
+        return redirect('/anuncio');        
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
-        //
+       
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    
+    public function getShow($id)
     {
-        //
+        $anuncio = Anuncio::find($id);
+
+        dd($anuncio);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function edit($id)
     {
-        //
+        
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   
     public function update(Request $request, $id)
     {
-        //
+        $anuncio = Anuncio::find($id);
+        $anuncio->cidade_id = $request->cidade_id;
+        $anuncio->user_id = $request->user_id;
+        $anuncio->categoria_id = $request->categoria_id;
+        $anuncio->titulo = $request->titulo;
+        $anuncio->descricao = $request->descricao;
+        $anuncio->valor = $request->valor;
+        $anuncio->save();
+
+        return redirect('/anuncio');   
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy($id)
     {
-        //
+        $anuncio = Anuncio::find($id);
+        $anuncio->delete();
+
+        return redirect('/anuncio');
     }
 }

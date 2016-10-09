@@ -14,7 +14,7 @@ class ImagemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function getIndex()
     {
         //
     }
@@ -46,7 +46,7 @@ class ImagemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function getShow($id)
     {
         //
     }
