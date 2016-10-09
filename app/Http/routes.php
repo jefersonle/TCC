@@ -15,10 +15,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('anuncios', 'AnuncioController@index');
+Route::controller('anuncio', 'AnuncioController');
 
-Route::get('categorias', 'CategoriaController@index');
+Route::controller('categoria', 'CategoriaController');
 
+Route::controller('cidade', 'CidadeController');
+
+Route::controller('estado', 'EstadoController');
+
+Route::controller('usuario', 'UsuarioController');
+
+Route::get('ajaxtest', function(){
+	return view('ajaxtest');
+});
 /*
 |--------------------------------------------------------------------------
 | Application Routes
