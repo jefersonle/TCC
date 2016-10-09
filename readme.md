@@ -9,8 +9,7 @@ O sistema visa oferecer uma plataforma de portal de anúncios voltada aos agricu
 
 ## Desenvolvedores
 
-Jeferson Eurides
-Marlon Gross
+Jeferson Eurides e Marlon Gross - Formandos de 2016
 
 ## Segurança e Vulnerabilidade
 
@@ -18,4 +17,4 @@ Este trabalho trata-se de um projeto com fim não comercial e visa o aprendizado
 
 ## Licença
 
-O conteúdo deste repositório pode ser utilizado por qualquer pessoa que consigo acessa-lo.
+O conteúdo deste repositório pode ser utilizado por qualquer pessoa que consiga acessa-lo.
