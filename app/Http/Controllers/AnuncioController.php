@@ -26,6 +26,14 @@ class AnuncioController extends Controller
     
     public function create(Request $request)
     {
+        
+
+
+    }
+
+    
+    public function store(Request $request)
+    {
         $anuncio = new Anuncio();
         $anuncio->cidade_id = $request->cidade_id;
         $anuncio->user_id = $request->user_id;
@@ -35,14 +43,7 @@ class AnuncioController extends Controller
         $anuncio->valor = $request->valor;
         $anuncio->save();
 
-        return redirect('/anuncio');        
-
-    }
-
-    
-    public function store(Request $request)
-    {
-       
+        return redirect('/anuncio'); 
     }
 
     

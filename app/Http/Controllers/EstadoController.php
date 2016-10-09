@@ -18,6 +18,11 @@ class EstadoController extends Controller
     public function getIndex()
     {
         $estados = Estado::all();
+
+        if($request->ajax()){
+                return response()->json($estados);
+        }
+        
         dd($estados);
     }
 

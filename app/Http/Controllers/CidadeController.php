@@ -18,6 +18,10 @@ class CidadeController extends Controller
     public function getIndex()
     {
         $cidades = Cidade::all();
+
+        if($request->ajax()){
+                return response()->json($cidades);
+        }
         dd($cidades);
     }
 

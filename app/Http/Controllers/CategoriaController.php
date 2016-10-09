@@ -18,9 +18,14 @@ class CategoriaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getIndex()
+    public function getIndex(Request $request)
     {
         $categorias = Categoria::all();
+
+        if($request->ajax()){
+                return response()->json($categorias);
+        }
+
         dd($categorias);
     }
 

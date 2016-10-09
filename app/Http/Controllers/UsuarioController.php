@@ -18,6 +18,11 @@ class UsuarioController extends Controller
     public function getIndex()
     {
         $usuarios = User::all();
+
+        if($request->ajax()){
+                return response()->json($usuarios);
+        }
+
         dd($usuarios);
     }
 
