@@ -15,12 +15,15 @@ class EstadoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getIndex()
+    public function getIndex(Request $request)
     {
         $estados = Estado::all();
 
         if($request->ajax()){
-                return response()->json($estados);
+
+                $estados = $estados->toArray();
+
+                return $estados;
         }
         
         dd($estados);
@@ -33,7 +36,8 @@ class EstadoController extends Controller
      */
     public function create()
     {
-        //
+        $data['tipo'] = 'criar';
+        // return view('formestado', $data);
     }
 
     /**
@@ -73,7 +77,10 @@ class EstadoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $estado = Estado::find($id);
+        $data['estado'] = $estado;
+        $data['tipo'] = 'editar';
+        // return view('formestado', $data);
     }
 
     /**

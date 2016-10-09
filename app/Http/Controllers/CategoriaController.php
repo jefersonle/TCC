@@ -23,10 +23,16 @@ class CategoriaController extends Controller
         $categorias = Categoria::all();
 
         if($request->ajax()){
-                return response()->json($categorias);
+
+                $categorias = $categorias->toArray();
+
+                return $categorias;
         }
 
+        
         dd($categorias);
+
+
     }
 
     /**
@@ -36,8 +42,10 @@ class CategoriaController extends Controller
      */
     public function create()
     {
-
+        $data['tipo'] = 'criar';
+        // return view('formcategoria', $data);
     }
+    
 
     /**
      * Store a newly created resource in storage.
@@ -77,7 +85,10 @@ class CategoriaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $categoria = Categoria::find($id);
+        $data['categoria'] = $categoria;
+        $data['tipo'] = 'editar';
+        // return view('formcategoria', $data);
     }
 
     /**

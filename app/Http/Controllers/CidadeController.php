@@ -15,13 +15,17 @@ class CidadeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getIndex()
+    public function getIndex(Request $request)
     {
         $cidades = Cidade::all();
 
         if($request->ajax()){
-                return response()->json($cidades);
+
+                $cidades = $cidades->toArray();
+
+                return $cidades;
         }
+
         dd($cidades);
     }
 
@@ -32,7 +36,8 @@ class CidadeController extends Controller
      */
     public function create()
     {
-        //
+        $data['tipo'] = 'criar';
+        // return view('formcidade', $data);
     }
 
     /**
@@ -72,7 +77,10 @@ class CidadeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $cidade = Cidade::find($id);
+        $data['cidade'] = $cidade;
+        $data['tipo'] = 'editar';
+        // return view('formcidade', $data);
     }
 
     /**

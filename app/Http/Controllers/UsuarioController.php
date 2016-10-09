@@ -15,12 +15,15 @@ class UsuarioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getIndex()
+    public function getIndex(Request $request)
     {
         $usuarios = User::all();
 
         if($request->ajax()){
-                return response()->json($usuarios);
+
+                $usuarios = $usuarios->toArray();
+
+                return $usuarios;
         }
 
         dd($usuarios);

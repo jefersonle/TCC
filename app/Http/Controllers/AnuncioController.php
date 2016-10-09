@@ -24,10 +24,10 @@ class AnuncioController extends Controller
     }
 
     
-    public function create(Request $request)
+    public function create()
     {
-        
-
+        $data['tipo'] = 'criar';
+        // return view('formanuncio', $data);
 
     }
 
@@ -57,7 +57,11 @@ class AnuncioController extends Controller
     
     public function edit($id)
     {
-        
+        $anuncio = Anuncio::find($id);
+        $data['anuncio'] = $anuncio;
+        $data['tipo'] = 'editar';
+        // return view('formanuncio', $data);
+
     }
 
    
