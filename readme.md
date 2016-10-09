@@ -1,20 +1,27 @@
-# Agro Anúncios - TCC - Tecnologia em Sistemas para Internet - Unopar Ponta Grossa
+# Laravel PHP Framework
 
-Trabalho de conclusão de curso de Tecnologia em Sistemas para Internet, Faculdade Unopar - Ponta Grossa - PR.
+[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
+[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
+[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
+[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
+[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
 
-Trabalho Desenvolvido utilizando o framework laravel, banco de dados MySQL e jquery.
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
 
-O sistema visa oferecer uma plataforma de portal de anúncios voltada aos agricultores e trabalhadores do campo.
+Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
 
+## Official Documentation
 
-## Desenvolvedores
+Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
 
-Jeferson Eurides e Marlon Gross - Formandos de 2016
+## Contributing
 
-## Segurança e Vulnerabilidade
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
 
-Este trabalho trata-se de um projeto com fim não comercial e visa o aprendizado e teste das tecnologias aprendidas durante o curso, sendo assim, não garantimos total segurança do mesmo e não aconselhamos seu uso para fins que não sejam os citados anteriormente.
+## Security Vulnerabilities
 
-## Licença
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
 
-O conteúdo deste repositório pode ser utilizado por qualquer pessoa que consiga acessa-lo.
+## License
+
+The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
