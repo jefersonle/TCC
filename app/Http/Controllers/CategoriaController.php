@@ -20,7 +20,7 @@ class CategoriaController extends Controller
      */
     public function getIndex(Request $request)
     {
-        $categorias = Categoria::all();
+        $categorias = Categoria::orderBy('nome')->get();
 
         if($request->ajax()){
 

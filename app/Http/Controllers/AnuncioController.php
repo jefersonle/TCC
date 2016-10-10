@@ -24,26 +24,27 @@ class AnuncioController extends Controller
     }
 
     
-    public function create()
+    public function getCreate()
     {
         $data['tipo'] = 'criar';
-        // return view('formanuncio', $data);
+        return view('formanuncio', $data);
 
     }
 
     
-    public function store(Request $request)
+    public function postCreate(Request $request)
     {
         $anuncio = new Anuncio();
         $anuncio->cidade_id = $request->cidade_id;
-        $anuncio->user_id = $request->user_id;
+        $anuncio->user_id = 1;
         $anuncio->categoria_id = $request->categoria_id;
         $anuncio->titulo = $request->titulo;
         $anuncio->descricao = $request->descricao;
         $anuncio->valor = $request->valor;
         $anuncio->save();
 
-        return redirect('/anuncio'); 
+        return redirect('/anuncio/create'); 
+
     }
 
     
@@ -80,7 +81,7 @@ class AnuncioController extends Controller
     }
 
     
-    public function destroy($id)
+    public function getDestroy($id)
     {
         $anuncio = Anuncio::find($id);
         $anuncio->delete();

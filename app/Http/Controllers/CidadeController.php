@@ -15,17 +15,18 @@ class CidadeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getIndex(Request $request)
+    public function getIndex(Request $request, $id)
     {
-        $cidades = Cidade::all();
-
+        
         if($request->ajax()){
+               
+                $cidades = Cidade::where('estado_id', $id)->orderBy('nome')->get();
 
                 $cidades = $cidades->toArray();
 
                 return $cidades;
-        }
-
+        }        
+        $cidades = Cidade::orderBy('nome')->get();
         dd($cidades);
     }
 

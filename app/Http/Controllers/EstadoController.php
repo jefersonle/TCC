@@ -17,7 +17,7 @@ class EstadoController extends Controller
      */
     public function getIndex(Request $request)
     {
-        $estados = Estado::all();
+        $estados = Estado::orderBy('nome')->get();
 
         if($request->ajax()){
 
