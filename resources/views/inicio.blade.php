@@ -59,7 +59,7 @@
       <div class="container">    
             <h1>Lorem ipsum   <span class="segment-heading">    dolor amet </span> lorem ipsum</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <a href="post-ad.html">Criar Anúncio</a>
+            <a href="{{ url('/anuncio/create') }}">Criar Anúncio</a>
       </div>
     </div>
     <!-- Fim Banner Header -->
@@ -72,61 +72,61 @@
             <div class="categories">
                 <div class="container">
                     <div class="col-md-2 focus-grid">
-                        <a href="categories.html">
+                        <a href="{{ url('/') }}/categoria">
                             <div class="focus-border">
                                 <div class="focus-layout">
                                     <div class="focus-image"><i class="fa fa-mobile"></i></div>
-                                    <h4 class="clrchg">Mobiles</h4>
+                                    <h4 class="clrchg">Agricultura</h4>
                                 </div>
                             </div>
                         </a>
                     </div>
                     <div class="col-md-2 focus-grid">
-                        <a href="categories.html#parentVerticalTab2">
+                        <a href="{{ url('/') }}/categoria#parentVerticalTab3">
                             <div class="focus-border">
                                 <div class="focus-layout">
                                     <div class="focus-image"><i class="fa fa-laptop"></i></div>
-                                    <h4 class="clrchg"> Electronics & Appliances</h4>
+                                    <h4 class="clrchg">Pecuária</h4>
                                 </div>
                             </div>
                         </a>
                     </div>
                     <div class="col-md-2 focus-grid">
-                        <a href="categories.html#parentVerticalTab3">
+                        <a href="{{ url('/') }}/categoria#parentVerticalTab6">
                             <div class="focus-border">
                                 <div class="focus-layout">
                                     <div class="focus-image"><i class="fa fa-car"></i></div>
-                                    <h4 class="clrchg">Cars</h4>
+                                    <h4 class="clrchg">Vestuario</h4>
                                 </div>
                             </div>
                         </a>
                     </div>  
                     <div class="col-md-2 focus-grid">
-                        <a href="categories.html#parentVerticalTab4">
+                        <a href="{{ url('/') }}/categoria#parentVerticalTab5">
                             <div class="focus-border">
                                 <div class="focus-layout">
                                     <div class="focus-image"><i class="fa fa-motorcycle"></i></div>
-                                    <h4 class="clrchg">Bikes</h4>
+                                    <h4 class="clrchg">Veículos</h4>
                                 </div>
                             </div>
                         </a>
                     </div>  
                     <div class="col-md-2 focus-grid">
-                        <a href="categories.html#parentVerticalTab5">
+                        <a href="{{ url('/') }}/categoria#parentVerticalTab2">
                             <div class="focus-border">
                                 <div class="focus-layout">
                                     <div class="focus-image"><i class="fa fa-wheelchair"></i></div>
-                                    <h4 class="clrchg">Furnitures</h4>
+                                    <h4 class="clrchg">Imóveis</h4>
                                 </div>
                             </div>
                         </a>
                     </div>
                     <div class="col-md-2 focus-grid">
-                        <a href="categories.html#parentVerticalTab6">
+                        <a href="{{ url('/') }}/categoria#parentVerticalTab4">
                             <div class="focus-border">
                                 <div class="focus-layout">
                                     <div class="focus-image"><i class="fa fa-paw"></i></div>
-                                    <h4 class="clrchg">Pets</h4>
+                                    <h4 class="clrchg">Serviços</h4>
                                 </div>
                             </div>
                         </a>
@@ -139,134 +139,33 @@
                 <div class="container">
                 <!-- slider -->
                 <div class="trend-ads">
-                    <h2>Mais Acessados</h2>
-                            <ul id="flexiselDemo3">
-                                <li>
+                    <h2>Ultimos Anúncios</h2>
+                        <ul id="flexiselDemo3">                            
+                            @foreach($anuncios as $anuncio)
+                                @if($cont == 1 || $cont == 5 || $cont == 9)
+                                    <li>
+                                @endif
                                     <div class="col-md-3 biseller-column">
                                         <a href="single.html">
                                             <img src="images/p1.jpg"/>
-                                            <span class="price">R&#36; 450</span>
+                                            <span class="price">R&#36; {{ $anuncio->valor }}</span>
                                         </a> 
                                         <div class="ad-info">
-                                            <h5>There are many variations of passages</h5>
-                                            <span>1 hour ago</span>
+                                            <h5>{{ $anuncio->titulo }}</h5>
+                                            <span>{{ $anuncio->created_at }}</span>
                                         </div>
                                     </div>
-                                    <div class="col-md-3 biseller-column">
-                                        <a href="single.html">
-                                            <img src="images/p2.jpg"/>
-                                            <span class="price">R&#36; 399</span>
-                                        </a> 
-                                        <div class="ad-info">
-                                            <h5>Lorem Ipsum is simply dummy</h5>
-                                            <span>3 hour ago</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 biseller-column">
-                                        <a href="single.html">
-                                            <img src="images/p3.jpg"/>
-                                            <span class="price">R&#36; 199</span>
-                                        </a> 
-                                        <div class="ad-info">
-                                            <h5>It is a long established fact that a reader</h5>
-                                            <span>8 hour ago</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 biseller-column">
-                                        <a href="single.html">
-                                            <img src="images/p4.jpg"/>
-                                            <span class="price">R&#36; 159</span>
-                                        </a> 
-                                        <div class="ad-info">
-                                            <h5>passage of Lorem Ipsum you need to be</h5>
-                                            <span>19 hour ago</span>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="col-md-3 biseller-column">
-                                        <a href="single.html">
-                                            <img src="images/p5.jpg"/>
-                                            <span class="price">R&#36; 1599</span>
-                                        </a> 
-                                        <div class="ad-info">
-                                            <h5>There are many variations of passages</h5>
-                                            <span>1 hour ago</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 biseller-column">
-                                        <a href="single.html">
-                                            <img src="images/p6.jpg"/>
-                                            <span class="price">R&#36; 1099</span>
-                                        </a> 
-                                        <div class="ad-info">
-                                            <h5>passage of Lorem Ipsum you need to be</h5>
-                                            <span>1 day ago</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 biseller-column">
-                                        <a href="single.html">
-                                            <img src="images/p7.jpg"/>
-                                            <span class="price">R&#36; 109</span>
-                                        </a> 
-                                        <div class="ad-info">
-                                            <h5>It is a long established fact that a reader</h5>
-                                            <span>9 hour ago</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 biseller-column">
-                                        <a href="single.html">
-                                            <img src="images/p8.jpg"/>
-                                            <span class="price">R&#36; 189</span>
-                                        </a> 
-                                        <div class="ad-info">
-                                            <h5>Lorem Ipsum is simply dummy</h5>
-                                            <span>3 hour ago</span>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="col-md-3 biseller-column">
-                                        <a href="single.html">
-                                            <img src="images/p9.jpg"/>
-                                            <span class="price">R&#36; 2599</span>
-                                        </a> 
-                                        <div class="ad-info">
-                                            <h5>Lorem Ipsum is simply dummy</h5>
-                                            <span>3 hour ago</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 biseller-column">
-                                        <a href="single.html">
-                                            <img src="images/p10.jpg"/>
-                                            <span class="price">R&#36; 3999</span>
-                                        </a> 
-                                        <div class="ad-info">
-                                            <h5>It is a long established fact that a reader</h5>
-                                            <span>9 hour ago</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 biseller-column">
-                                        <a href="single.html">
-                                            <img src="images/p11.jpg"/>
-                                            <span class="price">R&#36; 2699</span>
-                                        </a> 
-                                        <div class="ad-info">
-                                            <h5>passage of Lorem Ipsum you need to be</h5>
-                                            <span>1 day ago</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 biseller-column">
-                                        <a href="single.html">
-                                            <img src="images/p12.jpg"/>
-                                            <span class="price">R&#36; 899</span>
-                                        </a> 
-                                        <div class="ad-info">
-                                            <h5>There are many variations of passages</h5>
-                                            <span>1 hour ago</span>
-                                        </div>
-                                    </div>
-                                </li>
+                                @if($cont == 4 || $cont == 8)
+                                    </li>
+                                @endif
+
+                                <?php $cont++; ?>
+
+                            @endforeach                            
+                            @if($cont != 4 && $cont != 8)
+                            </li>
+                            @endif
+
                         </ul>
                     <script type="text/javascript">
                          $(window).load(function() {

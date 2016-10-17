@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Models\Anuncio;
+use App\Models\Estado;
 
 class AnuncioController extends Controller
 {
@@ -19,8 +20,8 @@ class AnuncioController extends Controller
     public function getIndex()
     {
         $anuncios = Anuncio::all();
-
-        dd($anuncios);
+        $data['anuncios'] = $anuncios;
+        return view('anuncio', $data);
     }
 
     
@@ -51,8 +52,8 @@ class AnuncioController extends Controller
     public function getShow($id)
     {
         $anuncio = Anuncio::find($id);
-
-        dd($anuncio);
+        $data['anuncio'] = $anuncio;
+        return view('single', $data);
     }
 
     
@@ -87,5 +88,29 @@ class AnuncioController extends Controller
         $anuncio->delete();
 
         return redirect('/anuncio');
+    }
+
+     public function getCidade($id)
+    {
+        $anuncios = Anuncio::where('cidade_id', $id)->orderBy('created_at')->get();
+        $data['anuncios'] = $anuncios;
+        return view('anuncio', $data);
+        
+    }
+
+    public function getEstado($id)
+    {
+        $anuncios = Estado::find($id)->anuncios()->get();        
+        $data['anuncios'] = $anuncios;
+        return view('anuncio', $data);
+        
+    }
+
+    public function getCategoria($id)
+    {
+        $anuncios = Anuncio::where('categoria_id', $id)->get();        
+        $data['anuncios'] = $anuncios;
+        return view('anuncio', $data);
+        
     }
 }

@@ -12,9 +12,7 @@
 */
 
 
-Route::get('/', function () {
-    return view('inicio');
-});
+
 
 Route::controller('anuncio', 'AnuncioController');
 
@@ -49,3 +47,5 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/home', 'HomeController@index');
 });
+
+Route::controller('/', 'HomeController');

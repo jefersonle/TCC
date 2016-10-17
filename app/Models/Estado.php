@@ -10,4 +10,9 @@ class Estado extends Model
     {
         return $this->hasMany('App\Models\Cidade');
     }
+
+    public function anuncios()
+    {
+        return $this->hasManyThrough('App\Models\Anuncio', 'App\Models\Cidade');
+    }
 }

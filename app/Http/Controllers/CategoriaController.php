@@ -27,10 +27,10 @@ class CategoriaController extends Controller
                 $categorias = $categorias->toArray();
 
                 return $categorias;
-        }
-
-        
-        dd($categorias);
+        }       
+       
+        $data['categorias'] = $categorias;
+        return view('categorias', $data);
 
 
     }

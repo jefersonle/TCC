@@ -8,46 +8,12 @@
 <script src="{{ url('/') }}/js/bootstrap.min.js"></script>
 <script src="{{ url('/') }}/js/bootstrap-select.js"></script>
 <script>
-	var cidades = [];
-	function loadCidades(id_estado){
-				$.ajax({
-					url: '{{ url('/cidade/index') }}/' +  id_estado.value,
-					data: '',
-					name:name,
-					method:'get',
-		   			success:function(data){
-						cidades = data;
-						console.log(cidades);  
-
-						var options = '<option value="">Selecionar Cidade</option>';
-					      for (var i = 0; i < data.length; i++) {
-					        options += '<option value="' + data[i].id + '">' + data[i].nome + '</option>';
-					      }
-					      $("#selectCidades").html(options);	    			
-					}			
-				});
-		}	
+	
   $(document).ready(function () {  	
-  	var estados = [];
+  	
   	var categorias = [];		
 
-		$.ajax({
-			url: '{{ url('/estado') }}',
-			data: '',
-			name:name,
-			method:'get',
-   			success:function(data){
-				estados = data;
-				console.log(estados);   
-
-				var options = '<option value="">Selecionar Estado</option>';
-			      for (var i = 0; i < data.length; i++) {
-			        options += '<option value="' + data[i].id + '">' + data[i].nome + '</option>';
-			      }
-			      $("#selectEstados").html(options);	   			
-			}			
-		});
-
+		
 		$.ajax({
 			url: '{{ url('/categoria') }}',
 			data: '',
@@ -163,12 +129,12 @@
 				</div>
 					<div class="personal-details">					
 						<label>Selecione um estado para o anúncio...<span>*</span></label>
-						<select class="" id="selectEstados" name="estado_id" onchange="loadCidades(this);">
+						<select class="" id="selectEstadosForm" name="estado_id" onchange="loadCidades(this);">
 						  
 						</select>
 						<div class="clearfix"></div>
 						<label>Selecione uma cidade para o anúncio...<span>*</span></label>
-						<select class="" id="selectCidades" name="cidade_id">
+						<select class="" id="selectCidadesForm" name="cidade_id">
 						<option value="">Selecione um estado primeiro...</option>
 						</select>
 						<div class="clearfix"></div>

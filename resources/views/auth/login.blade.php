@@ -1,66 +1,133 @@
-@extends('layouts.app')
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<title>Resale a Business Category Flat Bootstrap Responsive Website Template | Login :: w3layouts</title>
+<link rel="stylesheet" href="{{ url('/') }}/css/bootstrap.min.css">
+<link rel="stylesheet" href="{{ url('/') }}/css/bootstrap-select.css">
+<link href="{{ url('/') }}/css/style.css" rel="stylesheet" type="text/css" media="all" />
+<!-- for-mobile-apps -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Resale Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- //for-mobile-apps -->
+<!--fonts-->
+<link href='//fonts.googleapis.com/css?family=Ubuntu+Condensed' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+<!--//fonts-->  
+<!-- js -->
+<script type="text/javascript" src="{{ url('/') }}/js/jquery.min.js"></script>
+<!-- js -->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="{{ url('/') }}/js/bootstrap.min.js"></script>
+<script src="{{ url('/') }}/js/bootstrap-select.js"></script>
+<script>
+  $(document).ready(function () {
+    var mySelect = $('#first-disabled2');
 
-@section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
-                <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
-                        {!! csrf_field() !!}
+    $('#special').on('click', function () {
+      mySelect.find('option:selected').prop('disabled', true);
+      mySelect.selectpicker('refresh');
+    });
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">E-Mail Address</label>
+    $('#special2').on('click', function () {
+      mySelect.find('option:disabled').prop('disabled', false);
+      mySelect.selectpicker('refresh');
+    });
 
-                            <div class="col-md-6">
-                                <input type="email" class="form-control" name="email" value="{{ old('email') }}">
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input type="password" class="form-control" name="password">
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember"> Remember Me
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-btn fa-sign-in"></i>Login
-                                </button>
-
-                                <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+    $('#basic2').selectpicker({
+      liveSearch: true,
+      maxOptions: 1
+    });
+  });
+</script>
+<script type="text/javascript" src="{{ url('/') }}/js/jquery.leanModal.min.js"></script>
+<link href="{{ url('/') }}/css/jquery.uls.css" rel="stylesheet"/>
+<link href="{{ url('/') }}/css/jquery.uls.grid.css" rel="stylesheet"/>
+<link href="{{ url('/') }}/css/jquery.uls.lcd.css" rel="stylesheet"/>
+<!-- Source -->
+<script src="{{ url('/') }}/js/jquery.uls.data.js"></script>
+<script src="{{ url('/') }}/js/jquery.uls.data.utils.js"></script>
+<script src="{{ url('/') }}/js/jquery.uls.lcd.js"></script>
+<script src="{{ url('/') }}/js/jquery.uls.languagefilter.js"></script>
+<script src="{{ url('/') }}/js/jquery.uls.regionfilter.js"></script>
+<script src="{{ url('/') }}/js/jquery.uls.core.js"></script>
+<script>
+            $( document ).ready( function() {
+                $( '.uls-trigger' ).uls( {
+                    onSelect : function( language ) {
+                        var languageName = $.uls.data.getAutonym( language );
+                        $( '.uls-trigger' ).text( languageName );
+                    },
+                    quickList: ['en', 'hi', 'he', 'ml', 'ta', 'fr'] //FIXME
+                } );
+            } );
+        </script>
+</head>
+<body>
+<div class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html"><span>Agro</span>Anúncios</a>
             </div>
+            <div class="header-right">
+    
+        </div>
         </div>
     </div>
-</div>
-@endsection
+     <section>
+            <div id="page-wrapper" class="sign-in-wrapper">
+                <div class="graphs">
+                    <div class="sign-in-form">
+                        <div class="sign-in-form-top">
+                            <h1>Log in</h1>
+                        </div>
+                        <div class="signin">
+                            <div class="signin-rit">
+                                <span class="checkbox1">
+                                     <label class="checkbox"><input type="checkbox" name="remember" checked="">Mantenha-me Conectado</label>
+                                </span>
+                                <p><a href="{{ url('/password/reset') }}">Esqueci Minha Senha!</a> </p>
+                                <div class="clearfix"> </div>
+                            </div>
+                            <form action="{{ url('/login') }}" method="POST">
+                                {!! csrf_field() !!}
+                            <div class="log-input">
+                                <div class="log-input-left">
+                                   <input type="text" class="user" value="Email" name="email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Seu email';}"/>
+                                </div>                              
+                                <div class="clearfix"> </div>
+                            </div>
+                            <div class="log-input">
+                                <div class="log-input-left">
+                                   <input type="password" class="lock" name="password" value="senha" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Sua senha:';}"/>
+                                </div>
+                                
+                                <div class="clearfix"> </div>
+                            </div>
+                            <input type="submit" value="Entrar">
+                        </form>  
+                        </div>
+                        <div class="new_people">
+                            <h2>Ainda não é cadastrado?</h2>
+                            <p>Crie sua conta clicando no botão abaixo.</p>
+                            <a href="{{ url('/register') }}">Criar Conta!</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!--footer section start-->
+            <footer class="diff">
+               <p class="text-center">&copy 2016 Agro Anúncios. All Rights Reserved | Design by <a href="https://w3layouts.com/" target="_blank">w3layouts.</a></p>
+            </footer>
+        <!--footer section end-->
+    </section>
+</body>
+</html>

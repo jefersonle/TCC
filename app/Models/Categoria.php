@@ -12,9 +12,14 @@ class Categoria extends Model
         return $this->hasMany('App\Models\Anuncio');
     }
 
+    public function subcategorias()
+    {
+        return $this->hasMany('App\Models\Categoria');
+    }
+
      public function categoriapai()
     {
-        return $this->belongsTo('App\Models\Categoria', 'categoria_pai');
+        return $this->belongsTo('App\Models\Categoria');
     }
 
 }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class Anuncio extends Model
 {
     //
@@ -30,6 +31,6 @@ class Anuncio extends Model
     public function cidade()
     {
         return $this->belongsTo('App\Models\Cidade');
-    }
+    }    
 
 }
