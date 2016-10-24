@@ -44,6 +44,14 @@ Route::group(['middleware' => 'web'], function () {
     
     Route::controller('anuncio', 'AnuncioController');
     
+    Route::get('dashboard', function(){
+        return view('dashboard');
+    })->middleware('auth');
+    
+    Route::get('admin', function(){
+        return view('admin');
+    })->middleware('auth');
+    
     Route::auth();
 });
 

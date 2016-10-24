@@ -26,6 +26,7 @@ class AnuncioController extends Controller
     {
         $anuncios = Anuncio::all();
         $data['anuncios'] = $anuncios;
+        $data['bread'] = "Todos os anúncios";
         return view('anuncio', $data);
     }
 
@@ -99,6 +100,7 @@ class AnuncioController extends Controller
     {
         $anuncios = Anuncio::where('cidade_id', $id)->orderBy('created_at')->get();
         $data['anuncios'] = $anuncios;
+        $data['bread'] = $anuncios[0]->cidade->nome;
         return view('anuncio', $data);
         
     }
@@ -107,6 +109,7 @@ class AnuncioController extends Controller
     {
         $anuncios = Estado::find($id)->anuncios()->get();        
         $data['anuncios'] = $anuncios;
+        $data['bread'] = $anuncios[0]->cidade->estado->nome;
         return view('anuncio', $data);
         
     }
@@ -115,6 +118,7 @@ class AnuncioController extends Controller
     {
         $anuncios = Anuncio::where('categoria_id', $id)->get();        
         $data['anuncios'] = $anuncios;
+        $data['bread'] = $anuncios[0]->categoria->nome;
         return view('anuncio', $data);
         
     }
