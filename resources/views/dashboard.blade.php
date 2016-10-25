@@ -113,7 +113,7 @@
 									   <div>
 											<div id="container">
 											<div class="view-controls-list" id="viewcontrols">
-												<h3><span class="label label-primary">Criar Novo</span></h3>
+												<h3><a href="{{ url('/anuncio/create') }}"><span class="label label-primary">Criar Novo</span></a></h3>
 											</div>
 											<div class="sort">
 											   <div class="sort-by">
