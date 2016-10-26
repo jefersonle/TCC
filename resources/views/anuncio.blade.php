@@ -374,7 +374,7 @@ var elem=$('#container ul');
 
 						   <div>
 
-												<div id="container">
+								<div id="container">
 
 								<div class="view-controls-list" id="viewcontrols">
 
