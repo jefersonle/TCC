@@ -41,7 +41,7 @@ class AnuncioController extends Controller
 
     {
 
-        $anuncios = Anuncio::all();
+        $anuncios = Anuncio::orderBy('updated_at', 'desc')->get();
 
         $data['anuncios'] = $anuncios;
 
@@ -220,7 +220,7 @@ class AnuncioController extends Controller
 
     {
 
-        $anuncios = Anuncio::where('cidade_id', $id)->orderBy('created_at')->get();
+        $anuncios = Anuncio::where('cidade_id', $id)->orderBy('updated_at', 'desc')->get();
 
         $data['anuncios'] = $anuncios;
 
@@ -254,7 +254,7 @@ class AnuncioController extends Controller
 
     {
 
-        $anuncios = Anuncio::where('categoria_id', $id)->get();        
+        $anuncios = Anuncio::where('categoria_id', $id)->orderBy('updated_at', 'desc')->get();        
 
         $data['anuncios'] = $anuncios;
 
