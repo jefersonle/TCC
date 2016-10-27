@@ -87,7 +87,11 @@ class AnuncioController extends Controller
 
         $anuncio->descricao = $request->descricao;
 
-        $anuncio->valor = $request->valor;
+        $valor = str_replace("," , "" , $request->valor);
+
+        $valor = str_replace("." , "" , $valor);
+
+        $anuncio->valor = $valor;
 
         $anuncio->save();
 
