@@ -536,7 +536,7 @@
 
 
 
-						<input type="text" class="name" placeholder="" name="valor" required>
+						<input type="number" class="name" placeholder="" name="valor" required>
 
 
 

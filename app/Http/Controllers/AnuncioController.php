@@ -87,7 +87,7 @@ class AnuncioController extends Controller
 
         $anuncio->descricao = $request->descricao;
 
-        $anuncio->valor = $request->valor;
+        $anuncio->valor = number_format($valor, 2, '.', '');
 
         $anuncio->save();
 
