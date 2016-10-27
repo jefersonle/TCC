@@ -207,7 +207,7 @@ class AnuncioController extends Controller
             $anuncio->delete();
         }     
 
-        return redirect('/anuncio');
+        return redirect('/dashboard/anuncio');
     }
 
 
