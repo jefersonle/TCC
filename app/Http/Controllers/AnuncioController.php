@@ -222,9 +222,7 @@ class AnuncioController extends Controller
 
         $data['bread'] = $anuncios[0]->cidade->nome;
 
-        return view('anuncio', $data);
-
-        
+        return view('anuncio', $data);        
 
     }
 

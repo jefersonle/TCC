@@ -85,9 +85,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
             <div class="header-right">
                 @if (Auth::guest())
-                        <a class="account" href="{{ url('/dashboard') }}">Minha Conta</a>                        
+                        <a class="account" href="{{ url('/dashboard/anuncio') }}">Minha Conta</a>                        
                 @else
-                        <a class="account" href="{{ url('/dashboard') }}">{{ Auth::user()->name }}</a>
+                        <a class="account" href="{{ url('/dashboard/anuncio') }}">{{ Auth::user()->name }}</a>
                         <a class="account" href="{{ url('/logout') }}">Sair</a>                         
                 @endif
             
