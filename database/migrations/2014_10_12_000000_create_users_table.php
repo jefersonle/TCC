@@ -21,9 +21,10 @@ class CreateUsersTable extends Migration
             $table->string('logradouro');
             $table->string('numero');
             $table->string('bairro');
-            $table->string('contato1');
-            $table->string('contato2');
-            $table->string('contato3');
+            $table->string('contato_fone');
+            $table->string('contato_email');
+            $table->string('contato_whatsapp');
+            $table->string('contato_facebook');
             $table->integer('cidade_id');
             $table->rememberToken();
             $table->timestamps();

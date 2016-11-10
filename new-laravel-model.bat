@@ -1,1 +1,1 @@
-php artisan make:model Models\Status --migration
+php artisan make:model FormaDePagamento --migration
