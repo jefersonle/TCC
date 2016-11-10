@@ -6,11 +6,27 @@
 
 
 
+
+
+
+
+
+
+
+
 @section('scripts')
 
 
 
+
+
+
+
 <!-- js -->
+
+
+
+
 
 
 
@@ -18,7 +34,15 @@
 
 
 
+
+
+
+
 <!-- js -->
+
+
+
+
 
 
 
@@ -26,7 +50,15 @@
 
 
 
+
+
+
+
 <script src="{{ url('/') }}/js/bootstrap.min.js"></script>
+
+
+
+
 
 
 
@@ -34,7 +66,15 @@
 
 
 
+
+
+
+
 <script>
+
+
+
+
 
 
 
@@ -42,11 +82,23 @@
 
 
 
+
+
+
+
   $(document).ready(function () {  	
 
 
 
+
+
+
+
   	
+
+
+
+
 
 
 
@@ -58,7 +110,19 @@
 
 
 
+
+
+
+
+
+
+
+
 		
+
+
+
+
 
 
 
@@ -66,7 +130,15 @@
 
 
 
+
+
+
+
 			url: '{{ url('/categoria') }}',
+
+
+
+
 
 
 
@@ -74,7 +146,15 @@
 
 
 
+
+
+
+
 			name:name,
+
+
+
+
 
 
 
@@ -82,11 +162,23 @@
 
 
 
+
+
+
+
    			success:function(data){
 
 
 
+
+
+
+
 				categorias = data;
+
+
+
+
 
 
 
@@ -98,7 +190,19 @@
 
 
 
+
+
+
+
+
+
+
+
 				var options = '<option value="">Selecionar Categoria</option>';
+
+
+
+
 
 
 
@@ -106,19 +210,34 @@
 
 
 
+
+
+
+
 			        options += '<option value="' + data[i].id + '">' + data[i].nome + '</option>';
+
+
+
+
 
 
 
 			      }
 
+			      $("#selectCategorias").html(options);	
 
+			      @if (isset($tipo) && isset($anuncio) && $tipo == "editar")        
 
-			      $("#selectCategorias").html(options);		
+                    $("#selectCategorias").val({{$anuncio->categoria_id}});
 
+                 @endif          
 
 
 			}			
+
+
+
+
 
 
 
@@ -130,11 +249,31 @@
 
 
 
+
+
+
+
+
+
+
+
 		
 
 
 
+
+
+
+
 	
+
+
+
+
+
+
+
+
 
 
 
@@ -150,7 +289,19 @@
 
 
 
+
+
+
+
+
+
+
+
     $('#special').on('click', function () {
+
+
+
+
 
 
 
@@ -158,11 +309,27 @@
 
 
 
+
+
+
+
       mySelect.selectpicker('refresh');
 
 
 
+
+
+
+
     });
+
+
+
+
+
+
+
+
 
 
 
@@ -174,7 +341,15 @@
 
 
 
+
+
+
+
       mySelect.find('option:disabled').prop('disabled', false);
+
+
+
+
 
 
 
@@ -182,7 +357,19 @@
 
 
 
+
+
+
+
     });
+
+
+
+
+
+
+
+
 
 
 
@@ -194,7 +381,15 @@
 
 
 
+
+
+
+
       liveSearch: true,
+
+
+
+
 
 
 
@@ -202,7 +397,15 @@
 
 
 
+
+
+
+
     });
+
+
+
+
 
 
 
@@ -210,7 +413,15 @@
 
 
 
+
+
+
+
 </script>
+
+
+
+
 
 
 
@@ -218,7 +429,15 @@
 
 
 
+
+
+
+
 <link href="{{ url('/') }}/css/jquery.uls.css" rel="stylesheet"/>
+
+
+
+
 
 
 
@@ -226,7 +445,15 @@
 
 
 
+
+
+
+
 <link href="{{ url('/') }}/css/jquery.uls.lcd.css" rel="stylesheet"/>
+
+
+
+
 
 
 
@@ -234,7 +461,15 @@
 
 
 
+
+
+
+
 <script src="{{ url('/') }}/js/jquery.uls.data.js"></script>
+
+
+
+
 
 
 
@@ -242,7 +477,15 @@
 
 
 
+
+
+
+
 <script src="{{ url('/') }}/js/jquery.uls.lcd.js"></script>
+
+
+
+
 
 
 
@@ -250,7 +493,15 @@
 
 
 
+
+
+
+
 <script src="{{ url('/') }}/js/jquery.uls.regionfilter.js"></script>
+
+
+
+
 
 
 
@@ -258,7 +509,15 @@
 
 
 
+
+
+
+
 <script>
+
+
+
+
 
 
 
@@ -266,7 +525,15 @@
 
 
 
+
+
+
+
 				$( '.uls-trigger' ).uls( {
+
+
+
+
 
 
 
@@ -274,7 +541,15 @@
 
 
 
+
+
+
+
 						var languageName = $.uls.data.getAutonym( language );
+
+
+
+
 
 
 
@@ -282,7 +557,15 @@
 
 
 
+
+
+
+
 					},
+
+
+
+
 
 
 
@@ -290,7 +573,15 @@
 
 
 
+
+
+
+
 				} );
+
+
+
+
 
 
 
@@ -298,7 +589,15 @@
 
 
 
+
+
+
+
 		</script>
+
+
+
+
 
 
 
@@ -306,11 +605,27 @@
 
 
 
+
+
+
+
     <script src="{{ url('/') }}/js/easyResponsiveTabs.js"></script>
 
 
 
+
+
+
+
 @endsection
+
+
+
+
+
+
+
+
 
 
 
@@ -322,7 +637,15 @@
 
 
 
+
+
+
+
 	<div class="banner text-center">
+
+
+
+
 
 
 
@@ -330,7 +653,15 @@
 
 
 
+
+
+
+
 			<h1>Lorem ipsum   <span class="segment-heading">    dolor amet </span> lorem ipsum</h1>
+
+
+
+
 
 
 
@@ -342,11 +673,27 @@
 
 
 
+
+
+
+
+
+
+
+
 	  </div>
 
 
 
+
+
+
+
 	</div>
+
+
+
+
 
 
 
@@ -358,7 +705,19 @@
 
 
 
+
+
+
+
+
+
+
+
 @section('content')
+
+
+
+
 
 
 
@@ -366,7 +725,15 @@
 
 
 
+
+
+
+
 	<div class="submit-ad main-grid-border">
+
+
+
+
 
 
 
@@ -374,25 +741,51 @@
 
 
 
+
+
+
+
 			<h2 class="head">Criar Anúncio</h2>
+
+
+
+
 
 
 
 			<div class="post-ad-form">
 
+
+
                 @if (isset($success) && $success)
+
+
 
                     <div class="alert alert-success alert-dismissible" role="alert">
 
+
+
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+
 
                       Cadastro realizado com sucesso!
 
+
+
                     </div>
+
+
 
                 @endif
 
+
+
 				<form action="" method="POST" enctype="multipart/form-data"> 
+
+
+
+
 
 
 
@@ -400,27 +793,32 @@
 
 
 
+
+
+
+
 					<label>Selecione uma categoria <span>*</span></label>
 
 
 
+
+
+
+
 					<select class="" id="selectCategorias" name="categoria_id" required>
-
-
-
-					  
-
-
-
-					  
-
-
-
 					</select>
 
 
 
+
+
+
+
 					<div class="clearfix"></div>
+
+
+
+
 
 
 
@@ -428,11 +826,31 @@
 
 
 
-					<input type="text" class="phone" placeholder="" name="titulo" required>
+
+
+
+
+					<input type="text" class="phone" placeholder="" name="titulo" required
+
+					     @if (isset($tipo) && $tipo == "editar")
+
+					         value="{{ $anuncio->titulo }}"
+
+					     @endif
+
+					>
+
+
+
+
 
 
 
 					<div class="clearfix"></div>
+
+
+
+
 
 
 
@@ -440,11 +858,23 @@
 
 
 
-					<textarea class="mess" placeholder="Write few lines about your product" name="descricao" required></textarea>
+
+
+
+
+					<textarea class="mess" placeholder="Write few lines about your product" name="descricao" required>@if (isset($tipo) && $tipo == "editar"){{ $anuncio->descricao }}@endif</textarea>
+
+
+
+
 
 
 
 					<div class="clearfix"></div>
+
+
+
+
 
 
 
@@ -452,7 +882,15 @@
 
 
 
+
+
+
+
 				<label>Adicione fotos ao seu anúncio:</label>	
+
+
+
+
 
 
 
@@ -460,7 +898,15 @@
 
 
 
+
+
+
+
 						<div>
+
+
+
+
 
 
 
@@ -468,7 +914,37 @@
 
 
 
-						</div>						
+
+
+
+
+						</div>	
+
+						@if (isset($tipo) && $tipo == "editar")						
+						
+						<div class="row">
+							<br/>
+								<h4>Fotos do anúncio:</h4>
+								<br/>
+								<ul class="slides">
+										@forelse($anuncio->imagens as $imagem)
+										<li>
+											
+											<img src="{{url('/')}}/uploads/{{$imagem->nome}}" class="col-md-2"/>
+											
+										</li>
+										@empty
+										<li>
+											<p>Nenhuma foto encontrada...</p>	
+										</li>
+										@endforelse
+								</ul>
+						</div>
+
+						@endif
+
+
+
 
 
 
@@ -476,7 +952,15 @@
 
 
 
+
+
+
+
 					<div class="clearfix"></div>
+
+
+
+
 
 
 
@@ -484,7 +968,15 @@
 
 
 
+
+
+
+
 				</div>
+
+
+
+
 
 
 
@@ -492,7 +984,15 @@
 
 
 
+
+
+
+
 						<label>Selecione um estado para o anúncio...<span>*</span></label>
+
+
+
+
 
 
 
@@ -500,7 +1000,15 @@
 
 
 
+
+
+
+
 						  
+
+
+
+
 
 
 
@@ -508,7 +1016,15 @@
 
 
 
+
+
+
+
 						<div class="clearfix"></div>
+
+
+
+
 
 
 
@@ -516,7 +1032,15 @@
 
 
 
+
+
+
+
 						<select class="" id="selectCidadesForm" name="cidade_id" required>
+
+
+
+
 
 
 
@@ -524,11 +1048,23 @@
 
 
 
+
+
+
+
 						</select>
 
 
 
+
+
+
+
 						<div class="clearfix"></div>
+
+
+
+
 
 
 
@@ -536,11 +1072,31 @@
 
 
 
-						<input type="text" class="name" placeholder="" name="valor" required>
+
+
+
+
+						<input type="text" class="name" placeholder="" name="valor" required
+
+					     @if (isset($tipo) && $tipo == "editar")
+
+					         value="{{ $anuncio->valor }}"
+
+					     @endif
+
+					    >
+
+
+
+
 
 
 
 						<div class="clearfix"></div>
+
+
+
+
 
 
 
@@ -548,23 +1104,24 @@
 
 
 
-						<select class="" required>
 
 
 
-						  <option>Selecionar condição</option>
+
+						<select class="" required>	
 
 
-
-						  <option>Novo</option>
-
+						  <option value="novo">Novo</option>
 
 
-						  <option>Usado</option>						 
-
+						  <option value="usado">Usado</option>		
 
 
 						</select>
+
+
+
+
 
 
 
@@ -572,7 +1129,15 @@
 
 
 
+
+
+
+
 												
+
+
+
+
 
 
 
@@ -580,7 +1145,15 @@
 
 
 
+
+
+
+
 					<input type="submit" value="Publicar">					
+
+
+
+
 
 
 
@@ -588,7 +1161,15 @@
 
 
 
+
+
+
+
 					</form>
+
+
+
+
 
 
 
@@ -596,7 +1177,15 @@
 
 
 
+
+
+
+
 			</div>
+
+
+
+
 
 
 
@@ -604,11 +1193,22 @@
 
 
 
+
+
+
+
 	</div>
 
 
 
+
+
+
 	<!-- // Submit Ad -->
+
+
+
+
 
 
 

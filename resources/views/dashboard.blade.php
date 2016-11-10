@@ -256,31 +256,37 @@
 
 											<div class="clearfix"></div>
 
-										<ul class="list">											
+										<ul class="list">	
+
+												@forelse(Auth::user()->anuncios as $anuncio)										
 
 												<li>
 
-												<img ="{{ url('/') }}/images/m1.jpg" title="" alt="" />
+												@if($anuncio->imagens->count() > 0)
+													<img src="{{ url('/') }}/uploads/{{ $anuncio->imagens[0]->nome }}" title="" alt="" />
+												@else
+													<img src="{{ url('/') }}/images/m1.jpg" title="" alt="" />
+												@endif
 
 												<section class="list-left">
 
-												<a href="single.html"><h5 class="title">There are many variations of passages of Lorem Ipsum</h5></a>
+												<a href="{{ url('/anuncio/show') }}/{{ $anuncio->id }}"><h5 class="title">{{ $anuncio->titulo }}</h5></a>
 
-												<span class="adprice">$290</span>
+												<span class="adprice">{{ $anuncio->valor }}</span>
 
-												<p class="catpath">Mobile Phones » Brand</p>
+												<p class="catpath">{{ $anuncio->categoria->nome }}</p>
 
 												</section>
 
 												<section class="list-right">
 
-												<span class="date">Today, 17:55</span>
+												<span class="date">{{ $anuncio->created_at}}</span>
 
-												<span class="cityname">City name</span>
+												<span class="cityname">{{ $anuncio->cidade->nome }}</span>
 
-												<a href="{{ url('/anuncio/edit') }}/"><span class="label label-success">Editar</span></a>
+												<a href="{{ url('/anuncio/edit') }}/{{ $anuncio->id }}"><span class="label label-success">Editar</span></a>
 
-												<a href="{{ url('/anuncio/destroy') }}/"><span class="label label-danger">Excluir</span></a>
+												<a href="{{ url('/anuncio/destroy') }}/{{ $anuncio->id }}"><span class="label label-danger">Excluir</span></a>
 
 												</section>
 
@@ -288,169 +294,10 @@
 
 												</li>
 
+												@empty
+													<li>Nenhum anuncio encontrado...</li>
 
-
-												<li>
-
-												<img ="{{ url('/') }}/images/m1.jpg" title="" alt="" />
-
-												<section class="list-left">
-
-												<a href="single.html"><h5 class="title">There are many variations of passages of Lorem Ipsum</h5></a>
-
-												<span class="adprice">$290</span>
-
-												<p class="catpath">Mobile Phones » Brand</p>
-
-												</section>
-
-												<section class="list-right">
-
-												<span class="date">Today, 17:55</span>
-
-												<span class="cityname">City name</span>
-
-												<a href="single.html"><span class="label label-success">Editar</span></a>
-
-												<a href="single.html"><span class="label label-danger">Excluir</span></a>
-
-												</section>
-
-												<div class="clearfix"></div>
-
-												</li>
-
-
-
-												<li>
-
-												<img ="{{ url('/') }}/images/m1.jpg" title="" alt="" />
-
-												<section class="list-left">
-
-												<a href="single.html"><h5 class="title">There are many variations of passages of Lorem Ipsum</h5></a>
-
-												<span class="adprice">$290</span>
-
-												<p class="catpath">Mobile Phones » Brand</p>
-
-												</section>
-
-												<section class="list-right">
-
-												<span class="date">Today, 17:55</span>
-
-												<span class="cityname">City name</span>
-
-												<a href="single.html"><span class="label label-success">Editar</span></a>
-
-												<a href="single.html"><span class="label label-danger">Excluir</span></a>
-
-												</section>
-
-												<div class="clearfix"></div>
-
-												</li>
-
-
-
-												<li>
-
-												<img ="{{ url('/') }}/images/m1.jpg" title="" alt="" />
-
-												<section class="list-left">
-
-												<a href="single.html"><h5 class="title">There are many variations of passages of Lorem Ipsum</h5></a>
-
-												<span class="adprice">$290</span>
-
-												<p class="catpath">Mobile Phones » Brand</p>
-
-												</section>
-
-												<section class="list-right">
-
-												<span class="date">Today, 17:55</span>
-
-												<span class="cityname">City name</span>
-
-												<a href="single.html"><span class="label label-success">Editar</span></a>
-
-												<a href="single.html"><span class="label label-danger">Excluir</span></a>
-
-												</section>
-
-												<div class="clearfix"></div>
-
-												</li>
-
-
-
-												<li>
-
-												<img ="{{ url('/') }}/images/m1.jpg" title="" alt="" />
-
-												<section class="list-left">
-
-												<a href="single.html"><h5 class="title">There are many variations of passages of Lorem Ipsum</h5></a>
-
-												<span class="adprice">$290</span>
-
-												<p class="catpath">Mobile Phones » Brand</p>
-
-												</section>
-
-												<section class="list-right">
-
-												<span class="date">Today, 17:55</span>
-
-												<span class="cityname">City name</span>
-
-												<a href="single.html"><span class="label label-success">Editar</span></a>
-
-												<a href="single.html"><span class="label label-danger">Excluir</span></a>
-
-												</section>
-
-												<div class="clearfix"></div>
-
-												</li>
-
-
-
-												<li>
-
-												<img ="{{ url('/') }}/images/m1.jpg" title="" alt="" />
-
-												<section class="list-left">
-
-												<a href="single.html"><h5 class="title">There are many variations of passages of Lorem Ipsum</h5></a>
-
-												<span class="adprice">$290</span>
-
-												<p class="catpath">Mobile Phones » Brand</p>
-
-												</section>
-
-												<section class="list-right">
-
-												<span class="date">Today, 17:55</span>
-
-												<span class="cityname">City name</span>
-
-												<a href="single.html"><span class="label label-success">Editar</span></a>
-
-												<a href="single.html"><span class="label label-danger">Excluir</span></a>
-
-												</section>
-
-												<div class="clearfix"></div>
-
-												</li>
-
-											
-
-											
+													@endforelse
 
 										</ul>
 
@@ -458,33 +305,8 @@
 
 										</div>
 
-									</div>							
+									</div>		
 
-									
-
-									<ul class="pagination pagination-sm">
-
-										<li><a href="#">Anterior</a></li>
-
-										<li><a href="#">1</a></li>
-
-										<li><a href="#">2</a></li>
-
-										<li><a href="#">3</a></li>
-
-										<li><a href="#">4</a></li>
-
-										<li><a href="#">5</a></li>
-
-										<li><a href="#">6</a></li>
-
-										<li><a href="#">7</a></li>
-
-										<li><a href="#">8</a></li>
-
-										<li><a href="#">Próxima</a></li>
-
-									</ul>
 
 								  </div>
 
@@ -1107,390 +929,7 @@
 							
 
 						</div>
-
-						<div>
-
-							<div class="category">
-
-								<div class="category-img">
-
-									<img ="{{ url('/') }}/images/cat5.png" title="image" alt="" />
-
-								</div>
-
-								<div class="category-info">
-
-									<h4>Furniture</h4>
-
-									<span>1,05,168 Ads</span>
-
-									<a href="all-classifieds.html">View all Ads</a>
-
-								</div>
-
-								<div class="clearfix"></div>
-
-							</div>
-
-							<div class="sub-categories">
-
-								<ul>
-
-									<li><a href="furnitures.html">Sofa & Dining</a></li>
-
-									<li><a href="furnitures.html">Beds & Wardrobes</a></li>
-
-									<li><a href="furnitures.html">Home Decor & Garden</a></li>
-
-									<li><a href="furnitures.html">Other Household Items</a></li>
-
-									<div class="clearfix"></div>
-
-								</ul>
-
-							</div>
-
-						</div>
-
-						<div>
-
-							<div class="category">
-
-								<div class="category-img">
-
-									<img ="{{ url('/') }}/images/cat6.png" title="image" alt="" />
-
-								</div>
-
-								<div class="category-info">
-
-									<h4>Pets</h4>
-
-									<span>1,77,816 Ads</span>
-
-									<a href="all-classifieds.html">View all Ads</a>
-
-								</div>
-
-								<div class="clearfix"></div>
-
-							</div>
-
-							<div class="sub-categories">
-
-								<ul>
-
-									<li><a href="pets.html">Dogs</a></li>
-
-									<li><a href="pets.html">Aquariums</a></li>
-
-									<li><a href="pets.html">Pet Food & Accessories</a></li>
-
-									<li><a href="pets.html">Other Pets</a></li>
-
-									<div class="clearfix"></div>
-
-								</ul>
-
-							</div>
-
-						</div>
-
-						<div>
-
-							<div class="category">
-
-								<div class="category-img">
-
-									<img ="{{ url('/') }}/images/cat7.png" title="image" alt="" />
-
-								</div>
-
-								<div class="category-info">
-
-									<h4>Books, Sports & Hobbies</h4>
-
-									<span>9,58,458 Ads</span>
-
-									<a href="all-classifieds.html">View all Ads</a>
-
-								</div>
-
-								<div class="clearfix"></div>
-
-							</div>
-
-							<div class="sub-categories">
-
-								<ul>
-
-									<li><a href="books-sports-hobbies.html">Books & Magazines</a></li>
-
-									<li><a href="books-sports-hobbies.html">Musical Instruments</a></li>
-
-									<li><a href="books-sports-hobbies.html">Sports Equipment</a></li>
-
-									<li><a href="books-sports-hobbies.html">Gym & Fitness</a></li>
-
-									<li><a href="books-sports-hobbies.html">Other Hobbies</a></li>
-
-									<div class="clearfix"></div>
-
-								</ul>
-
-							</div>
-
-						</div>
-
-						<div>
-
-							<div class="category">
-
-								<div class="category-img">
-
-									<img ="{{ url('/') }}/images/cat8.png" title="image" alt="" />
-
-								</div>
-
-								<div class="category-info">
-
-									<h4>Fashion</h4>
-
-									<span>3,52,345 Ads</span>
-
-									<a href="all-classifieds.html">View all Ads</a>
-
-								</div>
-
-								<div class="clearfix"></div>
-
-							</div>
-
-							<div class="sub-categories">
-
-								<ul>
-
-									<li><a href="fashion.html">Clothes</a></li>
-
-									<li><a href="fashion.html">Footwear</a></li>
-
-									<li><a href="fashion.html">Accessories</a></li>
-
-									<div class="clearfix"></div>
-
-								</ul>
-
-							</div>
-
-						</div>
-
-						<div>
-
-							<div class="category">
-
-								<div class="category-img">
-
-									<img ="{{ url('/') }}/images/cat9.png" title="image" alt="" />
-
-								</div>
-
-								<div class="category-info">
-
-									<h4>Kids</h4>
-
-									<span>8,45,298 Ads</span>
-
-									<a href="all-classifieds.html">View all Ads</a>
-
-								</div>
-
-								<div class="clearfix"></div>
-
-							</div>
-
-							<div class="sub-categories">
-
-								<ul>
-
-									<li><a href="kids.html">Furniture And Toys</a></li>
-
-									<li><a href="kids.html">Prams & Walkers</a></li>
-
-									<li><a href="kids.html">Accessories</a></li>
-
-									<div class="clearfix"></div>
-
-								</ul>
-
-							</div>
-
-						</div>
-
-						<div>
-
-							<div class="category">
-
-								<div class="category-img">
-
-									<img ="{{ url('/') }}/images/cat10.png" title="image" alt="" />
-
-								</div>
-
-								<div class="category-info">
-
-									<h4>Services</h4>
-
-									<span>7,58,867 Ads</span>
-
-									<a href="all-classifieds.html">View all Ads</a>
-
-								</div>
-
-								<div class="clearfix"></div>
-
-							</div>
-
-							<div class="sub-categories">
-
-								<ul>
-
-									<li><a href="services.html">Education & Classes</a></li>
-
-									<li><a href="services.html">Web Development</a></li>
-
-									<li><a href="services.html">Electronics & Computer Repair</a></li>
-
-									<li><a href="services.html">Maids & Domestic Help</a></li>
-
-									<li><a href="services.html">Health & Beauty</a></li>
-
-									<li><a href="services.html">Movers & Packers</a></li>
-
-									<li><a href="services.html">Drivers & Taxi</a></li>
-
-									<li><a href="services.html">Event Services</a></li>
-
-									<li><a href="services.html">Other Services</a></li>
-
-									<div class="clearfix"></div>
-
-								</ul>
-
-							</div>
-
-						</div>
-
-						<div>
-
-							<div class="category">
-
-								<div class="category-img">
-
-									<img ="{{ url('/') }}/images/cat11.png" title="image" alt="" />
-
-								</div>
-
-								<div class="category-info">
-
-									<h4>Jobs</h4>
-
-									<span>5,74,547 Ads</span>
-
-									<a href="all-classifieds.html">View all Ads</a>
-
-								</div>
-
-								<div class="clearfix"></div>
-
-							</div>
-
-							<div class="sub-categories">
-
-								<ul>
-
-									<li><a href="jobs.html">Customer Service</a></li>
-
-									<li><a href="jobs.html">IT</a></li>
-
-									<li><a href="jobs.html">Online</a></li>
-
-									<li><a href="jobs.html">Marketing</a></li>
-
-									<li><a href="jobs.html">Advertising & PR</a></li>
-
-									<li><a href="jobs.html">Sales</a></li>
-
-									<li><a href="jobs.html">Clerical & Administration</a></li>
-
-									<li><a href="jobs.html">Human Resources</a></li>
-
-									<li><a href="jobs.html">Education</a></li>
-
-									<li><a href="jobs.html">Hotels & Tourism</a></li>
-
-									<li><a href="jobs.html">Accounting & Finance</a></li>
-
-									<li><a href="jobs.html">Manufacturing</a></li>
-
-									<li><a href="jobs.html">Part - Time</a></li>
-
-									<li><a href="jobs.html">Other Jobs</a></li>
-
-									<div class="clearfix"></div>
-
-								</ul>
-
-							</div>
-
-						</div>
-
-						<div>
-
-							<div class="category">
-
-								<div class="category-img">
-
-									<img ="{{ url('/') }}/images/cat12.png" title="image" alt="" />
-
-								</div>
-
-								<div class="category-info">
-
-									<h4>Real Estate</h4>
-
-									<span>98,156 Ads</span>
-
-									<a href="all-classifieds.html">View all Ads</a>
-
-								</div>
-
-								<div class="clearfix"></div>
-
-							</div>
-
-							<div class="sub-categories">
-
-								<ul>
-
-									<li><a href="real-estate.html">Houses</a></li>
-
-									<li><a href="real-estate.html">Apartments</a></li>
-
-									<li><a href="real-estate.html">PG & Roommates</a></li>
-
-									<li><a href="real-estate.html">Land & Plots</a></li>
-
-									<li><a href="real-estate.html">Shops - Offices - Commercial Space</a></li>
-
-									<li><a href="real-estate.html">Vacation Rentals - Guest Houses</a></li>
-
-									<div class="clearfix"></div>
-
-								</ul>
-
-							</div>
-
-						</div>
+						
 
 					</div>
 

@@ -1,4 +1,4 @@
-<!--
+﻿<!--
 Author: W3layouts
 Author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
@@ -30,6 +30,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script>
     var cidades = [];
     function loadCidades(id_estado){
+                $("#selectCidadesForm").val("0");
                 $.ajax({
                     url: '{{ url('/cidade/index') }}/' +  id_estado.value,
                     data: '',
@@ -39,15 +40,28 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         cidades = data;
                         console.log(cidades);  
 
-                        var options = '<option value="">Selecionar Cidade</option>';
+                        var options = '<option value="0">Selecionar Cidade</option>';
                           for (var i = 0; i < data.length; i++) {
                             options += '<option value="' + data[i].id + '">' + data[i].nome + '</option>';
                           }
                           $("#selectCidades").html(options);   
-                          $("#selectCidadesForm").html(options);                    
+                          $("#selectCidadesForm").html(options);
+
+                          @if (isset($tipo) && isset($anuncio) && $tipo == "editar")              
+
+                            if(id_estado.value == "{{$anuncio->cidade->estado_id}}"){
+                                $("#selectCidadesForm").val({{$anuncio->cidade_id}});
+                            }
+
+                         @endif                              
                     }           
                 });
         }   
+    @if (isset($tipo) && isset($anuncio) && $tipo == "editar")    
+        var Obj = {"value":"{{$anuncio->cidade->estado_id}}"};
+        loadCidades(Obj); 
+    @endif
+
     function loadAnuncios(id_cidade){
                 var page = "{{ url('/anuncio/cidade') }}/" + id_cidade.value;
                 window.location= page; 
@@ -69,7 +83,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     options += '<option value="' + data[i].id + '">' + data[i].nome + '</option>';
                   }
                   $("#selectEstados").html(options); 
-                  $("#selectEstadosForm").html(options);                
+                  $("#selectEstadosForm").html(options);  
+
+                   @if (isset($tipo) && isset($anuncio) && $tipo == "editar")                
+
+                    $("#selectEstadosForm").val({{$anuncio->cidade->estado_id}});
+                                                         
+
+                 @endif              
             }           
         });
       
@@ -85,9 +106,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
             <div class="header-right">
                 @if (Auth::guest())
-                        <a class="account" href="{{ url('/dashboard') }}">Minha Conta</a>                        
-                @else
-                        <a class="account" href="{{ url('/dashboard') }}">{{ Auth::user()->name }}</a>
+                        <a class="account" href="{{ url('/dashboard/anuncio') }}">Minha Conta</a>
+		@else
+                        <a class="account" href="{{ url('/dashboard/anuncio') }}">{{ Auth::user()->name }}</a>  
                         <a class="account" href="{{ url('/logout') }}">Sair</a>                         
                 @endif
             
