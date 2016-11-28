@@ -30,6 +30,12 @@ use App\Models\Estado;
 
 use App\Models\Imagem;
 
+use App\Models\Moeda;
+
+use App\Models\FormaDePagamento;
+
+use App\Models\FormaDeEntrega;
+
 
 
 
@@ -88,8 +94,7 @@ class AnuncioController extends Controller
 
 
 
-        $data['anuncios'] = $anuncios;
-
+        $data['anuncios'] = $anuncios;        
 
 
         $data['bread'] = "Todos os anúncios";
@@ -102,13 +107,7 @@ class AnuncioController extends Controller
 
     }
 
-
-
-
-
-
-
-    
+  
 
 
 
@@ -122,7 +121,11 @@ class AnuncioController extends Controller
 
         $data['tipo'] = 'criar';
 
+        $data['moedas'] = Moeda::all();
 
+        $data['formasDeEntrega'] = FormaDeEntrega::all();
+
+        $data['formasDePagamento'] = FormaDePagamento::all();
 
         return view('formanuncio', $data);
 
@@ -186,15 +189,20 @@ class AnuncioController extends Controller
 
         $anuncio->valor = $valor;
 
+        $anuncio->status_id = 1;
+
+        $anuncio->moeda_id = $request->moeda;
+
+        $anuncio->forma_de_entrega_id = $request->entrega;
+
+
+        $anuncio->condicao = $request->condicao;
 
 
         $anuncio->save();
 
-
-
         $path = "uploads";
-
-        
+       
 
         if ($request->hasFile('images')) {  
 
@@ -228,7 +236,7 @@ class AnuncioController extends Controller
 
                
 
-        }        
+        } 
 
 
 
@@ -237,6 +245,13 @@ class AnuncioController extends Controller
         $data['tipo'] = 'criar';
 
         $data['success'] = true;
+
+        $data['moedas'] = Moeda::all();
+
+        $data['formasDeEntrega'] = FormaDeEntrega::all();
+
+        $data['formasDePagamento'] = FormaDePagamento::all();
+
 
 
 

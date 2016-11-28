@@ -1098,14 +1098,9 @@
 
 						<select class="" name="moeda" required>	
 
-
-						  <option value="1">USD</option>
-
-
-						  <option value="2">BRL</option>	
-
-						  <option value="3">EUR</option>		
-
+							@foreach($moedas as $moeda)
+							  <option value="{{$moeda->id}}">{{$moeda->nome}} ({{$moeda->sigla}})</option>		
+						  	@endforeach
 
 						</select>
 
@@ -1161,13 +1156,13 @@
 
 
 
-						<select class="" name="condicao" required>	
+						<select class="" name="entrega" required>	
 
+						  @foreach($formasDeEntrega as $entrega)
+						  		<option value="{{$entrega->id}}">{{$entrega->nome}}</option>
+						  @endforeach
 
-						  <option value="1">Somente Retirada</option>
-
-
-						  <option value="2">Retirada e Frete Pago</option>		
+						  	
 
 
 						</select>
@@ -1177,8 +1172,9 @@
 
 
 						<div>
-							<input type="checkbox" name="pagamento" value="dinheiro">Dinheiro
-							<input type="checkbox" name="pagamento" value="cartao">Cartão
+							@foreach($formasDePagamento as $pagamento)
+							<input type="checkbox" name="pagamento" value="{{$pagamento->id}}">{{$pagamento->nome}}
+							@endforeach
 						</div>
 
 						<div class="clearfix"></div>
@@ -1187,8 +1183,12 @@
 
 
 						<div>
-							<input type="checkbox" name="pagamento" value="dinheiro">Email
-							<input type="checkbox" name="pagamento" value="cartao">Telefone
+							<input type="checkbox" name="pagamento" value="email">Email
+							<input type="checkbox" name="pagamento" value="telefone">Telefone
+							<input type="checkbox" name="pagamento" value="whatsapp">WhatsApp
+							<input type="checkbox" name="pagamento" value="facebook">Facebook
+							<input type="checkbox" name="pagamento" value="mensagem">Mensagem
+							<p class="small">Você pode atualizar suas informações de contato clicando aqui.</p>
 						</div>
 
 						<div class="clearfix"></div>

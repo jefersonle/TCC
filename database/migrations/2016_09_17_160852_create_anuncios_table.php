@@ -36,6 +36,10 @@ class CreateAnunciosTable extends Migration
 
             $table->integer('categoria_id');
 
+            $table->integer('moeda_id');
+
+            $table->integer('forma_de_entrega_id');
+
             $table->string('titulo');
 
             $table->text('descricao', 4096);
