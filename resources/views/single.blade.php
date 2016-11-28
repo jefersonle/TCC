@@ -202,12 +202,44 @@
 					</script>
 
 					<!-- //FlexSlider -->
+					<div class="product-details">						
+
+						
+
+						<p><button>Gostei</button><button>Não Gostei</button></p>
+
+					
+
+					</div>
 
 					<div class="product-details">						
 
 						<h4><strong>Descrição</strong> :</h4>
 
 						<p>{{ $anuncio->descricao }}</p>
+
+					
+
+					</div>
+					<div class="product-details">						
+
+						<h4><strong>Deixe seu comentário</strong> :</h4>
+
+						<form>						
+							<div class="post-ad-form">
+								<textarea class="mess" placeholder="" name="comentario"></textarea>
+								<input type="submit" value="Publicar">	
+							</div>
+						</form>
+
+					
+
+					</div>
+					<div class="product-details">						
+
+						<h4><strong>Comentários</strong> :</h4>
+
+						<p><strog>Jeferson: </strong>Comentário....</p>
 
 					
 
@@ -259,6 +291,20 @@
 
 						<p><i class="glyphicon glyphicon-earphone"></i>{{ $anuncio->user->contato1 }}</p>
 
+						<div class="product-details">						
+
+						<h4><strong>Envie uma mensagem</strong> :</h4>
+
+						<form>						
+							<div class="post-ad-form">
+								<textarea class="mess" placeholder="" name="comentario"></textarea>
+								<input type="submit" value="Publicar">	
+							</div>
+						</form>
+
+					
+
+					</div>
 					</div>
 
 						<!-- <div class="tips">

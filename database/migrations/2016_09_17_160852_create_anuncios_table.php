@@ -46,6 +46,8 @@ class CreateAnunciosTable extends Migration
 
             $table->integer('status_id');
 
+            $table->integer('tipo');
+
             $table->integer('views');
 
             $table->integer('gostei');

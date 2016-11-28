@@ -797,7 +797,7 @@
 
 
 
-					<label>Selecione uma categoria <span>*</span></label>
+					<label>Categoria <span>*</span></label>
 
 
 
@@ -822,7 +822,7 @@
 
 
 
-					<label>Digite o título do seu anúncio aqui...<span>*</span></label>
+					<label>Título...<span>*</span></label>
 
 
 
@@ -854,7 +854,7 @@
 
 
 
-					<label>Digite a descrição do seu anúncio aqui...<span>*</span></label>
+					<label>Descrição...<span>*</span></label>
 
 
 
@@ -886,7 +886,7 @@
 
 
 
-				<label>Adicione fotos ao seu anúncio:</label>	
+				<label>Fotos:</label>	
 
 
 
@@ -924,7 +924,7 @@
 						
 						<div class="row">
 							<br/>
-								<h4>Fotos do anúncio:</h4>
+								<h4>Fotos:</h4>
 								<br/>
 								<ul class="slides">
 										@forelse($anuncio->imagens as $imagem)
@@ -988,7 +988,7 @@
 
 
 
-						<label>Selecione um estado para o anúncio...<span>*</span></label>
+						<label>Estado...<span>*</span></label>
 
 
 
@@ -1028,7 +1028,7 @@
 
 
 
-						<label>Selecione uma cidade para o anúncio...<span>*</span></label>
+						<label>Cidade...<span>*</span></label>
 
 
 
@@ -1086,21 +1086,9 @@
 
 					    >
 
+					    <div class="clearfix"></div>
 
-
-
-
-
-
-						<div class="clearfix"></div>
-
-
-
-
-
-
-
-						<label>Selecione a condição do produto...<span>*</span></label>
+					    <label>Moeda<span>*</span></label>
 
 
 
@@ -1108,13 +1096,15 @@
 
 
 
-						<select class="" required>	
+						<select class="" name="moeda" required>	
 
 
-						  <option value="novo">Novo</option>
+						  <option value="1">USD</option>
 
 
-						  <option value="usado">Usado</option>		
+						  <option value="2">BRL</option>	
+
+						  <option value="3">EUR</option>		
 
 
 						</select>
@@ -1125,6 +1115,11 @@
 
 
 
+						
+
+
+
+
 						<div class="clearfix"></div>
 
 
@@ -1133,68 +1128,86 @@
 
 
 
-												
+						<label>Condição<span>*</span></label>
+
+
+
+
+
+						<select class="" name="condicao" required>	
+
+
+						  <option value="novo">Novo</option>
+
+
+						  <option value="usado">Usado</option>		
+
+
+						</select>
+
+						<div class="clearfix"></div>
 
 
 
 
 
 
+
+						<label>Forma de Entrega...<span>*</span></label>
+
+
+
+
+
+
+
+						<select class="" name="condicao" required>	
+
+
+						  <option value="1">Somente Retirada</option>
+
+
+						  <option value="2">Retirada e Frete Pago</option>		
+
+
+						</select>
+						<div class="clearfix"></div>
+
+						<label>Forma de Pagamento<span>*</span></label>
+
+
+						<div>
+							<input type="checkbox" name="pagamento" value="dinheiro">Dinheiro
+							<input type="checkbox" name="pagamento" value="cartao">Cartão
+						</div>
+
+						<div class="clearfix"></div>
+
+						<label>Forma de Contato<span>*</span></label>
+
+
+						<div>
+							<input type="checkbox" name="pagamento" value="dinheiro">Email
+							<input type="checkbox" name="pagamento" value="cartao">Telefone
+						</div>
+
+						<div class="clearfix"></div>
 
 						<p class="post-terms">Ao clicar no<strong>botão Publicar</strong> você aceita nossos <a href="terms.html" target="_blank">Termos de Uso</a> e nossa <a href="privacy.html" target="_blank">Política de Privacidade</a></p>
 
-
-
-
-
-
-
-					<input type="submit" value="Publicar">					
-
-
-
-
-
-
+					<input type="submit" value="Publicar">	
 
 					<div class="clearfix"></div>
 
-
-
-
-
-
-
 					</form>
 
-
-
-
-
-
-
 					</div>
-
-
-
-
-
 
 
 			</div>
 
 
-
-
-
-
-
 		</div>	
-
-
-
-
-
 
 
 	</div>
