@@ -36,6 +36,8 @@ use App\Models\FormaDePagamento;
 
 use App\Models\FormaDeEntrega;
 
+use App\Models\PagamentoAnuncio;
+
 
 
 
@@ -152,9 +154,7 @@ class AnuncioController extends Controller
 
 
     {   
-
-
-
+        
         $anuncio = new Anuncio();
 
 
@@ -195,9 +195,13 @@ class AnuncioController extends Controller
 
         $anuncio->forma_de_entrega_id = $request->entrega;
 
-
         $anuncio->condicao = $request->condicao;
 
+        $anuncio->contato_email = ($request->email != null)?1:0;
+        $anuncio->contato_fone1 = ($request->telefone != null)?1:0;
+        $anuncio->contato_whatsapp = ($request->whatsapp != null)?1:0;
+        $anuncio->contato_facebook = ($request->facebook != null)?1:0;
+        $anuncio->contato_mensagem = ($request->mensagem != null)?1:0;
 
         $anuncio->save();
 
@@ -219,7 +223,6 @@ class AnuncioController extends Controller
                     $image->move($path, $name);
 
 
-
                     $imagem = new Imagem();
 
                     $imagem->anuncio_id = $anuncio->id;
@@ -238,9 +241,11 @@ class AnuncioController extends Controller
 
         } 
 
-
-
-        
+        foreach ($request->pagamento as $value) {
+            $pagamentoAnuncio = new PagamentoAnuncio();
+            $pagamentoAnuncio->anuncio_id = $anuncio->id;
+            $pagamentoAnuncio->forma_de_pagamento_id = $value;
+        }        
 
         $data['tipo'] = 'criar';
 

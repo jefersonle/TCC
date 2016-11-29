@@ -9,7 +9,7 @@ class Comentario extends Model
     
     public function user()
     {
-        return $this->belongsTo('App\Usuario');
+        return $this->belongsTo('App\User');
     }
 
     public function anuncio()

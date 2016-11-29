@@ -1173,7 +1173,7 @@
 
 						<div>
 							@foreach($formasDePagamento as $pagamento)
-							<input type="checkbox" name="pagamento" value="{{$pagamento->id}}">{{$pagamento->nome}}
+							<input type="checkbox" name="pagamento[]" value="{{$pagamento->id}}">{{$pagamento->nome}}
 							@endforeach
 						</div>
 
@@ -1183,11 +1183,11 @@
 
 
 						<div>
-							<input type="checkbox" name="pagamento" value="email">Email
-							<input type="checkbox" name="pagamento" value="telefone">Telefone
-							<input type="checkbox" name="pagamento" value="whatsapp">WhatsApp
-							<input type="checkbox" name="pagamento" value="facebook">Facebook
-							<input type="checkbox" name="pagamento" value="mensagem">Mensagem
+							<input type="checkbox" name="email">Email
+							<input type="checkbox" name="telefone">Telefone
+							<input type="checkbox" name="whatsapp">WhatsApp
+							<input type="checkbox" name="facebook">Facebook
+							<input type="checkbox" name="mensagem"">Mensagem
 							<p class="small">Você pode atualizar suas informações de contato clicando aqui.</p>
 						</div>
 

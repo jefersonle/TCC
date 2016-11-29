@@ -1,1 +1,1 @@
-php artisan make:model FormaDePagamento --migration
+php artisan make:model Models\PagamentoAnuncio --migration

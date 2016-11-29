@@ -88,6 +88,12 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::controller('anuncio', 'AnuncioController');
 
+    Route::controller('comentario', 'ComentarioController');
+
+    Route::controller('mensagem', 'MensagemController');
+
+    Route::controller('likes', 'LikesController');
+
     
 
     Route::controller('/dashboard/anuncio', 'Dashboard\AnuncioController');

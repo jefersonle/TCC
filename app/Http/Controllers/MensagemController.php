@@ -26,7 +26,7 @@ class MensagemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function getCreate()
     {
         //
     }
@@ -37,16 +37,16 @@ class MensagemController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function postStore(Request $request)
     {
         $mensagem = new Mensagem();
-        $mensagem->de = $request->de;
-        $mensagem->para = $request->para;
+        $mensagem->de = $request->user_id;
+        $mensagem->para = $request->vendedor_id;
         $mensagem->status_id = 0;
-        $mensagem->msg = $request->msg;
+        $mensagem->msg = $request->mensagem;
         $mensagem->save();
 
-        return redirect('/mensagem');
+        return "Mensagem enviada!";
     }
 
     /**

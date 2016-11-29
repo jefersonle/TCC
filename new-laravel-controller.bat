@@ -1,1 +1,1 @@
-php artisan make:controller ComentarioController --resource
+php artisan make:controller LikesController --resource

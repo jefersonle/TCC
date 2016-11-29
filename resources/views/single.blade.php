@@ -96,9 +96,88 @@
 
 				} );
 
-			} );
+			
 
-		</script>
+			$("#comentarioSave").click(function(){
+				alert("comentario");
+				
+
+				var url = "{{url('/')}}/comentario/store";
+				$.ajax({
+			           type: "POST",
+			           url: url,
+			           data: $("#comentarioForm").serialize(), // serializes the form's elements.
+			           success: function(data)
+			           {
+			               alert(data); // show response from the php script.
+			           }
+			         });
+				return false;
+			    
+
+			});
+
+			$("#mensagemSave").click(function(){
+				alert("mensagem");
+				
+					
+				var url = "{{url('/')}}/mensagem/store";
+				$.ajax({
+			           type: "POST",
+			           url: url,
+			           data: $("#mensagemForm").serialize(), // serializes the form's elements.
+			           success: function(data)
+			           {
+			               alert(data); // show response from the php script.
+			           }
+			         });
+
+			    return false;
+
+			});
+
+			$("#gostei").click(function(){
+
+				alert("gostei");
+				
+					
+				var url = "{{url('/')}}/likes/gostei";
+
+				$.ajax({						
+			           type: "POST",
+			           url: url,
+			           data: "anuncio_id={{$anuncio->id}}&user_id={{Auth::user()->id}}&_token={{ csrf_token() }}", // serializes the form's elements.
+			           success: function(data)
+			           {
+			               alert(data); // show response from the php script.
+			           }
+			         });
+
+			    return false;
+
+			});
+			$("#naogostei").click(function(){
+
+				alert("nao gostei");
+				
+					
+				var url = "{{url('/')}}/likes/naogostei";
+
+				$.ajax({						
+			           type: "POST",
+			           url: url,
+			           data: "anuncio_id={{$anuncio->id}}&user_id={{Auth::user()->id}}&_token={{ csrf_token() }}", // serializes the form's elements.
+			           success: function(data)
+			           {
+			               alert(data); // show response from the php script.
+			           }
+			         });
+
+			    return false;
+
+			});
+		});
+	</script>
 
 		<link rel="stylesheet" href="{{ url('/') }}/css/flexslider.css" media="screen" />
 
@@ -206,7 +285,7 @@
 
 						
 
-						<p><button>Gostei</button><button>Não Gostei</button></p>
+						<p><button id="gostei">Gostei</button><button id="naogostei">Não Gostei</button></p>
 
 					
 
@@ -225,10 +304,13 @@
 
 						<h4><strong>Deixe seu comentário</strong> :</h4>
 
-						<form>						
+						<form method="POST" id="comentarioForm">	
+						{{ csrf_field() }}					
 							<div class="post-ad-form">
 								<textarea class="mess" placeholder="" name="comentario"></textarea>
-								<input type="submit" value="Publicar">	
+								<input type="hidden" name="user_id" value="{{Auth::user()->id}}">	
+								<input type="hidden" name="anuncio_id" value="{{$anuncio->id}}">	
+								<input type="button" id="comentarioSave" value="Publicar">	
 							</div>
 						</form>
 
@@ -239,7 +321,11 @@
 
 						<h4><strong>Comentários</strong> :</h4>
 
-						<p><strog>Jeferson: </strong>Comentário....</p>
+						@forelse($anuncio->comentarios as $comentario)
+							<p><strog>{{$comentario->user->name}}: </strong>{{$comentario->comentario}}</p>
+						@empty
+
+						@endforelse
 
 					
 
@@ -289,16 +375,33 @@
 
 						<h4><small>Entre em contato com o vendedor!</small><h4>
 
-						<p><i class="glyphicon glyphicon-earphone"></i>{{ $anuncio->user->contato1 }}</p>
-
+						@if($anuncio->contato_fone1 == 1)
+						<p><i class="glyphicon glyphicon-earphone"></i>Telefone: {{ $anuncio->user->contato_fone }}</p>
+						@endif
+						@if($anuncio->contato_whatsapp == 1)
+						<p><i class="glyphicon glyphicon-comment"></i>WhatsApp: {{ $anuncio->user->contato_whatsapp }}</p>
+						@endif
+						@if($anuncio->contato_facebook == 1)						
+						<p><i class="glyphicon glyphicon-user"></i>Facebook: {{ $anuncio->user->contato_facebook }}</p>
+						@endif
+						@if($anuncio->contato_email == 1)						
+						<p><i class="glyphicon glyphicon-envelope"></i> Email: {{ $anuncio->user->contato_email }}</p>
+						@endif
+						@if($anuncio->contato_mensagem == 1)						
+						<p><i class="glyphicon glyphicon-share-alt"></i>Enviar Mensagem</p>
+						@endif						
+						
 						<div class="product-details">						
 
 						<h4><strong>Envie uma mensagem</strong> :</h4>
 
-						<form>						
+						<form method="POST" id="mensagemForm">	
+						{{ csrf_field() }}					
 							<div class="post-ad-form">
-								<textarea class="mess" placeholder="" name="comentario"></textarea>
-								<input type="submit" value="Publicar">	
+								<textarea class="mess" placeholder="" name="mensagem"></textarea>
+								<input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+								<input type="hidden" name="vendedor_id" value="{{$anuncio->user->id}}">
+								<input type="button" id="mensagemSave" value="Publicar">	
 							</div>
 						</form>
 

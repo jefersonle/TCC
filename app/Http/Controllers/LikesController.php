@@ -6,16 +6,17 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Models\Comentario;
 
-class ComentarioController extends Controller
+use App\Models\Anuncio;
+
+class LikesController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function getIndex()
+    public function index()
     {
         //
     }
@@ -36,16 +37,26 @@ class ComentarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function postStore(Request $request)
+    public function postGostei(Request $request)
     {
-        $comentario = new Comentario();
-        $comentario->anuncio_id = $request->anuncio_id;
-        $comentario->user_id = $request->user_id;
-        $comentario->comentario = $request->comentario;
-        $comentario->save();
+        $anuncio = Anuncio::find($request->anuncio_id);
 
-        return "Comentario enviado!";
-        
+        $anuncio->gostei = $anuncio->gostei + 1;
+
+        $anuncio->save();
+
+        return "Você gostou do anuncio";
+    }
+
+    public function postNaogostei(Request $request)
+    {
+        $anuncio = Anuncio::find($request->anuncio_id);
+
+        $anuncio->nao_gostei = $anuncio->nao_gostei + 1;
+
+        $anuncio->save();
+
+        return "Você não gostou do anuncio";
     }
 
     /**
@@ -54,7 +65,7 @@ class ComentarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function getShow($id)
+    public function show($id)
     {
         //
     }
@@ -79,13 +90,7 @@ class ComentarioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $comentario = Comentario::find($id);
-        $comentario->anuncio_id = $request_id;
-        $comentario->user_id = $request->user_id;
-        $comentario->comentario = $request->comentario;
-        $comentario->save();
-
-        return redirect('/comentario');
+        //
     }
 
     /**
@@ -96,9 +101,6 @@ class ComentarioController extends Controller
      */
     public function destroy($id)
     {
-        $comentario = Comentario::find($id);
-        $comentario->delete();
-
-        return redirect('/comentario');
+        //
     }
 }
