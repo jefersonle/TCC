@@ -768,9 +768,11 @@
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
 
-
-                      Cadastro realizado com sucesso!
-
+                      @if (isset($tipo) && $tipo == "editar")
+                      	Anúncio atualizado com sucesso!
+                      @else
+                      	Anúncio cadastrado com sucesso!
+                      @endif
 
 
                     </div>
@@ -805,7 +807,13 @@
 
 
 
-					<select class="" id="selectCategorias" name="categoria_id" required>
+					@if (isset($tipo) && $tipo == "editar")
+
+					<select class="" id="selectCategorias" name="categoria_id" value="{{$anuncio->categoria_id}}" required>
+					@else
+						<select class="" id="selectCategorias" name="categoria_id" required>
+					@endif
+
 					</select>
 
 
@@ -931,6 +939,7 @@
 										<li>
 											
 											<img src="{{url('/')}}/uploads/{{$imagem->nome}}" class="col-md-2"/>
+											<h6><a href="">Excluir</a></h6>
 											
 										</li>
 										@empty
@@ -995,10 +1004,13 @@
 
 
 
+						@if (isset($tipo) && $tipo == "editar")
 
-						<select class="" id="selectEstadosForm" name="estado_id" onchange="loadCidades(this);" required>
+						<select class="" id="selectEstadosForm" name="estado_id" onchange="loadCidades(this);" value="{{$anuncio->cidade->estado->id}}" required>
 
-
+						@else
+							<select class="" id="selectEstadosForm" name="estado_id" onchange="loadCidades(this);" required>
+						@endif
 
 
 
@@ -1035,8 +1047,13 @@
 
 
 
-
+						@if (isset($tipo) && $tipo == "editar")
+						<select class="" id="selectCidadesForm" value="{{$anuncio->cidade_id}}" name="cidade_id" required>
+						@else
 						<select class="" id="selectCidadesForm" name="cidade_id" required>
+
+						@endif
+
 
 
 
@@ -1095,8 +1112,11 @@
 
 
 
-
-						<select class="" name="moeda" required>	
+					    @if(isset($tipo) && $tipo == "editar")
+							<select class="" name="moeda" required value="{{$anuncio->moeda_id}}">	
+						@else
+							<select class="" name="moeda" required>	
+						@endif
 
 							@foreach($moedas as $moeda)
 							  <option value="{{$moeda->id}}">{{$moeda->nome}} ({{$moeda->sigla}})</option>		
@@ -1128,9 +1148,11 @@
 
 
 
-
-						<select class="" name="condicao" required>	
-
+						@if (isset($tipo) && $tipo == "editar")
+						<select class="" name="condicao" value="{{$anuncio->condicao}}" required>	
+						@else
+							<select class="" name="condicao" required>	
+						@endif
 
 						  <option value="novo">Novo</option>
 
@@ -1155,8 +1177,11 @@
 
 
 
-
-						<select class="" name="entrega" required>	
+						@if (isset($tipo) && $tipo == "editar")
+							<select class="" name="entrega" value="{{$anuncio->forma_de_entrega_id}}" required>	
+						@else
+							<select class="" name="entrega" required>	
+						@endif
 
 						  @foreach($formasDeEntrega as $entrega)
 						  		<option value="{{$entrega->id}}">{{$entrega->nome}}</option>
@@ -1184,11 +1209,19 @@
 
 
 						<div>
-							<input type="checkbox" name="email">Email
+							@if (isset($tipo) && $tipo == "editar")
+							<input type="checkbox" name="email" @if($anuncio->contato_email == 1) checked="checked" @endif>Email
+							<input type="checkbox" name="telefone" @if($anuncio->contato_fone1 == 1) checked="checked" @endif>Telefone
+							<input type="checkbox" name="whatsapp" @if($anuncio->contato_whatsapp == 1) checked="checked" @endif>WhatsApp
+							<input type="checkbox" name="facebook" @if($anuncio->contato_facebook == 1) checked="checked" @endif>Facebook
+							<input type="checkbox" name="mensagem" @if($anuncio->contato_mensagem == 1) checked="checked" @endif>Mensagem
+							@else
+							<input type="checkbox" name="email"  >Email
 							<input type="checkbox" name="telefone">Telefone
 							<input type="checkbox" name="whatsapp">WhatsApp
 							<input type="checkbox" name="facebook">Facebook
 							<input type="checkbox" name="mensagem"">Mensagem
+							@endif
 							<p class="small">Você pode atualizar suas informações de contato clicando aqui.</p>
 						</div>
 

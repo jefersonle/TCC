@@ -259,7 +259,7 @@
 
 					<h2>{{ $anuncio->titulo }}</h2>
 
-					<p> <i class="glyphicon glyphicon-map-marker"></i><a href="#">{{ $anuncio->cidade->estado->nome }}</a>, <a href="#">{{ $anuncio->cidade->nome }}</a>| Adicionado em {{ date_format($anuncio->created_at, 'd-m-Y H:i') }}, ID: {{ $anuncio->id }}</p>
+					<p> <i class="glyphicon glyphicon-map-marker"></i><a href="#">{{ $anuncio->cidade->estado->nome }}</a>, <a href="#">{{ $anuncio->cidade->nome }},</a> <a href="#">Região ({{ $anuncio->ddd}})</a>| Adicionado em {{ date_format($anuncio->created_at, 'd-m-Y H:i') }}, ID: {{ $anuncio->id }}</p>
 
 					<div class="flexslider">
 
@@ -331,6 +331,42 @@
 					
 
 					</div>
+
+					<div class="product-details">						
+
+						<div>
+
+							<p>Envio:</p>
+
+							<h4>{{$anuncio->formadeentrega->nome}}</h4>
+
+							<div class="clearfix"></div>
+
+						</div>
+						<div>
+
+							<p>Formas de Pagamento</p>
+
+							<h4>
+							@forelse($anuncio->pagamentos as $pagamento)
+								{{$pagamento->nome}},
+							@empty
+								Nenhuma Forma de Pagamento Informada
+							@endforelse
+							</h4>
+
+							<div class="clearfix"></div>
+
+						</div>
+
+						<p><a href="{{url('/')}}/anuncio/usuario/{{ $anuncio->user_id}}">Clique aqui para ver todos os anúncios deste vendedor!</a></p>
+
+					</div>
+					
+
+
+
+
 					@if (Auth::user())
 					<div class="product-details">						
 
@@ -384,7 +420,7 @@
 
 							<p class="p-price">Condição</p>
 
-							<h4>Novo</h4>
+							<h4>{{ucfirst($anuncio->condicao)}}</h4>
 
 							<div class="clearfix"></div>
 

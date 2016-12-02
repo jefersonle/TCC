@@ -80,7 +80,7 @@
 						<a href="{{ url('/anuncio') }}">Todos os Anúncios</a>
 					</ul>
 					<div class="resp-tabs-container hor_1">
-						<span class="active total" style="display:block;" data-toggle="modal" data-target="#myModal"><strong>Em Todo o Brasil</strong> (Selecione sua cidade para ver anúncios locais)</span>
+						<span class="active total" style="display:block;" data-toggle="modal" data-target="#myModal" id="selecionarRegiao"><strong>Em Todo o Brasil</strong> (Selecione sua cidade ou região para ver anúncios locais)</span>
 						@foreach($categorias as $categoria)
 							@if($categoria->categoria_id == 0)
 								<div>
@@ -130,6 +130,10 @@
                 $name.text($tab.text());
                 $info.show();
             }
+        });
+
+        $("#selecionarRegiao").on('click', function(){
+        	$("#project").focus();
         });
     });
 </script>

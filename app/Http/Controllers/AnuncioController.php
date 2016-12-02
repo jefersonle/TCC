@@ -330,22 +330,18 @@ class AnuncioController extends Controller
         $anuncio = Anuncio::find($id);
 
 
+        $data['moedas'] = Moeda::all();
+
+        $data['formasDeEntrega'] = FormaDeEntrega::all();
+
+        $data['formasDePagamento'] = FormaDePagamento::all();
 
         $data['anuncio'] = $anuncio;
 
 
-
         $data['tipo'] = 'editar';
 
-
-
         return view('formanuncio', $data);
-
-
-
-
-
-
 
     }
 
@@ -377,7 +373,10 @@ class AnuncioController extends Controller
 
             $anuncio->cidade_id = $request->cidade_id;
 
+            //Pega cidade para salvar seu ddd no anuncio
+            $cidade = Cidade::find($request->cidade_id);
 
+            $anuncio->ddd = $cidade->ddd;
 
             $anuncio->user_id = \Auth::user()->id;
 
@@ -395,17 +394,34 @@ class AnuncioController extends Controller
 
 
 
-            $anuncio->valor = $request->valor;
+            $valor = str_replace("," , "" , $request->valor);
 
 
+
+            $valor = str_replace("." , "" , $valor);
+
+
+
+            $anuncio->valor = $valor;
+
+            $anuncio->status_id = 1;
+
+            $anuncio->moeda_id = $request->moeda;
+
+            $anuncio->forma_de_entrega_id = $request->entrega;
+
+            $anuncio->condicao = $request->condicao;
+
+            $anuncio->contato_email = ($request->email != null)?1:0;
+            $anuncio->contato_fone1 = ($request->telefone != null)?1:0;
+            $anuncio->contato_whatsapp = ($request->whatsapp != null)?1:0;
+            $anuncio->contato_facebook = ($request->facebook != null)?1:0;
+            $anuncio->contato_mensagem = ($request->mensagem != null)?1:0;
 
             $anuncio->save();
 
-            
-
             $path = "uploads";
-
-        
+           
 
             if ($request->hasFile('images')) {  
 
@@ -421,7 +437,6 @@ class AnuncioController extends Controller
 
                         $image->move($path, $name);
 
-    
 
                         $imagem = new Imagem();
 
@@ -431,23 +446,22 @@ class AnuncioController extends Controller
 
                         $imagem->save();
 
-    
-
                     }
+                }                                   
 
-                }
-
-
-
-        }     
-
-
+            }  
 
         $data['anuncio'] = $anuncio;
 
         $data['tipo'] = 'editar';
 
         $data['success'] = true;
+
+        $data['moedas'] = Moeda::all();
+
+        $data['formasDeEntrega'] = FormaDeEntrega::all();
+
+        $data['formasDePagamento'] = FormaDePagamento::all();
 
 
 
@@ -731,6 +745,47 @@ class AnuncioController extends Controller
 
     }
 
+    public function getUsuario($id, Request $request)
+
+
+
+    {
+         if(isset($request->f)){
+            switch ($request->f) {
+                case 'antigo':
+                    $anuncios = Anuncio::where('user_id', $id)->orderBy('updated_at', 'ASC')->get();
+                    break;
+                case 'recente':
+                    $anuncios = Anuncio::where('user_id', $id)->orderBy('updated_at', 'DESC')->get();
+                    break;
+                case 'menorpreco':
+                    $anuncios = Anuncio::where('user_id', $id)->orderBy('valor', 'ASC')->get();
+                    break;
+                case 'maiorpreco':
+                    $anuncios = Anuncio::where('user_id', $id)->orderBy('valor', 'DESC')->get();
+                    break;                
+            }
+         }else{
+            $anuncios = Anuncio::where('user_id', $id)->orderBy('updated_at', 'desc')->get();
+         }                
+
+
+
+        $data['anuncios'] = $anuncios;
+
+
+
+        
+        $data['bread1'] = "Categorias";
+        $data['bread1a'] = "categoria";
+        $data['bread2'] = $anuncios[0]->categoria->nome;       
+
+
+
+        return view('anuncio', $data);
+
+
+    }
 
 
 }

@@ -31,6 +31,17 @@ class Anuncio extends Model
     public function cidade()
     {
         return $this->belongsTo('App\Models\Cidade');
-    }    
+    }      
+
+    public function pagamentos()
+    {
+        return $this->belongsToMany('App\Models\FormaDePagamento', 'pagamento_anuncios');
+    }
+
+    public function formadeentrega()
+    {
+        return $this->belongsTo('App\Models\FormaDeEntrega', 'forma_de_entrega_id');
+    }
+
 
 }
