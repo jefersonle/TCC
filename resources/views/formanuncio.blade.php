@@ -1172,6 +1172,7 @@
 
 
 						<div>
+						
 							@foreach($formasDePagamento as $pagamento)
 							<input type="checkbox" name="pagamento[]" value="{{$pagamento->id}}">{{$pagamento->nome}}
 							@endforeach

@@ -13,6 +13,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <link href="{{ url('/') }}/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <link rel="stylesheet" href="{{ url('/') }}/css/flexslider.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="{{ url('/') }}/css/font-awesome.min.css" />
+<link rel="stylesheet" href="{{ url('/') }}/jquery-ui/jquery-ui.css">
 <!-- for-mobile-apps -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -24,6 +25,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href='//fonts.googleapis.com/css?family=Ubuntu+Condensed' rel='stylesheet' type='text/css'>
 <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
 <!--//fonts-->  
+<style>
+  #project-label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 1em;
+  }
+  #project-icon {
+    float: left;
+    height: 32px;
+    width: 32px;
+  }
+  #project-description {
+    margin: 0;
+    padding: 0;
+  }
+  </style>
 
 @yield('scripts')
 
@@ -105,48 +122,31 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <a href="{{ url('/') }}"><span>Agro</span>Anúncios</a>
             </div>
             <div class="header-right">
-                @if (Auth::guest())
+            @if (Auth::guest())
                         <a class="account" href="{{ url('/dashboard/anuncio') }}">Minha Conta</a>
-		@else
+              @else
                         <a class="account" href="{{ url('/dashboard/anuncio') }}">{{ Auth::user()->name }}</a>  
                         <a class="account" href="{{ url('/logout') }}">Sair</a>                         
                 @endif
+                
             
             <!-- <span class="active uls-trigger">Idioma</span> -->
     <!-- Large modal -->
             <div class="selectregion">
-                <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                Selecionar Região</button>
-                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-                    aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                        &times;</button>
-                                    <h4 class="modal-title" id="myModalLabel">
-                                        Selecione sua região</h4>
-                                </div>
-                                <div class="modal-body">
-                                     <form class="form-horizontal" role="form">
-                                         <div class="form-group">
-                                            <select id="selectEstados" class="form-control" onchange="loadCidades(this);">
-                                                <option selected style="display:none;color:#eee;">Selecionar Estado</option>                                               
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <select id="selectCidades" class="form-control" onchange="loadAnuncios(this);">
-                                                <option selected style="display:none;color:#eee;">Selecionar Cidade</option>                                               
-                                            </select>
-                                        </div>
-                                      </form>    
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <script>
-                $('#myModal').modal('');
-                </script>
+                <div id="project-label">                    
+                    <form class="form-horizontal" role="form" id="formcidaderegiao">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="input-group">                                  
+                                 <input class="form-control" placeholder="Digite o nome da cidade aqui..." id="project">
+                                  <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                                  </span>
+                                </div><!-- /input-group -->
+                              </div><!-- /.col-lg-6 -->
+                        </div>                        
+                    </form>                
+                </div> 
             </div>
         </div>
         </div>
@@ -181,5 +181,59 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
         </footer>
         <!--footer section end-->
+
+<script src="{{url('/')}}/jquery-ui/jquery-ui.js"></script>          
+  
+  <script>
+  $( function() {
+    var cidadesRegioes = []; 
+    
+        $("#project").on("keyup", function(){
+            var valor = $(this).val();
+            if(valor.length > 2){
+
+                $.ajax({
+                    url: '{{ url('/estado/busca') }}',
+                    data: 'term='+valor,
+                    name:name,
+                    method:'get',
+                    success:function(data){
+                        cidadesRegioes = data;
+                        console.log(cidades);   
+
+                        $( "#project" ).autocomplete({
+                              minLength: 0,
+                              source: cidadesRegioes,      
+                              focus: function( event, ui ) {
+                                $( "#project" ).val( ui.item.label );
+                                return false;
+                              },
+                              select: function( event, ui ) {
+                                $( "#project" ).val( ui.item.label);
+                                var urlaction = '{{url("/")}}/anuncio/'+ui.item.tipo+'/'+ui.item.value;
+                                $( "#formcidaderegiao" ).attr('action', urlaction);
+
+                                formcidaderegiao.submit();
+
+                                return false;
+                              }
+                            })
+                            .autocomplete( "instance" )._renderItem = function( ul, item ) {
+                              return $( "<li>" )
+                                .append( "<div>" + item.label + "<br>" + item.desc + "</div>" )
+                                .appendTo( ul );
+                            };
+                    }           
+                });
+
+            }
+        });
+  
+    
+  } );
+
+
+
+  </script>
 </body>
 </html>

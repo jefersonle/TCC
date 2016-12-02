@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Estado;
+use App\Models\Cidade;
 
 class EstadoController extends Controller
 {
@@ -17,13 +18,45 @@ class EstadoController extends Controller
      */
     public function getIndex(Request $request)
     {
-        $estados = Estado::orderBy('nome')->get();
+        $estados = Estado::orderBy('nome')->get();        
 
         if($request->ajax()){
 
                 $estados = $estados->toArray();
 
                 return $estados;
+        }
+        
+        dd($estados);
+    }
+
+    public function getBusca(Request $request)
+    {
+        $cidades = Cidade::where('nome', 'LIKE', $request->term.'%')->orderBy('nome', 'ASC')->get();
+
+        foreach ($cidades as $cidade) {
+            $cidadeLabel = $cidade->nome."(".$cidade->estado->nome.")";
+
+            $cidadeJson[] = [
+                "value" => $cidade->id,
+                "label"=> $cidadeLabel,
+                "desc"=> "Produtos na Cidade de ".$cidade->nome,
+                "tipo"=> "cidade"
+            ];         
+
+            $regiaoLabel = $cidade->nome."(".$cidade->estado->nome.") e Região (".$cidade->ddd.")";
+
+            $cidadeJson[] = [
+                "value" => $cidade->ddd,
+                "label"=> $regiaoLabel,
+                "desc"=>"Produtos na região de ".$cidade->nome."(".$cidade->ddd.")",
+                "tipo"=> "regiao"
+            ];    
+        }
+
+        if($request->ajax()){                
+
+                return $cidadeJson;
         }
         
         dd($estados);

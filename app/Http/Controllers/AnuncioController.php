@@ -28,6 +28,8 @@ use App\Models\Anuncio;
 
 use App\Models\Estado;
 
+use App\Models\Cidade;
+
 use App\Models\Imagem;
 
 use App\Models\Moeda;
@@ -96,10 +98,14 @@ class AnuncioController extends Controller
 
 
 
-        $data['anuncios'] = $anuncios;        
+        $data['anuncios'] = $anuncios;   
 
+        
+        $data['bread1'] = "Categorias";
 
-        $data['bread'] = "Todos os anúncios";
+        $data['bread1a'] = "categoria";          
+
+        $data['bread2'] = "Todos os anúncios";
 
 
 
@@ -161,7 +167,10 @@ class AnuncioController extends Controller
 
         $anuncio->cidade_id = $request->cidade_id;
 
+        //Pega cidade para salvar seu ddd no anuncio
+        $cidade = Cidade::find($request->cidade_id);
 
+        $anuncio->ddd = $cidade->ddd;
 
         $anuncio->user_id = \Auth::user()->id;
 
@@ -492,15 +501,33 @@ class AnuncioController extends Controller
 
 
 
-     public function getCidade($id)
+     public function getCidade($id, Request $request)
 
 
 
     {
 
+        if(isset($request->f)){
+            switch ($request->f) {
+                case 'antigo':
+                    $anuncios = Anuncio::where('cidade_id', $id)->orderBy('updated_at', 'ASC')->get();
+                    break;
+                case 'recente':
+                    $anuncios = Anuncio::where('cidade_id', $id)->orderBy('updated_at', 'DESC')->get();
+                    break;
+                case 'menorpreco':
+                    $anuncios = Anuncio::where('cidade_id', $id)->orderBy('valor', 'ASC')->get();
+                    break;
+                case 'maiorpreco':
+                    $anuncios = Anuncio::where('cidade_id', $id)->orderBy('valor', 'DESC')->get();
+                    break;                
+            }
+         }else{
+            $anuncios = Anuncio::where('cidade_id', $id)->orderBy('updated_at', 'desc')->get();
+         }
 
 
-        $anuncios = Anuncio::where('cidade_id', $id)->orderBy('updated_at', 'desc')->get();
+        
 
 
 
@@ -508,9 +535,58 @@ class AnuncioController extends Controller
 
 
 
-        $data['bread'] = $anuncios[0]->cidade->nome;
+        $data['bread1'] = "Cidade";
+        $data['bread1a'] = "cidade";
+        $data['bread2'] = $anuncios[0]->cidade->nome;
+       
+        
 
 
+
+        return view('anuncio', $data);        
+
+
+
+    }
+
+
+    public function getRegiao($id, Request $request)
+
+
+
+    {
+
+        if(isset($request->f)){
+            switch ($request->f) {
+                case 'antigo':
+                    $anuncios = Anuncio::where('ddd', $id)->orderBy('updated_at', 'ASC')->get();
+                    break;
+                case 'recente':
+                    $anuncios = Anuncio::where('ddd', $id)->orderBy('updated_at', 'DESC')->get();
+                    break;
+                case 'menorpreco':
+                    $anuncios = Anuncio::where('ddd', $id)->orderBy('valor', 'ASC')->get();
+                    break;
+                case 'maiorpreco':
+                    $anuncios = Anuncio::where('ddd', $id)->orderBy('valor', 'DESC')->get();
+                    break;                
+            }
+         }else{
+            $anuncios = Anuncio::where('ddd', $id)->orderBy('updated_at', 'desc')->get();
+         }
+
+
+        
+
+
+
+        $data['anuncios'] = $anuncios;
+
+
+
+        $data['bread1'] = "Regiao";
+        $data['bread1a'] = "regiao";
+        $data['bread2'] = "Região com DDD ".$anuncios[0]->ddd;   
 
         return view('anuncio', $data);        
 
@@ -560,15 +636,29 @@ class AnuncioController extends Controller
 
 
 
-    public function getCategoria($id)
+    public function getCategoria($id, Request $request)
 
 
 
     {
-
-
-
-        $anuncios = Anuncio::where('categoria_id', $id)->orderBy('updated_at', 'desc')->get();        
+         if(isset($request->f)){
+            switch ($request->f) {
+                case 'antigo':
+                    $anuncios = Anuncio::where('categoria_id', $id)->orderBy('updated_at', 'ASC')->get();
+                    break;
+                case 'recente':
+                    $anuncios = Anuncio::where('categoria_id', $id)->orderBy('updated_at', 'DESC')->get();
+                    break;
+                case 'menorpreco':
+                    $anuncios = Anuncio::where('categoria_id', $id)->orderBy('valor', 'ASC')->get();
+                    break;
+                case 'maiorpreco':
+                    $anuncios = Anuncio::where('categoria_id', $id)->orderBy('valor', 'DESC')->get();
+                    break;                
+            }
+         }else{
+            $anuncios = Anuncio::where('categoria_id', $id)->orderBy('updated_at', 'desc')->get();
+         }                
 
 
 
@@ -576,7 +666,10 @@ class AnuncioController extends Controller
 
 
 
-        $data['bread'] = $anuncios[0]->categoria->nome;
+        
+        $data['bread1'] = "Categorias";
+        $data['bread1a'] = "categoria";
+        $data['bread2'] = $anuncios[0]->categoria->nome;       
 
 
 
@@ -585,6 +678,54 @@ class AnuncioController extends Controller
 
 
         
+
+
+
+    }
+
+    public function getBusca(Request $request)
+
+
+
+    {
+
+        if(isset($request->f)){
+            switch ($request->f) {
+                case 'antigo':
+                    $anuncios = Anuncio::where('titulo', 'LIKE', '%'.$request->keyword.'%')->orderBy('updated_at', 'ASC')->get();
+                    break;
+                case 'recente':
+                   $anuncios = Anuncio::where('titulo', 'LIKE', '%'.$request->keyword.'%')->orderBy('updated_at', 'DESC')->get();
+                    break;
+                case 'menorpreco':
+                   $anuncios = Anuncio::where('titulo', 'LIKE', '%'.$request->keyword.'%')->orderBy('valor', 'ASC')->get();
+                    break;
+                case 'maiorpreco':
+                    $anuncios = Anuncio::where('titulo', 'LIKE', '%'.$request->keyword.'%')->orderBy('valor', 'DESC')->get();
+                    break;                
+            }
+         }else{
+            $anuncios = Anuncio::where('titulo', 'LIKE', '%'.$request->keyword.'%')->orderBy('updated_at', 'desc')->get(); 
+         }     
+
+
+               
+
+
+
+        $data['anuncios'] = $anuncios;
+
+
+        $data['bread1'] = "Buscar";
+        $data['bread1a'] = "busca";
+        $data['bread2'] = $request->keyword;
+       
+
+        $data['keyword'] = $request->keyword;
+
+
+
+        return view('anuncio', $data);     
 
 
 

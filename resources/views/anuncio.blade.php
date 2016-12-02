@@ -191,30 +191,33 @@ var elem=$('#container ul');
 			<div class="select-box">
 
 				<div width="100%">
-
+					<form action="{{url('/')}}/anuncio/busca" method="GET">
+						
 					<div class="search" width="100%">
 
 						<div id="custom-search-input" width="100%">
 
 						<div class="input-group" width="100%">
+							
 
-							<input type="text" class="form-control input-lg" placeholder="Buscar" width="100%" />
+								<input type="text" class="form-control input-lg" name="keyword" placeholder="Buscar" width="100%" />
 
-							<span class="input-group-btn">
+								<span class="input-group-btn">
 
-								<button class="btn btn-info btn-lg" type="button">
+									<button class="btn btn-info btn-lg" type="button" onclick="submit();">
 
-									<i class="glyphicon glyphicon-search"></i>
+										<i class="glyphicon glyphicon-search"></i>
 
-								</button>
+									</button>
 
-							</span>
-
+								</span>
+				
 						</div>
 
 					</div>
 
 					</div>
+				</form>
 
 				</div>
 
@@ -225,14 +228,14 @@ var elem=$('#container ul');
 			<ol class="breadcrumb" style="margin-bottom: 5px;">
 
 			  <li><a href="{{ url('/') }}">Home</a></li>
-
-			  <li><a href="{{ url('/categoria') }}">Categorias</a></li>
-
+				@if(isset($bread1))	
+			  <li><a href="{{ url('/') }}/{{$bread1a}}">{{$bread1}}</a></li>
+			  	@endif
 			  <li class="active">
 
-			     @if(isset($bread))
+			     @if(isset($bread2))
 
-			         {{ $bread }}
+			         {{ $bread2 }}
 
 			     @endif
 
@@ -385,6 +388,12 @@ var elem=$('#container ul');
 									<a class="listview active"><i class="glyphicon glyphicon-th-list"></i></a>
 
 								</div>
+								<form method="GET" action="">
+								@if(isset($keyword))
+
+							         <input type="hidden" name="keyword" value="{{$keyword}}">
+
+							     @endif
 
 								<div class="sort">
 
@@ -392,21 +401,24 @@ var elem=$('#container ul');
 
 										<label>Ordenar por : </label>
 
-										<select>
+										<select name="f" onchange="submit()">
 
-														<option value="">Mais recente</option>
+														<option value="">Ordenar</option>
 
-														<option value="">Mais Antigos</option>
+														<option value="recente">Mais recente</option>
 
-														<option value="">Menor Preço</option>
+														<option value="antigo">Mais Antigos</option>
 
-														<option value="">Maior Preço</option>
+														<option value="menorpreco">Menor Preço</option>
+
+														<option value="maiorpreco">Maior Preço</option>
 
 										</select>
 
 									   </div>
 
 									 </div>
+								</form>
 
 								<div class="clearfix"></div>
 

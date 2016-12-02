@@ -75,7 +75,7 @@
                         <a href="{{ url('/') }}/categoria">
                             <div class="focus-border">
                                 <div class="focus-layout">
-                                    <div class="focus-image"><i class="fa fa-mobile"></i></div>
+                                    <div class="focus-image"><i class="fa fa-tree"></i></div>
                                     <h4 class="clrchg">Agricultura</h4>
                                 </div>
                             </div>
@@ -85,7 +85,7 @@
                         <a href="{{ url('/') }}/categoria#parentVerticalTab3">
                             <div class="focus-border">
                                 <div class="focus-layout">
-                                    <div class="focus-image"><i class="fa fa-laptop"></i></div>
+                                    <div class="focus-image"><i class="fa fa-paw"></i></div>
                                     <h4 class="clrchg">Pecuária</h4>
                                 </div>
                             </div>
@@ -95,8 +95,8 @@
                         <a href="{{ url('/') }}/categoria#parentVerticalTab6">
                             <div class="focus-border">
                                 <div class="focus-layout">
-                                    <div class="focus-image"><i class="fa fa-car"></i></div>
-                                    <h4 class="clrchg">Vestuario</h4>
+                                    <div class="focus-image"><i class="fa fa-heart"></i></div>
+                                    <h4 class="clrchg">Orgânicos</h4>
                                 </div>
                             </div>
                         </a>
@@ -105,7 +105,7 @@
                         <a href="{{ url('/') }}/categoria#parentVerticalTab5">
                             <div class="focus-border">
                                 <div class="focus-layout">
-                                    <div class="focus-image"><i class="fa fa-motorcycle"></i></div>
+                                    <div class="focus-image"><i class="fa fa-car"></i></div>
                                     <h4 class="clrchg">Veículos</h4>
                                 </div>
                             </div>
@@ -115,7 +115,7 @@
                         <a href="{{ url('/') }}/categoria#parentVerticalTab2">
                             <div class="focus-border">
                                 <div class="focus-layout">
-                                    <div class="focus-image"><i class="fa fa-wheelchair"></i></div>
+                                    <div class="focus-image"><i class="fa fa-home "></i></div>
                                     <h4 class="clrchg">Imóveis</h4>
                                 </div>
                             </div>
@@ -125,7 +125,7 @@
                         <a href="{{ url('/') }}/categoria#parentVerticalTab4">
                             <div class="focus-border">
                                 <div class="focus-layout">
-                                    <div class="focus-image"><i class="fa fa-paw"></i></div>
+                                    <div class="focus-image"><i class="fa fa-wrench"></i></div>
                                     <h4 class="clrchg">Serviços</h4>
                                 </div>
                             </div>

@@ -32,6 +32,8 @@ class CreateAnunciosTable extends Migration
 
             $table->integer('cidade_id');
 
+            $table->integer('ddd');
+
             $table->integer('user_id');
 
             $table->integer('categoria_id');

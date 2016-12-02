@@ -9,6 +9,9 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Anuncio;
 
+
+use App\Models\Denuncia;
+
 class LikesController extends Controller
 {
     /**
@@ -57,6 +60,25 @@ class LikesController extends Controller
         $anuncio->save();
 
         return "Você não gostou do anuncio";
+    }
+
+    public function postDenunciar(Request $request)
+    {
+        $busca = Denuncia::where('anuncio_id', $request->anuncio_id)->get();
+
+        if($busca->count()){
+            return "Este anuncio já está sendo analisado";
+        }else{
+            $denuncia = new Denuncia();
+
+            $denuncia->anuncio_id = $request->anuncio_id;
+
+            $denuncia->save();
+
+            return "Você denunciou o anuncio";
+        }
+
+        
     }
 
     /**

@@ -97,6 +97,7 @@
 				} );
 
 			
+			@if (Auth::user())
 
 			$("#comentarioSave").click(function(){
 				alert("comentario");
@@ -136,7 +137,9 @@
 
 			});
 
-			$("#gostei").click(function(){
+			
+			
+	        $("#gostei").click(function(){
 
 				alert("gostei");
 				
@@ -155,8 +158,9 @@
 
 			    return false;
 
-			});
-			$("#naogostei").click(function(){
+			});     
+
+	        $("#naogostei").click(function(){
 
 				alert("nao gostei");
 				
@@ -176,6 +180,30 @@
 			    return false;
 
 			});
+
+			$("#denunciar").click(function(){
+
+				alert("denunciar");
+				
+					
+				var url = "{{url('/')}}/likes/denunciar";
+
+				$.ajax({						
+			           type: "POST",
+			           url: url,
+			           data: "anuncio_id={{$anuncio->id}}&user_id={{Auth::user()->id}}&_token={{ csrf_token() }}", // serializes the form's elements.
+			           success: function(data)
+			           {
+			               alert(data); // show response from the php script.
+			           }
+			         });
+
+			    return false;
+
+			});
+            @endif
+            
+			
 		});
 	</script>
 
@@ -281,15 +309,18 @@
 					</script>
 
 					<!-- //FlexSlider -->
+					@if (Auth::user())
+
 					<div class="product-details">						
 
 						
 
-						<p><button id="gostei">Gostei</button><button id="naogostei">Não Gostei</button></p>
+						<p><button id="gostei">Gostei</button><button id="naogostei">Não Gostei</button><button id="denunciar">Denunciar</button></p>
 
 					
 
 					</div>
+					@endif
 
 					<div class="product-details">						
 
@@ -300,13 +331,14 @@
 					
 
 					</div>
+					@if (Auth::user())
 					<div class="product-details">						
 
 						<h4><strong>Deixe seu comentário</strong> :</h4>
 
 						<form method="POST" id="comentarioForm">	
 						{{ csrf_field() }}					
-							<div class="post-ad-form">
+							<div>
 								<textarea class="mess" placeholder="" name="comentario"></textarea>
 								<input type="hidden" name="user_id" value="{{Auth::user()->id}}">	
 								<input type="hidden" name="anuncio_id" value="{{$anuncio->id}}">	
@@ -317,6 +349,7 @@
 					
 
 					</div>
+					@endif
 					<div class="product-details">						
 
 						<h4><strong>Comentários</strong> :</h4>
@@ -387,27 +420,31 @@
 						@if($anuncio->contato_email == 1)						
 						<p><i class="glyphicon glyphicon-envelope"></i> Email: {{ $anuncio->user->contato_email }}</p>
 						@endif
-						@if($anuncio->contato_mensagem == 1)						
-						<p><i class="glyphicon glyphicon-share-alt"></i>Enviar Mensagem</p>
-						@endif						
+
+						@if (Auth::user())
+							@if($anuncio->contato_mensagem == 1)						
+							<p><i class="glyphicon glyphicon-share-alt"></i>Enviar Mensagem</p>
+							@endif						
+							
+							
+							<div class="product-details">						
+
+								<h4><strong>Envie uma mensagem</strong> :</h4>
+
+								<form method="POST" id="mensagemForm">	
+								{{ csrf_field() }}					
+									<div>
+										<textarea class="mess" placeholder="" name="mensagem"></textarea>
+										<input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+										<input type="hidden" name="vendedor_id" value="{{$anuncio->user->id}}">
+										<input type="button" id="mensagemSave" value="Enviar">	
+									</div>
+								</form>
+
 						
-						<div class="product-details">						
 
-						<h4><strong>Envie uma mensagem</strong> :</h4>
-
-						<form method="POST" id="mensagemForm">	
-						{{ csrf_field() }}					
-							<div class="post-ad-form">
-								<textarea class="mess" placeholder="" name="mensagem"></textarea>
-								<input type="hidden" name="user_id" value="{{Auth::user()->id}}">
-								<input type="hidden" name="vendedor_id" value="{{$anuncio->user->id}}">
-								<input type="button" id="mensagemSave" value="Publicar">	
 							</div>
-						</form>
-
-					
-
-					</div>
+						@endif
 					</div>
 
 						<!-- <div class="tips">
