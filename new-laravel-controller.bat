@@ -1,0 +1,1 @@
+php artisan make:controller Admin\StatusController --resource

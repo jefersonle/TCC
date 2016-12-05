@@ -96,16 +96,25 @@ Route::group(['middleware' => 'web'], function () {
 
     
 
-    Route::controller('/dashboard/anuncio', 'Dashboard\AnuncioController');
+    Route::controller('/dashboard/anuncio', 'Dashboard\AnuncioController');   
 
-    
+    Route::controller('/admin/anuncios', 'Admin\AnuncioController');   
+    Route::controller('/admin/categorias', 'Admin\CategoriaController');
+    Route::controller('/admin/pagamento', 'Admin\FormaDePagamentoController');
+    Route::controller('/admin/entrega', 'Admin\FormaDeEntregaController');
+    Route::controller('/admin/moedas', 'Admin\MoedaController');
+    Route::controller('/admin/statuslist', 'Admin\StatusController');
+    Route::controller('/admin/mensagens', 'Admin\MensagemController');   
+    Route::controller('/admin/comentarios', 'Admin\ComentarioController');   
+    Route::controller('/admin/denuncias', 'Admin\DenunciaController');   
+    Route::controller('/admin/cidades', 'Admin\CidadeController');   
+    Route::controller('/admin/estados', 'Admin\EstadoController'); 
+    Route::controller('/admin/usuarios', 'Admin\UsuarioController');
+    Route::controller('/admin/perfil', 'Admin\PerfilController');  
 
-    Route::get('admin', function(){
-
-        return view('admin');
-
-    })->middleware('auth');
-
+    Route::get("/admin", function(){
+        return redirect("/admin/anuncios");
+    });
     
 
     Route::auth();
