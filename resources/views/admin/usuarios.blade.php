@@ -104,7 +104,7 @@
 								     <h3 class="head-top">Usuários</h3>								       
 									    <div class="col-md-12 page_1">
 									    	<div class="view-controls-list" id="viewcontrols">
-													<h3><span class="label label-primary">Novo Usuário</span></h3>
+													<h3><a href="{{url('/admin/usuarios/create')}}"><span class="label label-primary">Criar Novo Usuário</span></a></h3>
 												</div>												
 								              <table class="table table-bordered">
 												<thead>
@@ -117,15 +117,22 @@
 													</tr>
 												</thead>
 												<tbody>
+												@forelse($usuarios as $usuario)
 													<tr>
-														<td>00</td>
-														<td>Usuario 2</td>
-														<td>email@teste.com/td>
-														<td>05/09/2016</td>
-														<td><a href="single.html"><span class="label label-success">Editar</span></a>
-														<a href="single.html"><span class="label label-danger">Excluir</span></a>
+														<td>{{$usuario->id}}</td>
+														<td>{{$usuario->nome}}</td>
+														<td>{{$usuario->email}}/td>
+														<td>{{$usuario->created_at}}</td>
+														<td><a href="{{url('/admin/usuarios/edit')}}/{{$usuario->id}}"><span class="label label-success">Editar</span></a>
+														<a href="{{url('/admin/usuarios/destroy')}}/{{$usuario->id}}"><span class="label label-danger">Excluir</span></a>
 														</td>
 													</tr>	
+												@empty
+													<tr>
+														<td colspan="5">Nenhum usuário encontrado</td>
+													</tr>
+												@endforelse
+
 												</tbody>
 											  </table> 
 											                   

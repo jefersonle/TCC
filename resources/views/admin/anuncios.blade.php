@@ -123,7 +123,7 @@
 									   <div>
 											<div id="container">
 											<div class="view-controls-list" id="viewcontrols">
-												<h3><span class="label label-primary">Criar Novo</span></h3>
+												<h3><a href="{{url('/anuncio/create')}}"><span class="label label-primary">Criar Novo Anúncio</span></a></h3>
 											</div>
 											<div class="sort">
 											   <div class="sort-by">
@@ -137,102 +137,26 @@
 												   </div>
 												 </div>
 											<div class="clearfix"></div>
-										<ul class="list">											
-												<li>
-												<img ="{{ url('/') }}/images/m1.jpg" title="" alt="" />
-												<section class="list-left">
-												<a href="single.html"><h5 class="title">There are many variations of passages of Lorem Ipsum</h5></a>
-												<span class="adprice">$290</span>
-												<p class="catpath">Mobile Phones » Brand</p>
-												</section>
-												<section class="list-right">
-												<span class="date">Today, 17:55</span>
-												<span class="cityname">City name</span>
-												<a href="single.html"><span class="label label-success">Editar</span></a>
-												<a href="single.html"><span class="label label-danger">Excluir</span></a>
-												</section>
-												<div class="clearfix"></div>
-												</li>
-
-												<li>
-												<img ="{{ url('/') }}/images/m1.jpg" title="" alt="" />
-												<section class="list-left">
-												<a href="single.html"><h5 class="title">There are many variations of passages of Lorem Ipsum</h5></a>
-												<span class="adprice">$290</span>
-												<p class="catpath">Mobile Phones » Brand</p>
-												</section>
-												<section class="list-right">
-												<span class="date">Today, 17:55</span>
-												<span class="cityname">City name</span>
-												<a href="single.html"><span class="label label-success">Editar</span></a>
-												<a href="single.html"><span class="label label-danger">Excluir</span></a>
-												</section>
-												<div class="clearfix"></div>
-												</li>
-
-												<li>
-												<img ="{{ url('/') }}/images/m1.jpg" title="" alt="" />
-												<section class="list-left">
-												<a href="single.html"><h5 class="title">There are many variations of passages of Lorem Ipsum</h5></a>
-												<span class="adprice">$290</span>
-												<p class="catpath">Mobile Phones » Brand</p>
-												</section>
-												<section class="list-right">
-												<span class="date">Today, 17:55</span>
-												<span class="cityname">City name</span>
-												<a href="single.html"><span class="label label-success">Editar</span></a>
-												<a href="single.html"><span class="label label-danger">Excluir</span></a>
-												</section>
-												<div class="clearfix"></div>
-												</li>
-
-												<li>
-												<img ="{{ url('/') }}/images/m1.jpg" title="" alt="" />
-												<section class="list-left">
-												<a href="single.html"><h5 class="title">There are many variations of passages of Lorem Ipsum</h5></a>
-												<span class="adprice">$290</span>
-												<p class="catpath">Mobile Phones » Brand</p>
-												</section>
-												<section class="list-right">
-												<span class="date">Today, 17:55</span>
-												<span class="cityname">City name</span>
-												<a href="single.html"><span class="label label-success">Editar</span></a>
-												<a href="single.html"><span class="label label-danger">Excluir</span></a>
-												</section>
-												<div class="clearfix"></div>
-												</li>
-
-												<li>
-												<img ="{{ url('/') }}/images/m1.jpg" title="" alt="" />
-												<section class="list-left">
-												<a href="single.html"><h5 class="title">There are many variations of passages of Lorem Ipsum</h5></a>
-												<span class="adprice">$290</span>
-												<p class="catpath">Mobile Phones » Brand</p>
-												</section>
-												<section class="list-right">
-												<span class="date">Today, 17:55</span>
-												<span class="cityname">City name</span>
-												<a href="single.html"><span class="label label-success">Editar</span></a>
-												<a href="single.html"><span class="label label-danger">Excluir</span></a>
-												</section>
-												<div class="clearfix"></div>
-												</li>
-
-												<li>
-												<img ="{{ url('/') }}/images/m1.jpg" title="" alt="" />
-												<section class="list-left">
-												<a href="single.html"><h5 class="title">There are many variations of passages of Lorem Ipsum</h5></a>
-												<span class="adprice">$290</span>
-												<p class="catpath">Mobile Phones » Brand</p>
-												</section>
-												<section class="list-right">
-												<span class="date">Today, 17:55</span>
-												<span class="cityname">City name</span>
-												<a href="single.html"><span class="label label-success">Editar</span></a>
-												<a href="single.html"><span class="label label-danger">Excluir</span></a>
-												</section>
-												<div class="clearfix"></div>
-												</li>
+										<ul class="list">
+												@forelse($anuncios as $anuncio)									
+													<li>
+														<img src="{{ url('/') }}/uploads/{{$anuncio->imagens[0]->nome}}" title="" alt="" />
+														<section class="list-left">
+														<a href="{{ url('/anuncio/show') }}/{{$anuncio->id}}"><h5 class="title">{{$anuncio->titulo}}</h5></a>
+														<span class="adprice">{{$anuncio->valor}}</span>
+														<p class="catpath">{{$anuncio->categoria->nome}}</p>
+														</section>
+														<section class="list-right">
+														<span class="date">{{$anuncio->updated_at}}</span>
+														<span class="cityname">{{$anuncio->cidade->nome}}</span>
+														<a href="{{ url('/anuncio/edit') }}/{{$anuncio->id}}"><span class="label label-success">Editar</span></a>
+														<a href="{{ url('/anuncio/destroy') }}/{{$anuncio->id}}"><span class="label label-danger">Excluir</span></a>
+														</section>
+														<div class="clearfix"></div>
+													</li>
+												@empty
+													<li><h5 class="title">Nenhum anúncio encontrado</h5></li>
+												@endforelse
 											
 											
 										</ul>

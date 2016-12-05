@@ -8,12 +8,12 @@ class Mensagem extends Model
 {
     public function de()
     {
-        return $this->hasOne('App\Usuario', 'de');
+        return $this->belongsTo('App\User', 'de_user_id');
     }
 
     public function para()
     {
-        return $this->hasOne('App\Usuario', 'para');
+        return $this->belongsTo('App\User', 'para_user_id');
     }
 
     public function status()

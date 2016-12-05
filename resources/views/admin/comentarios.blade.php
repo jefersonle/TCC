@@ -114,15 +114,22 @@
 														<th width="25%">Ação</th>
 													</tr>
 												</thead>
-												<tbody>
+												<tbody>												
+												@forelse($comentarios as $comentario)
 													<tr>
-														<td>Produto Teste</td>
-														<td>Usuário</td>
-														<td>Ótimo Produto</td>
-														<td>05/09/2016</td>
-														<td><a href="single.html"><span class="label label-primary">Visualizar</span></a>
-														<a href="single.html"><span class="label label-danger">Remover</span></a></td>
+														<td>{{$comentario->anuncio->titulo}}</td>
+														<td>{{$comentario->user->name}}</td>
+														<td>{{$comentario->comentario}}</td>
+														<td>{{$comentario->updated_at}}</td>
+														<td><a href="{{url('/anuncio/show')}}/{{$comentario->anuncio->id}}"><span class="label label-primary">Visualizar</span></a>
+														<a href="{{url('/admin/comentarios/destroy')}}/{{$comentario->id}}"><span class="label label-danger">Remover</span></a></td>
 													</tr>
+													@empty
+														<tr>
+															<td colspan="5">Nenhum comentario encontrado</td>
+														</tr>
+													@endforelse
+													
 													
 													
 												</tbody>

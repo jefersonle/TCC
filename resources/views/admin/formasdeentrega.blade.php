@@ -103,24 +103,30 @@
 								     <h3 class="head-top">Formas de Entrega</h3>								       
 									    <div class="col-md-12 page_1">	
 									    	<div class="view-controls-list" id="viewcontrols">
-													<h3><span class="label label-primary">Nova Forma de Entrega</span></h3>
+													<h3><a href="{{url('/admin/entrega/create')}}"><span class="label label-primary">Nova Forma de Entrega</span></a></h3>
 												</div>											
 								              <table class="table table-bordered">
 												<thead>
 													<tr>
-														<th width="20%">Código</th>
-														<th width="20%">Nome</th>
+														<th width="5%">Código</th>
+														<th>Nome</th>
 														<th width="20%">Ação</th>
 													</tr>
 												</thead>
 												<tbody>
+												@forelse($formasdeentrega as $entrega)
 													<tr>
-														<td>00</td>
-														<td>Ponta Grossa</td>	
-														<td><a href="single.html"><span class="label label-success">Editar</span></a>
-														<a href="single.html"><span class="label label-danger">Excluir</span></a>
+														<td>{{$entrega->id}}</td>
+														<td>{{$entrega->nome}}</td>	
+														<td><a href="{{url('/admin/entrega/edit')}}/{{$entrega->id}}"><span class="label label-success">Editar</span></a>
+														<a href="{{url('/admin/entrega/destroy')}}/{{$entrega->id}}"><span class="label label-danger">Excluir</span></a>
 														</td>
 													</tr>	
+												@empty
+													<tr>
+														<td colspan="3">Nenhuma forma de entrega encontrada</td>
+													</tr>
+												@endforelse
 												</tbody>
 											  </table> 
 											                   

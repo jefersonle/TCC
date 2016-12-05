@@ -104,27 +104,33 @@
 								     <h3 class="head-top">Mensagens</h3>								       
 									    <div class="col-md-12 page_1">
 									    	<div class="view-controls-list" id="viewcontrols">
-													<h3><span class="label label-primary">Nova Mensagem</span></h3>
+													<h3><a href="{{url('/admin/mensagem/create')}}"><span class="label label-primary">Nova Mensagem</span></a></h3>
 												</div>											
 								              <table class="table table-bordered">
 												<thead>
 													<tr>
 														<th width="20%">De:</th>
 														<th width="20%">Para</th>
-														<th width="20%">Assunto</th>
-														<th width="20%">Data</th>
+														<th>Mensagem</th>
+														<th width="10%">Data</th>
 														<th width="20%">Ação</th>
 													</tr>
 												</thead>
 												<tbody>
+													@forelse($mensagens as $mensagem)
 													<tr>
-														<td>Usuario 1</td>
-														<td>Usuario 2</td>
-														<td>Compra de Mercadoria</td>
-														<td>05/09/2016</td>
-														<td><a href="single.html"><span class="label label-primary">Visualizar</span></a></td>
+														<td>{{$mensagem->de->name}}</td>
+														<td>{{$mensagem->para->name}}</td>
+														<td>{{$mensagem->msg}}</td>
+														<td>{{$mensagem->created_at}}</td>
+														<td><a href="single.html"><span class="label label-primary">Visualizar</span></a>
+														<a href="{{url('/admin/mensagens/destroy')}}/{{$mensagem->id}}"><span class="label label-danger">Escluir</span></a></td>
 													</tr>													
-													
+													@empty
+														<tr>
+															<td colspan="5">Nenhuma mensagem encontrada</td>
+														</tr>
+													@endforelse
 													
 												</tbody>
 											  </table> 

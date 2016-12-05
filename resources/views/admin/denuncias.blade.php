@@ -114,14 +114,20 @@
 													</tr>
 												</thead>
 												<tbody>
+												@forelse($denuncias as $denuncia)
 													<tr>
-														<td>Produto Teste</td>
-														<td>28/10/2016</td>	
-														<td><a href="single.html"><span class="label label-success">Ver Anúncio</span></a>
-														<a href="single.html"><span class="label label-warning">Excluir Anúncio</span></a>
-														<a href="single.html"><span class="label label-danger">Excluir Denúncia</span></a>
+														<td>{{$denuncia->anuncio->titulo}}</td>
+														<td>{{$denuncia->created_at}}</td>	
+														<td><a href="{{url('/anuncio/show')}}/{{$denuncia->anuncio->id}}"><span class="label label-success">Ver Anúncio</span></a>
+														<a href="{{url('/anuncio/destroy')}}/{{$denuncia->anuncio->id}}""><span class="label label-warning">Excluir Anúncio</span></a>
+														<a href="{{url('/admin/denuncias/destroy')}}/{{$denuncia->id}}""><span class="label label-danger">Excluir Denúncia</span></a>
 														</td>
 													</tr>
+												@empty
+													<tr>
+														<td colspan="3">Nenhuma denúncia encontrada</td>
+													</tr>
+												@endforelse
 												</tbody>
 											  </table> 
 											                   

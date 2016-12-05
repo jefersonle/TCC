@@ -105,26 +105,32 @@
 								     <h3 class="head-top">Estados</h3>								       
 									    <div class="col-md-12 page_1">		
 									    	<div class="view-controls-list" id="viewcontrols">
-													<h3><span class="label label-primary">Novo Estado</span></h3>
+													<h3><a href="{{url('/admin/estados/create')}}"><span class="label label-primary">Novo Estado</span></a></h3>
 												</div>										
 								              <table class="table table-bordered">
 												<thead>
 													<tr>
-														<th width="20%">Código</th>
-														<th width="20%">Nome</th>
-														<th width="20%">UF</th>
+														<th width="5%">Código</th>
+														<th>Nome</th>
+														<th width="5%">UF</th>
 														<th width="20%">Ação</th>											
 													</tr>
 												</thead>
 												<tbody>
+													@forelse($estados as $estado)
 													<tr>
-														<td>00</td>
-														<td>Paraná</td>
-														<td>PR</td>														
-														<td><a href="single.html"><span class="label label-success">Editar</span></a>
-														<a href="single.html"><span class="label label-danger">Excluir</span></a>
+														<td>{{$estado->id}}</td>
+														<td>{{$estado->nome}}</td>
+														<td>{{$estado->uf}}</td>														
+														<td><a href="{{url('/admin/estados/edit')}}/{{$estado->id}}"><span class="label label-success">Editar</span></a>
+														<a href="{{url('/admin/estados/destroy')}}/{{$estado->id}}"><span class="label label-danger">Excluir</span></a>
 														</td>
 													</tr>	
+													@empty
+														<tr>
+															<td colspan="4">Nenhum estado encontrado</td>
+														</tr>
+													@endforelse
 												</tbody>
 											  </table> 
 											                   

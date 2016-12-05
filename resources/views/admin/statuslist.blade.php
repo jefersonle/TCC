@@ -103,7 +103,7 @@
 								     <h3 class="head-top">Status List</h3>								       
 									    <div class="col-md-12 page_1">	
 									    	<div class="view-controls-list" id="viewcontrols">
-													<h3><span class="label label-primary">Novo Status</span></h3>
+													<h3><a href="{{url('/admin/statuslist/create')}}"><span class="label label-primary">Criar Novo Status</span></a></h3>
 												</div>											
 								              <table class="table table-bordered">
 												<thead>
@@ -114,13 +114,19 @@
 													</tr>
 												</thead>
 												<tbody>
+												@forelse($statuslist as $status)
 													<tr>
-														<td>00</td>
-														<td>Ponta Grossa</td>	
-														<td><a href="single.html"><span class="label label-success">Editar</span></a>
-														<a href="single.html"><span class="label label-danger">Excluir</span></a>
+														<td>{{$status->id}}</td>
+														<td>{{$status->nome}}</td>	
+														<td><a href="{{url('/admin/statuslist/edit')}}/{{$status->id}}"><span class="label label-success">Editar</span></a>
+														<a href="{{url('/admin/statuslist/destroy')}}/{{$status->id}}"><span class="label label-danger">Excluir</span></a>
 														</td>
 													</tr>	
+												@empty
+													<tr>
+														<td colspan="3">Nenhum status encontrado</td>
+													</tr>
+												@endforelse
 												</tbody>
 											  </table> 
 											                   

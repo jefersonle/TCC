@@ -104,28 +104,34 @@
 								     <h3 class="head-top">Cidades</h3>								       
 									    <div class="col-md-12 page_1">	
 									    	<div class="view-controls-list" id="viewcontrols">
-													<h3><span class="label label-primary">Nova Cidade</span></h3>
+													<h3><a href="{{ url('/admin/cidades/create')}}"><span class="label label-primary">Nova Cidade</span></a></h3>
 												</div>											
 								              <table class="table table-bordered">
 												<thead>
 													<tr>
-														<th width="20%">Código</th>
-														<th width="20%">Nome</th>
-														<th width="20%">UF</th>
-														<th width="20%">DDD</th>
+														<th width="5%">Código</th>
+														<th>Nome</th>
+														<th width="5%">UF</th>
+														<th width="5%">DDD</th>
 														<th width="20%">Ação</th>
 													</tr>
 												</thead>
 												<tbody>
+													@forelse($cidades as $cidade)
 													<tr>
-														<td>00</td>
-														<td>Ponta Grossa</td>
-														<td>PR</td>
-														<td>42</td>
-														<td><a href="single.html"><span class="label label-success">Editar</span></a>
-														<a href="single.html"><span class="label label-danger">Excluir</span></a>
+														<td>{{$cidade->id}}</td>
+														<td>{{$cidade->nome}}</td>	
+														<td>{{$cidade->estado->uf}}</td>
+														<td>{{$cidade->ddd}}</td>
+														<td><a href="{{ url('/admin/cidades/edit') }}/{{$cidade->id}}"><span class="label label-success">Editar</span></a>
+														<a href="{{ url('/admin/cidades/destroy') }}/{{$cidade->id}}"><span class="label label-danger">Excluir</span></a>
 														</td>
 													</tr>
+													@empty
+														<tr>
+															<td colspan="5">Nenhuma cidade encontrada</td>
+														</tr>
+													@endforelse
 													
 												</tbody>
 											  </table> 

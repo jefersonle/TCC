@@ -776,9 +776,9 @@ class AnuncioController extends Controller
 
 
         
-        $data['bread1'] = "Categorias";
+        $data['bread1'] = "Usuário";
         $data['bread1a'] = "categoria";
-        $data['bread2'] = $anuncios[0]->categoria->nome;       
+        $data['bread2'] = $anuncios[0]->user->name;       
 
 
 

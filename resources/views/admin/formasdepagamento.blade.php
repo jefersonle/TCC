@@ -103,24 +103,30 @@
 								     <h3 class="head-top">Categorias</h3>								       
 									    <div class="col-md-12 page_1">	
 									    	<div class="view-controls-list" id="viewcontrols">
-													<h3><span class="label label-primary">Nova Categoria</span></h3>
+													<h3><a href="{{url('/admin/pagamento/create')}}"><span class="label label-primary">Nova Forma de Pagamento</span></a></h3>
 												</div>											
 								              <table class="table table-bordered">
 												<thead>
 													<tr>
-														<th width="20%">Código</th>
-														<th width="20%">Nome</th>
+														<th width="5%">Código</th>
+														<th>Nome</th>
 														<th width="20%">Ação</th>
 													</tr>
 												</thead>
 												<tbody>
+												@forelse($formasdepagamento as $pagamento)
 													<tr>
-														<td>00</td>
-														<td>Ponta Grossa</td>	
-														<td><a href="single.html"><span class="label label-success">Editar</span></a>
-														<a href="single.html"><span class="label label-danger">Excluir</span></a>
+														<td>{{$pagamento->id}}</td>
+														<td>{{$pagamento->nome}}</td>	
+														<td><a href="{{url('/admin/pagamento/edit')}}/{{$pagamento->id}}"><span class="label label-success">Editar</span></a>
+														<a href="{{url('/admin/pagamento/destroy')}}/{{$pagamento->id}}"><span class="label label-danger">Excluir</span></a>
 														</td>
 													</tr>	
+												@empty
+												<tr>
+														<td colspan="3">Nenhuma forma de pagamento encontrada</td>
+													</tr>
+												@endforelse
 												</tbody>
 											  </table> 
 											                   
