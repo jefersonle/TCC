@@ -91,8 +91,11 @@ class MensagemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+     public function getDestroy($id)
     {
-        //
+        $mensagem = Mensagem::destroy($id);
+
+        session(['msg' => 'Mensagem excluída!']);
+        return redirect('/admin/mensagens');
     }
 }

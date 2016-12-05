@@ -8,6 +8,12 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Anuncio;
 
+use App\Models\Imagem;
+use App\Models\Comentario;
+use App\Models\PagamentoAnuncio;
+use App\Models\Denuncia;
+
+
 class AnuncioController extends Controller
 {
 
@@ -93,8 +99,40 @@ class AnuncioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function getDestroy($id)
+
     {
-        //
+
+        $anuncio = Anuncio::find($id);
+
+        foreach ($anuncio->imagens as $imagem) {
+            $imagem = Imagem::find($imagem->id);
+
+            $file = "uploads/".$imagem->nome;
+
+            if(file_exists($file)){
+                unlink($file);
+            }   
+
+            $imagem->delete();
+        }
+
+        foreach ($anuncio->comentarios as $comentario) {
+            $comentario = Comentario::destroy($comentario->id);
+        }
+        foreach ($anuncio->formaspagamento as $pagamento) {
+            $pagamento = PagamentoAnuncio::destroy($pagamento->id);
+        }
+
+        foreach ($anuncio->denuncias as $denuncia) {
+            $denuncia = Denuncia::destroy($denuncia->id);
+        }
+
+        $anuncio->delete();
+
+
+        session(['msg' => 'Anúncio excluído!']);
+
+        return redirect('/admin/anuncios');
     }
 }

@@ -90,8 +90,18 @@ class CategoriaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function getDestroy($id)
     {
-        //
+        $categoria = Categoria::find($id);
+
+        if($categoria->anuncios->count() != 0){
+           session(['msg' => 'Esta categoria não pode ser excluída pois contém anúncios!']);
+            return redirect('/admin/categorias');
+
+        }else{
+            $categoria->delete();
+            session(['msg' => 'Categoria excluída!']);
+            return redirect('/admin/categorias');
+        }
     }
 }

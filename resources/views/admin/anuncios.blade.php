@@ -137,6 +137,10 @@
 												   </div>
 												 </div>
 											<div class="clearfix"></div>
+											@if(session()->has('msg'))
+												<div class="alert">{{session('msg')}}</div>
+												{{session()->forget('msg')}}
+											@endif
 										<ul class="list">
 												@forelse($anuncios as $anuncio)									
 													<li>
@@ -150,7 +154,7 @@
 														<span class="date">{{$anuncio->updated_at}}</span>
 														<span class="cityname">{{$anuncio->cidade->nome}}</span>
 														<a href="{{ url('/anuncio/edit') }}/{{$anuncio->id}}"><span class="label label-success">Editar</span></a>
-														<a href="{{ url('/anuncio/destroy') }}/{{$anuncio->id}}"><span class="label label-danger">Excluir</span></a>
+														<a href="{{ url('/admin/anuncios/destroy') }}/{{$anuncio->id}}"><span class="label label-danger">Excluir</span></a>
 														</section>
 														<div class="clearfix"></div>
 													</li>

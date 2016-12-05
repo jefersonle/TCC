@@ -93,8 +93,18 @@ class FormaDePagamentoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+     public function getDestroy($id)
     {
-        //
+        $formaPagamento = FormaDePagamento::find($id);
+     
+
+        if($formaPagamento->paganuncio->count() != 0){
+           session(['msg' => 'Esta forma de pagamento não pode ser excluída pois contém anúncios!']);
+            return redirect('/admin/pagamento');
+        }else{
+            $formaPagamento->delete();
+            session(['msg' => 'Forma de pagamento excluída!']);
+            return redirect('/admin/pagamento');
+        }
     }
 }

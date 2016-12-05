@@ -103,8 +103,10 @@
 								 <div class="grid_3 grid_5">
 								     <h3 class="head-top">Denúncias</h3>								       
 									    <div class="col-md-12 page_1">
-									    	<div class="view-controls-list" id="viewcontrols">	
-												</div>												
+									    	@if(session()->has('msg'))
+												<div class="alert">{{session('msg')}}</div>
+												{{session()->forget('msg')}}
+											@endif											
 								              <table class="table table-bordered">
 												<thead>
 													<tr>														

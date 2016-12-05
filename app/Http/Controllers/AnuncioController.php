@@ -254,6 +254,8 @@ class AnuncioController extends Controller
             $pagamentoAnuncio = new PagamentoAnuncio();
             $pagamentoAnuncio->anuncio_id = $anuncio->id;
             $pagamentoAnuncio->forma_de_pagamento_id = $value;
+            $pagamentoAnuncio->save();
+            
         }        
 
         $data['tipo'] = 'criar';

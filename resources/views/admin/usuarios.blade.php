@@ -105,14 +105,18 @@
 									    <div class="col-md-12 page_1">
 									    	<div class="view-controls-list" id="viewcontrols">
 													<h3><a href="{{url('/admin/usuarios/create')}}"><span class="label label-primary">Criar Novo Usuário</span></a></h3>
-												</div>												
+												</div>	
+												@if(session()->has('msg'))
+												<div class="alert">{{session('msg')}}</div>
+												{{session()->forget('msg')}}
+											@endif											
 								              <table class="table table-bordered">
 												<thead>
 													<tr>
-														<th width="20%">Código</th>
-														<th width="20%">Nome</th>
-														<th width="20%">Email</th>
-														<th width="20%">Data</th>
+														<th width="5%">Código</th>
+														<th>Nome</th>
+														<th>Email</th>
+														<th width="10%">Data</th>
 														<th width="20%">Ação</th>
 													</tr>
 												</thead>
@@ -120,8 +124,8 @@
 												@forelse($usuarios as $usuario)
 													<tr>
 														<td>{{$usuario->id}}</td>
-														<td>{{$usuario->nome}}</td>
-														<td>{{$usuario->email}}/td>
+														<td>{{$usuario->name}}</td>
+														<td>{{$usuario->email}}</td>
 														<td>{{$usuario->created_at}}</td>
 														<td><a href="{{url('/admin/usuarios/edit')}}/{{$usuario->id}}"><span class="label label-success">Editar</span></a>
 														<a href="{{url('/admin/usuarios/destroy')}}/{{$usuario->id}}"><span class="label label-danger">Excluir</span></a>

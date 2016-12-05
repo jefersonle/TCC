@@ -104,7 +104,11 @@
 									    <div class="col-md-12 page_1">	
 									    	<div class="view-controls-list" id="viewcontrols">
 													<h3><a href="{{url('/admin/statuslist/create')}}"><span class="label label-primary">Criar Novo Status</span></a></h3>
-												</div>											
+												</div>		
+												@if(session()->has('msg'))
+												<div class="alert">{{session('msg')}}</div>
+												{{session()->forget('msg')}}
+											@endif									
 								              <table class="table table-bordered">
 												<thead>
 													<tr>

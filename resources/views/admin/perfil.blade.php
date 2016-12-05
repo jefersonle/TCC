@@ -100,7 +100,11 @@
 						
 						<div>
 							<div class="category">
-								<h3 class="head-top">Meu Perfil</h3>	
+								<h3 class="head-top">Meu Perfil</h3>
+								@if(session()->has('msg'))
+												<div class="alert">{{session('msg')}}</div>
+												{{session()->forget('msg')}}
+											@endif	
 								<form class="form-horizontal">
 										<div class="form-group">
 											<label for="focusedinput" class="col-sm-2 control-label">Nome</label>

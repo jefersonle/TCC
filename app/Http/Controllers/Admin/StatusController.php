@@ -93,8 +93,17 @@ class StatusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function getDestroy($id)
     {
-        //
+        $status = Status::find($id);
+        
+        if($status->anuncios->count() != 0){
+           session(['msg' => 'Este status não pode ser excluído pois contém anúncios!']);
+            return redirect('/admin/statuslist');
+        }else{
+            $status->delete();
+            session(['msg' => 'Status excluído!']);
+            return redirect('/admin/statuslist');
+        }
     }
 }

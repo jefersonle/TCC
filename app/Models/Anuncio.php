@@ -22,6 +22,14 @@ class Anuncio extends Model
     {
         return $this->hasMany('App\Models\Imagem');
     }
+    public function denuncias()
+    {
+        return $this->hasMany('App\Models\Denuncia');
+    }
+    public function formaspagamento()
+    {
+        return $this->hasMany('App\Models\PagamentoAnuncio');
+    }
 
     public function categoria()
     {

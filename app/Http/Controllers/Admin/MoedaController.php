@@ -93,8 +93,17 @@ class MoedaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function getDestroy($id)
     {
-        //
+        $moeda = Moeda::find($id);
+        
+        if($moeda->anuncios->count() != 0){
+           session(['msg' => 'Esta moeda não pode ser excluída pois contém anúncios!']);
+            return redirect('/admin/moedas');
+        }else{
+            $moeda->delete();
+            session(['msg' => 'Moeda excluída!']);
+            return redirect('/admin/moedas');
+        }
     }
 }

@@ -90,8 +90,19 @@ class CidadeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+
+    public function getDestroy($id)
     {
-        //
+        $cidade = Cidade::find($id);
+
+        if($cidade->anuncios->count() != 0){
+           session(['msg' => 'Esta cidade não pode ser excluída pois contém anúncios!']);
+            return redirect('/admin/cidades');
+
+        }else{
+            $cidade->delete();
+            session(['msg' => 'Cidade excluída!']);
+            return redirect('/admin/cidades');
+        }
     }
 }

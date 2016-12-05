@@ -91,8 +91,12 @@ class ComentarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function getDestroy($id)
     {
-        //
+        $comentario = Comentario::destroy($id);
+
+        session(['msg' => 'Comentário excluido!']);
+        return redirect('/admin/comentarios');
+      
     }
 }

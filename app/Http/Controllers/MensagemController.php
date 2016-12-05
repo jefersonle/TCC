@@ -40,8 +40,8 @@ class MensagemController extends Controller
     public function postStore(Request $request)
     {
         $mensagem = new Mensagem();
-        $mensagem->de = $request->user_id;
-        $mensagem->para = $request->vendedor_id;
+        $mensagem->de_user_id = $request->user_id;
+        $mensagem->para_user_id = $request->vendedor_id;
         $mensagem->status_id = 0;
         $mensagem->msg = $request->mensagem;
         $mensagem->save();

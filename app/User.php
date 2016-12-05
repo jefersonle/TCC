@@ -35,12 +35,12 @@ class User extends Authenticatable
 
     public function mensagensenviadas()
     {
-        return $this->hasMany('App\Models\Mensagem', 'de');
+        return $this->hasMany('App\Models\Mensagem', 'de_user_id');
     }
 
      public function mensagensrecebidas()
     {
-        return $this->hasMany('App\Models\Mensagem', 'para');
+        return $this->hasMany('App\Models\Mensagem', 'para_user_id');
     }
 
 }

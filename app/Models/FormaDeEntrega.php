@@ -6,5 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class FormaDeEntrega extends Model
 {
-    //
+    public function anuncios()
+    {
+        return $this->hasMany('App\Models\Anuncio');
+    }
 }

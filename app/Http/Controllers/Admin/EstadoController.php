@@ -91,8 +91,17 @@ class EstadoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function getDestroy($id)
     {
-        //
+        $estado = Estado::find($id);
+       
+        if($estado->cidades->count() != 0){
+           session(['msg' => 'Este estado não pode ser excluído pois contém cidades!']);
+            return redirect('/admin/estados');
+        }else{
+            $estado->delete();
+            session(['msg' => 'Estado excluído!']);
+            return redirect('/admin/estados');
+        }
     }
 }

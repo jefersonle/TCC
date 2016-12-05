@@ -9,6 +9,12 @@ use App\Http\Controllers\Controller;
 
 use App\User;
 
+use App\Models\Imagem;
+use App\Models\PagamentoAnuncio;
+use App\Models\Denuncia;
+use App\Models\Comentario;
+use App\Models\Mensagem;
+
 class UsuarioController extends Controller
 {
    public function __construct()
@@ -91,8 +97,60 @@ class UsuarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function getDestroy($id)
+
     {
-        //
+
+        $user = User::find($id);
+
+        foreach ($user->anuncios as $anuncio) {
+            foreach ($anuncio->imagens as $imagem) {
+                $imagem = Imagem::find($imagem->id);
+
+                $file = "uploads/".$imagem->nome;
+
+                if(file_exists($file)){
+                    unlink($file);
+                }   
+
+                $imagem->delete();
+            }
+
+            foreach ($anuncio->comentarios as $comentario) {
+                $comentario = Comentario::destroy($comentario->id);
+            }
+            foreach ($anuncio->formaspagamento as $pagamento) {
+                $pagamento = PagamentoAnuncio::destroy($pagamento->id);
+            }
+
+            foreach ($anuncio->denuncias as $denuncia) {
+                $denuncia = Denuncia::destroy($denuncia->id);
+            }
+
+            $anuncio->delete();
+        }
+
+        foreach ($user->comentarios as $comentario) {
+            $comentario = Comentario::destroy($comentario->id);
+        }
+
+        foreach ($user->comentarios as $comentario) {
+            $comentario = Comentario::destroy($comentario->id);
+        }
+
+        foreach ($user->mensagensenviadas as $enviada) {
+            $mensagem = Mensagem::destroy($enviada->id);
+        }
+
+        foreach ($user->mensagensrecebidas as $recebida) {
+            $mensagem = Mensagem::destroy($recebida->id);
+        }
+
+        $user->delete();
+
+
+        session(['msg' => 'Usuário excluído!']);
+
+        return redirect('/admin/usuarios');
     }
 }
