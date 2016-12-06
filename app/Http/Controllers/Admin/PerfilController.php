@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\PerfilRequest;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\User;
+use App\Models\Estado;
+
+use Illuminate\Support\Facades\Auth;
 
 class PerfilController extends Controller
 {
@@ -21,21 +25,10 @@ class PerfilController extends Controller
     public function getIndex()
 
     {
-        $usuario = User::find(1);
-        $data["usuario"] = $usuario;
+        $data["estados"] = Estado::all();
+        $data["user"] = User::find(1);
+       return view('admin.perfil', $data);  
 
-       return view('admin.perfil');  
-
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -44,10 +37,33 @@ class PerfilController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function postStore(PerfilRequest $request)
     {
-        //
+            $usuario = User::find(Auth::id());
+
+            $usuario->name = $request->nome;
+            $usuario->email = $request->email;
+            if($request->senha !== "" && $request->senha !== null && $request->senha !== " "){
+                $usuario->password = bcrypt($request->senha);
+            }
+            $usuario->cpf = $request->cpf;
+            $usuario->contato_fone = $request->telefone;
+            $usuario->contato_facebook = $request->facebook;
+            $usuario->contato_whatsapp = $request->whatsapp;
+            $usuario->cep = $request->cep;
+            $usuario->cidade_id = $request->cidade_id;
+            $usuario->logradouro = $request->logradouro;
+            $usuario->numero = $request->numero;
+            $usuario->complemento = $request->complemento;
+            $usuario->bairro = $request->bairro;
+
+            $usuario->save();
+
+            session(['msg' => 'Perfil Salvo!']);
+
+            return redirect('/admin/perfil');
     }
+
 
     /**
      * Display the specified resource.

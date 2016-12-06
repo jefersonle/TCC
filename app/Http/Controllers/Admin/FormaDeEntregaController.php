@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\NomeObrigatorioRequest;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -37,9 +38,9 @@ class FormaDeEntregaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function getCreate()
+    {           
+        return view('admin.formentrega');
     }
 
     /**
@@ -48,10 +49,15 @@ class FormaDeEntregaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function postStore(NomeObrigatorioRequest $request)
     {
-        //
+        $entrega = new FormaDeEntrega();
+        $entrega->nome = $request->nome;
+        $entrega->save();
+        session(['msg' => 'Forma de entrega cadastrada!']);
+        return redirect('/admin/entrega');
     }
+
 
     /**
      * Display the specified resource.

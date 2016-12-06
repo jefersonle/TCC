@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CreateUserRequest;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -14,6 +15,7 @@ use App\Models\PagamentoAnuncio;
 use App\Models\Denuncia;
 use App\Models\Comentario;
 use App\Models\Mensagem;
+use App\Models\Estado;
 
 class UsuarioController extends Controller
 {
@@ -41,9 +43,11 @@ class UsuarioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function getCreate()
+    {   
+        $data["estados"] = Estado::all();
+
+        return view('admin.formusuario', $data);
     }
 
     /**
@@ -52,10 +56,31 @@ class UsuarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function postStore(CreateUserRequest $request)
     {
-        //
+            $usuario = new User();
+            $usuario->name = $request->nome;
+            $usuario->email = $request->email;
+            $usuario->password = bcrypt($request->senha);
+            $usuario->cpf = $request->cpf;
+            $usuario->contato_fone = $request->telefone;
+            $usuario->contato_facebook = $request->facebook;
+            $usuario->contato_whatsapp = $request->whatsapp;
+            $usuario->cep = $request->cep;
+            $usuario->cidade_id = $request->cidade_id;
+            $usuario->logradouro = $request->logradouro;
+            $usuario->numero = $request->numero;
+            $usuario->complemento = $request->complemento;
+            $usuario->bairro = $request->bairro;
+
+            $usuario->save();
+
+            session(['msg' => 'Usuário cadastrado!']);
+
+            return redirect('/admin/usuarios');
+
     }
+
 
     /**
      * Display the specified resource.

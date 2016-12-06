@@ -48,6 +48,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     var cidades = [];
     function loadCidades(id_estado){
                 $("#selectCidadesForm").val("0");
+                @if(null !== Auth::user())
+                  var user_cidade = '{{Auth::user()->cidade_id}}';
+                @else
+                  var user_cidade = 0;
+                @endif
                 $.ajax({
                     url: '{{ url('/cidade/index') }}/' +  id_estado.value,
                     data: '',
@@ -59,7 +64,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
                         var options = '<option value="0">Selecionar Cidade</option>';
                           for (var i = 0; i < data.length; i++) {
-                            options += '<option value="' + data[i].id + '">' + data[i].nome + '</option>';
+                            if(data[i].id == user_cidade){
+                              options += '<option selected="selected" value="' + data[i].id + '">' + data[i].nome + '</option>';
+                            }else{
+                              options += '<option value="' + data[i].id + '">' + data[i].nome + '</option>';
+                            }
+                            
                           }
                           $("#selectCidades").html(options);   
                           $("#selectCidadesForm").html(options);
@@ -73,6 +83,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                          @endif                              
                     }           
                 });
+
+                
         }   
     @if (isset($tipo) && isset($anuncio) && $tipo == "editar")    
         var Obj = {"value":"{{$anuncio->cidade->estado_id}}"};

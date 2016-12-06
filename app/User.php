@@ -43,4 +43,9 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Mensagem', 'para_user_id');
     }
 
+    public function city()
+    {
+        return $this->belongsTo('App\Models\Cidade', 'cidade_id');        
+    }
+
 }

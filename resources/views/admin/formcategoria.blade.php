@@ -81,9 +81,9 @@
 				<div id="parentVerticalTab">
 					<ul class="resp-tabs-list hor_1">						
 						<li id="anunciosLink" onclick="location.href = '{{url("/admin/anuncios")}}';">Anúncios</li>
-						<li id="categoriasLink" onclick="location.href = '{{url("/admin/categorias")}}';">Categorias</li>
+						<li id="categoriasLink" class="active resp-tab-active" onclick="location.href = '{{url("/admin/categorias")}}';">Categorias</li>
 						<li id="categoriasLink" onclick="location.href = '{{url("/admin/entrega")}}';">Formas de Entrega</li>
-						<li id="categoriasLink"  class="active resp-tab-active" onclick="location.href = '{{url("/admin/pagamento")}}';">Formas de Pagamento</li>
+						<li id="categoriasLink" onclick="location.href = '{{url("/admin/pagamento")}}';">Formas de Pagamento</li>
 						<li id="categoriasLink" onclick="location.href = '{{url("/admin/moedas")}}';">Moedas</li>
 						<li id="categoriasLink" onclick="location.href = '{{url("/admin/statuslist")}}';">Status</li>
 						<li id="comentariosLink" onclick="location.href = '{{url("/admin/comentarios")}}';">Comentários</li>
@@ -96,52 +96,52 @@
 						<a href="{{ url('/logout') }}">Sair</a>
 
 					</ul>
-					<div class="resp-tabs-container hor_1">	
+					<div class="resp-tabs-container hor_1">					
+						
 						<div>
 							<div class="category">
-								 <div class="grid_3 grid_5">
-								     <h3 class="head-top">Formas de Pagamento</h3>								       
-									    <div class="col-md-12 page_1">	
-									    	<div class="view-controls-list" id="viewcontrols">
-													<h3><a href="{{url('/admin/pagamento/create')}}"><span class="label label-primary">Nova Forma de Pagamento</span></a></h3>
-												</div>	
-												@if(session()->has('msg'))
+								<h3 class="head-top">Cadastro  de Categoria</h3>
+								@if(session()->has('msg'))
 												<div class="alert">{{session('msg')}}</div>
 												{{session()->forget('msg')}}
-											@endif										
-								              <table class="table table-bordered">
-												<thead>
-													<tr>
-														<th width="5%">Código</th>
-														<th>Nome</th>
-														<th width="20%">Ação</th>
-													</tr>
-												</thead>
-												<tbody>
-												@forelse($formasdepagamento as $pagamento)
-													<tr>
-														<td>{{$pagamento->id}}</td>
-														<td>{{$pagamento->nome}}</td>	
-														<td><a href="{{url('/admin/pagamento/edit')}}/{{$pagamento->id}}"><span class="label label-success">Editar</span></a>
-														<a href="{{url('/admin/pagamento/destroy')}}/{{$pagamento->id}}"><span class="label label-danger">Excluir</span></a>
-														</td>
-													</tr>	
-												@empty
-												<tr>
-														<td colspan="3">Nenhuma forma de pagamento encontrada</td>
-													</tr>
-												@endforelse
-												</tbody>
-											  </table> 
-											                   
-										</div>										
-									   <div class="clearfix"> </div>  
-									  
-								    </div>								
-							</div>								
-						</div>
+								@endif	
+								@foreach ($errors->all() as $message) 
+									<div class="alert">{{$message}}</div>
+								@endforeach
+								<form class="form-horizontal" method="POST" action="{{url('/admin/categorias/store')}}">
+								{{ csrf_field() }}
+										<div class="form-group">
+											<label for="focusedinput" class="col-sm-2 control-label">Nome</label>
+											<div class="col-sm-8">
+												<input type="text" name="nome" class="form-control1" id="focusedinput" placeholder="Digite o nome da categoria...">
+											</div>
+											<div class="col-sm-2 jlkdfj1">
+												<p class="help-block">...!</p>
+											</div>
+										</div>
+										
 
-						
+										<div class="form-group">
+											<label for="selector1" class="col-sm-2 control-label">Categoria Pai</label>
+											<div class="col-sm-8"><select name="categoria_id" id="selector1" class="form-control1">
+												<option value="">Selecione uma categoria pai...</option>
+												@forelse($categorias as $categoria)
+												<option value="{{$categoria->id}}">{{$categoria->nome}}</option>
+												@empty
+												<option>Nenhuma categoria encontrada...</option>
+												@endforelse												
+											</select></div>
+										</div>										
+										<div class="form-group">											
+											<div class="col-sm-12">
+												<input type="submit" class="btn btn-block" value="Salvar Alterações">
+											</div>											
+										</div>
+									</form>
+								<div class="clearfix"></div>
+							</div>
+							
+						</div>
 			
 					</div>
 					<div class="clearfix"></div>
@@ -160,17 +160,13 @@
             fit: true, // 100% fit in a container
             closed: 'accordion', // Start closed if in accordion view
             tabidentify: 'hor_1', // The tab groups identifier
-            activate: function(event) { // Callback function if tab is switched
-                var $tab = $(this);
-                var $info = $('#nested-tabInfo2');
-                var $name = $('span', $info);
-                $name.text($tab.text());
-                $info.show();
-            }
+            
         });
 
         $("#anunciosLink").removeClass("active resp-tab-active");
+
         $(".resp-tabs-list li").attr("aria-controls", "");
+     
 
     });
 </script>

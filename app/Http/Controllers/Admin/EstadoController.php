@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\EstadoRequest;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -35,9 +36,10 @@ class EstadoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function getCreate()
+    {   
+        
+        return view('admin.formestado');
     }
 
     /**
@@ -46,10 +48,18 @@ class EstadoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function postStore(EstadoRequest $request)
     {
-        //
+        $estado = new Estado();
+        $estado->nome = $request->nome;
+        $estado->uf = $request->uf;
+        $estado->save();
+
+        session(['msg' => 'Estado cadastrado!']);
+        return redirect('/admin/estados');
+
     }
+
 
     /**
      * Display the specified resource.

@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CidadeRequest;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Models\Cidade;
+use App\Models\Estado;
 
 class CidadeController extends Controller
 {
@@ -34,9 +36,10 @@ class CidadeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function getCreate()
+    {   
+        $data['estados'] = Estado::all();
+        return view('admin.formcidade', $data);
     }
 
     /**
@@ -45,9 +48,17 @@ class CidadeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function postStore(CidadeRequest $request)
     {
-        //
+        $cidade = new Cidade();
+        $cidade->nome = $request->nome;
+        $cidade->ddd = $request->ddd;
+        $cidade->estado_id = $request->estado_id;
+        $cidade->save();
+
+        session(['msg' => 'Cidade cadastrada!']);
+        return redirect('/admin/cidades');
+
     }
 
     /**

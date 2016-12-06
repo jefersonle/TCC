@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-
+use App\Http\Requests\NomeObrigatorioRequest;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -37,9 +37,9 @@ class FormaDePagamentoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function getCreate()
+    {   
+        return view('admin.formpagamento');
     }
 
     /**
@@ -48,10 +48,15 @@ class FormaDePagamentoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function postStore(NomeObrigatorioRequest $request)
     {
-        //
+        $pagamento = new FormaDePagamento();
+        $pagamento->nome = $request->nome;
+        $pagamento->save();
+        session(['msg' => 'Forma de pagamento cadastrada!']);
+        return redirect('/admin/pagamento');
     }
+
 
     /**
      * Display the specified resource.

@@ -3,11 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\MensagemRequest;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Models\Mensagem;
+
+use App\User;
+
+use Illuminate\Support\Facades\Auth;
 
 class MensagemController extends Controller
 {
@@ -35,9 +40,10 @@ class MensagemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function getCreate()
+    {           
+        $data['usuarios'] = User::all();
+        return view('admin.formmensagem', $data);
     }
 
     /**
@@ -46,10 +52,19 @@ class MensagemController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function postStore(MensagemRequest $request)
     {
-        //
+        $mensagem = new Mensagem();
+        $mensagem->para_user_id = $request->para_user_id;
+        $mensagem->de_user_id = Auth::id();
+        $mensagem->msg = $request->msg;
+        $mensagem->save();
+
+        session(['msg' => 'Mensagem enviada!']);
+        return redirect('/admin/mensagens');
+
     }
+
 
     /**
      * Display the specified resource.

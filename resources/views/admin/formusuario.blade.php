@@ -91,8 +91,8 @@
 						<li id="denunciasLink" onclick="location.href = '{{url("/admin/denuncias")}}';">Denúncias</li>
 						<li id="cidadesLink" onclick="location.href = '{{url("/admin/cidades")}}';">Cidades</li>
 						<li id="estadosLink" onclick="location.href = '{{url("/admin/estados")}}';">Estados</li>
-						<li id="usuariosLink" onclick="location.href = '{{url("/admin/usuarios")}}';">Usuários</li>
-						<li class="active resp-tab-active" onclick="location.href = '{{url("/admin/perfil")}}';">Perfil</li>						
+						<li id="usuariosLink" class="active resp-tab-active" onclick="location.href = '{{url("/admin/usuarios")}}';">Usuários</li>
+						<li onclick="location.href = '{{url("/admin/perfil")}}';">Perfil</li>						
 						<a href="{{ url('/logout') }}">Sair</a>
 
 					</ul>
@@ -100,7 +100,7 @@
 						
 						<div>
 							<div class="category">
-								<h3 class="head-top">Meu Perfil</h3>
+								<h3 class="head-top">Informações do Usuário</h3>
 								@if(session()->has('msg'))
 												<div class="alert">{{session('msg')}}</div>
 												{{session()->forget('msg')}}
@@ -111,16 +111,12 @@
 								@foreach ($errors->all() as $message) 
 									<div class="alert">{{$message}}</div>
 								@endforeach
-								<form class="form-horizontal" method="POST" action="{{url('/admin/perfil/store')}}">
+								<form class="form-horizontal" method="POST" action="{{url('/admin/usuarios/store')}}">
 								{{ csrf_field() }}
 										<div class="form-group" method="POST" action="{{url('/admin/usuarios/store')}}">
 											<label for="focusedinput" class="col-sm-2 control-label">Nome</label>
 											<div class="col-sm-8">
-												<input type="text" name="nome" class="form-control1" id="focusedinput" placeholder="Digite o nome do usuário..."
-												@if(null !== Auth::user()->name)
-													value="{{Auth::user()->name}}"
-												@endif
-												>
+												<input type="text" name="nome" class="form-control1" id="focusedinput" placeholder="Digite o nome do usuário...">
 											</div>
 											<div class="col-sm-2 jlkdfj1">
 												<p class="help-block">...!</p>
@@ -129,11 +125,7 @@
 										<div class="form-group">
 											<label for="focusedinput" class="col-sm-2 control-label">Email</label>
 											<div class="col-sm-8">
-												<input type="email" name="email" class="form-control1" id="focusedinput" placeholder="Digite o email do usuário..."
-												@if(null !== Auth::user()->email)
-													value="{{Auth::user()->email}}"
-												@endif
-												>
+												<input type="email" name="email" class="form-control1" id="focusedinput" placeholder="Digite o email do usuário...">
 											</div>
 											<div class="col-sm-2 jlkdfj1">
 												<p class="help-block">...!</p>
@@ -160,11 +152,7 @@
 										<div class="form-group">
 											<label for="focusedinput" class="col-sm-2 control-label">CPF:</label>
 											<div class="col-sm-8">
-												<input type="text" name="cpf" class="form-control1" id="focusedinput" placeholder="Digite o CPF do usuário..."
-												@if(null !== Auth::user()->cpf)
-													value="{{Auth::user()->cpf}}"
-												@endif
-												>
+												<input type="text" name="cpf" class="form-control1" id="focusedinput" placeholder="Digite o CPF do usuário...">
 											</div>
 											<div class="col-sm-2 jlkdfj1">
 												<p class="help-block">...!</p>
@@ -173,11 +161,7 @@
 										<div class="form-group">
 											<label for="focusedinput" class="col-sm-2 control-label">Telefone:</label>
 											<div class="col-sm-8">
-												<input type="text" name="telefone" class="form-control1" id="focusedinput" placeholder="Digite o telefone do usuário..."
-												@if(null !== Auth::user()->contato_fone)
-													value="{{Auth::user()->contato_fone}}"
-												@endif
-												>
+												<input type="text" name="telefone" class="form-control1" id="focusedinput" placeholder="Digite o telefone do usuário...">
 											</div>
 											<div class="col-sm-2 jlkdfj1">
 												<p class="help-block">...!</p>
@@ -186,11 +170,7 @@
 										<div class="form-group">
 											<label for="focusedinput" class="col-sm-2 control-label">WhatsApp:</label>
 											<div class="col-sm-8">
-												<input type="text" name="whatsapp" class="form-control1" id="focusedinput" placeholder="Digite o WhatsApp do usuário..."
-												@if(null !== Auth::user()->contato_whatsapp)
-													value="{{Auth::user()->contato_whatsapp}}"
-												@endif
-												>
+												<input type="text" name="whatsapp" class="form-control1" id="focusedinput" placeholder="Digite o WhatsApp do usuário...">
 											</div>
 											<div class="col-sm-2 jlkdfj1">
 												<p class="help-block">...!</p>
@@ -199,11 +179,7 @@
 										<div class="form-group">
 											<label for="focusedinput" class="col-sm-2 control-label">Facebook:</label>
 											<div class="col-sm-8">
-												<input type="text" name="facebook" class="form-control1" id="focusedinput" placeholder="Digite o link do perfil do usuário no facebook..."
-												@if(null !== Auth::user()->contato_facebook)
-													value="{{Auth::user()->contato_facebook}}"
-												@endif
-												>
+												<input type="text" name="facebook" class="form-control1" id="focusedinput" placeholder="Digite o link do perfil do usuário no facebook...">
 											</div>
 											<div class="col-sm-2 jlkdfj1">
 												<p class="help-block">...!</p>
@@ -212,11 +188,7 @@
 										<div class="form-group">
 											<label for="focusedinput" class="col-sm-2 control-label">CEP:</label>
 											<div class="col-sm-8">
-												<input type="text" name="cep" class="form-control1" id="focusedinput" placeholder="Digite o CEP do usuário..."
-												@if(null !== Auth::user()->cep)
-													value="{{Auth::user()->cep}}"
-												@endif
-												>
+												<input type="text" name="cep" class="form-control1" id="focusedinput" placeholder="Digite o CEP do usuário...">
 											</div>
 											<div class="col-sm-2 jlkdfj1">
 												<p class="help-block">...!</p>
@@ -224,22 +196,15 @@
 										</div>
 										<div class="form-group">
 											<label for="selector1" class="col-sm-2 control-label">Estado</label>
-											<div class="col-sm-8"><select name="estado" id="estado" class="form-control1" onchange="loadCidades(this);">
+											<div class="col-sm-8"><select name="estado" id="selector1" class="form-control1" onchange="loadCidades(this);">
 												<option value="">Selecione um estado.</option>
 												@forelse($estados as $estado)
-												<option value="{{$estado->id}}"
-												@if(Auth::user()->cidade_id !="" && Auth::user()->cidade_id != null)
-													@if(Auth::user()->city->estado_id == $estado->id)
-														selected="selected"
-													@endif
-												@endif
-
-												>{{$estado->nome}}</option>
+												<option value="{{$estado->id}}">{{$estado->nome}}</option>
 												@empty
 												<option value="">Nenhum estado encontrado.</option>
 												@endforelse
 											</select></div>
-										</div>										
+										</div>
 										<div class="form-group">
 											<label for="selector1" class="col-sm-2 control-label">Cidade</label>
 											<div class="col-sm-8"><select name="cidade_id" id="selectCidadesForm" class="form-control1">
@@ -249,11 +214,7 @@
 										<div class="form-group">
 											<label for="focusedinput" class="col-sm-2 control-label">Logradouro:</label>
 											<div class="col-sm-8">
-												<input type="text" name="logradouro" class="form-control1" id="focusedinput" placeholder="Digite o logradouro do usuário..."
-												@if(null !== Auth::user()->logradouro)
-													value="{{Auth::user()->logradouro}}"
-												@endif
-												>
+												<input type="text" name="logradouro" class="form-control1" id="focusedinput" placeholder="Digite o logradouro do usuário...">
 											</div>
 											<div class="col-sm-2 jlkdfj1">
 												<p class="help-block">...!</p>
@@ -262,11 +223,7 @@
 										<div class="form-group">
 											<label for="focusedinput" class="col-sm-2 control-label">Número:</label>
 											<div class="col-sm-8">
-												<input type="text" name="numero" class="form-control1" id="focusedinput" placeholder="Digite o número da casa do usuário..."
-												@if(null !== Auth::user()->numero)
-													value="{{Auth::user()->numero}}"
-												@endif
-												>
+												<input type="text" name="numero" class="form-control1" id="focusedinput" placeholder="Digite o número da casa do usuário...">
 											</div>
 											<div class="col-sm-2 jlkdfj1">
 												<p class="help-block">...!</p>
@@ -275,11 +232,7 @@
 										<div class="form-group">
 											<label for="focusedinput" class="col-sm-2 control-label">Complemento:</label>
 											<div class="col-sm-8">
-												<input type="text" name="complemento" class="form-control1" id="focusedinput" placeholder="Digite um complemento..."
-												@if(null !== Auth::user()->complemento)
-													value="{{Auth::user()->complemento}}"
-												@endif
-												>
+												<input type="text" name="complemento" class="form-control1" id="focusedinput" placeholder="Digite um complemento...">
 											</div>
 											<div class="col-sm-2 jlkdfj1">
 												<p class="help-block">...!</p>
@@ -288,11 +241,7 @@
 										<div class="form-group">
 											<label for="focusedinput" class="col-sm-2 control-label">Bairro:</label>
 											<div class="col-sm-8">
-												<input type="text" name="bairro" class="form-control1" id="focusedinput" placeholder="Digite o bairro do usuário..."
-												@if(null !== Auth::user()->bairro)
-													value="{{Auth::user()->bairro}}"
-												@endif
-												>
+												<input type="text" name="bairro" class="form-control1" id="focusedinput" placeholder="Digite o bairro do usuário...">
 											</div>
 											<div class="col-sm-2 jlkdfj1">
 												<p class="help-block">...!</p>
@@ -332,16 +281,8 @@
 
         $("#anunciosLink").removeClass("active resp-tab-active");
 
-        $(".resp-tabs-list li").attr("aria-controls", "");        
-
-        @if(Auth::user()->cidade_id !="" && Auth::user()->cidade_id != null)
-			var Obj = {"value":"{{Auth::user()->city->estado_id}}"};
-        	loadCidades(Obj);
-			
-		@endif
-
-        
-        
+        $(".resp-tabs-list li").attr("aria-controls", "");
+     
 
     });
 </script>

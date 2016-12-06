@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\MoedaRequest;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -37,9 +38,10 @@ class MoedaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function getCreate()
+    {   
+        
+        return view('admin.formmoeda');
     }
 
     /**
@@ -48,10 +50,16 @@ class MoedaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function postStore(MoedaRequest $request)
     {
-        //
+        $moeda = new Moeda();
+        $moeda->nome = $request->nome;
+        $moeda->sigla = $request->sigla;
+        $moeda->save();
+        session(['msg' => 'Moeda cadastrada!']);
+        return redirect('/admin/moedas');
     }
+
 
     /**
      * Display the specified resource.

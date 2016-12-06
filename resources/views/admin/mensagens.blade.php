@@ -104,7 +104,7 @@
 								     <h3 class="head-top">Mensagens</h3>								       
 									    <div class="col-md-12 page_1">
 									    	<div class="view-controls-list" id="viewcontrols">
-													<h3><a href="{{url('/admin/mensagem/create')}}"><span class="label label-primary">Nova Mensagem</span></a></h3>
+													<h3><a href="{{url('/admin/mensagens/create')}}"><span class="label label-primary">Nova Mensagem</span></a></h3>
 												</div>	
 												@if(session()->has('msg'))
 												<div class="alert">{{session('msg')}}</div>

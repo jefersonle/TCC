@@ -111,8 +111,12 @@
 			           success: function(data)
 			           {
 			               alert(data); // show response from the php script.
+			               window.location.reload();
 			           }
 			         });
+
+				$('#comentarioForm').trigger("reset");
+
 				return false;
 			    
 
@@ -132,7 +136,7 @@
 			               alert(data); // show response from the php script.
 			           }
 			         });
-
+				$('#mensagemForm').trigger("reset");
 			    return false;
 
 			});

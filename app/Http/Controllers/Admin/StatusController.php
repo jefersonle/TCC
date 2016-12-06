@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\NomeObrigatorioRequest;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -37,9 +38,10 @@ class StatusController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function getCreate()
+    {   
+        
+        return view('admin.formstatus');
     }
 
     /**
@@ -48,10 +50,16 @@ class StatusController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function postStore(NomeObrigatorioRequest $request)
     {
-        //
+        $status = new Status();
+        $status->nome = $request->nome;
+        $status->save();
+        session(['msg' => 'Status cadastrado!']);
+        return redirect('/admin/statuslist');
+
     }
+
 
     /**
      * Display the specified resource.

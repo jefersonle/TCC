@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\NomeObrigatorioRequest;
+
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -34,9 +36,10 @@ class CategoriaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function getCreate()
+    {   
+        $data['categorias'] = Categoria::all();
+        return view('admin.formcategoria', $data);
     }
 
     /**
@@ -45,9 +48,21 @@ class CategoriaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function postStore(NomeObrigatorioRequest $request)
     {
-        //
+        $categoria = new Categoria();
+        $categoria->nome = $request->nome;
+        if(isset($request->categoria_id) && $request->categoria_id !=""){
+            if($categoriaPai = Categoria::find($request->categoria_id)){
+                $categoria->categoria_id = $request->categoria_id;
+            }
+        }
+        
+        $categoria->save();
+
+        session(['msg' => 'Categoria cadastrada!']);
+        return redirect('/admin/categorias');
+
     }
 
     /**
