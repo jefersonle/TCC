@@ -661,7 +661,7 @@
 
 
 			<h1>O Maior Portal de Anúncios Agrícola do Brasil</h1>
-			<p>A tecnologia facilitando a vida do home do campo!.</p>
+			<p>A tecnologia facilitando a vida do homem do campo.</p>
 
 
 
