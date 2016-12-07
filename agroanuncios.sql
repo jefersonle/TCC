@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 07-Dez-2016 às 01:06
+-- Generation Time: 07-Dez-2016 às 03:56
 -- Versão do servidor: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `anuncios` (
 INSERT INTO `anuncios` (`id`, `cidade_id`, `user_id`, `categoria_id`, `moeda_id`, `forma_de_entrega_id`, `ddd`, `titulo`, `descricao`, `valor`, `condicao`, `status_id`, `tipo`, `views`, `gostei`, `nao_gostei`, `contato_email`, `contato_fone1`, `contato_whatsapp`, `contato_facebook`, `contato_mensagem`, `created_at`, `updated_at`) VALUES
 (35, 3060, 1, 1, 2, 6, 42, 'Anuncio em Agricultura', 'Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura ', 100.00, 'novo', 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, '2016-12-07 01:46:35', '2016-12-07 01:46:35'),
 (36, 3060, 1, 7, 2, 2, 42, 'Anúncio na Categoria Grãos', 'Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos ', 200.00, 'novo', 1, 0, 0, 0, 0, 1, 1, 0, 0, 1, '2016-12-07 01:51:17', '2016-12-07 01:51:17'),
-(37, 3060, 1, 1, 2, 5, 42, 'Anúncio na Categoria Agricultura', 'Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura ', 300.00, 'novo', 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, '2016-12-07 01:53:45', '2016-12-07 01:53:45');
+(37, 3060, 1, 1, 2, 5, 42, 'Anúncio na Categoria Agricultura', 'Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura ', 300.00, 'novo', 1, 0, 0, 1, 1, 0, 1, 0, 1, 1, '2016-12-07 01:53:45', '2016-12-07 03:37:35');
 
 -- --------------------------------------------------------
 
@@ -5694,7 +5694,14 @@ CREATE TABLE IF NOT EXISTS `comentarios` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=11 ;
+
+--
+-- Extraindo dados da tabela `comentarios`
+--
+
+INSERT INTO `comentarios` (`id`, `anuncio_id`, `user_id`, `comentario`, `created_at`, `updated_at`) VALUES
+(10, 37, 1, 'Muito bom este produto. Está indicado!', '2016-12-07 03:37:12', '2016-12-07 03:37:12');
 
 -- --------------------------------------------------------
 
@@ -5709,7 +5716,14 @@ CREATE TABLE IF NOT EXISTS `denuncias` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+
+--
+-- Extraindo dados da tabela `denuncias`
+--
+
+INSERT INTO `denuncias` (`id`, `anuncio_id`, `motivo`, `created_at`, `updated_at`) VALUES
+(3, 37, '', '2016-12-07 03:37:39', '2016-12-07 03:37:39');
 
 -- --------------------------------------------------------
 
@@ -5861,7 +5875,7 @@ CREATE TABLE IF NOT EXISTS `mensagems` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=16 ;
 
 --
 -- Extraindo dados da tabela `mensagems`
@@ -5870,7 +5884,13 @@ CREATE TABLE IF NOT EXISTS `mensagems` (
 INSERT INTO `mensagems` (`id`, `de_user_id`, `para_user_id`, `status_id`, `msg`, `created_at`, `updated_at`) VALUES
 (5, 1, 1, 0, 'Mensagem', '2016-12-06 01:04:28', '2016-12-06 01:04:28'),
 (8, 1, 1, 0, 'teste teste', '2016-12-06 03:53:09', '2016-12-06 03:53:09'),
-(9, 1, 1, 0, 'msg', '2016-12-06 19:28:48', '2016-12-06 19:28:48');
+(9, 1, 1, 0, 'msg', '2016-12-06 19:28:48', '2016-12-06 19:28:48'),
+(10, 1, 1, 0, 'Gostei do Produto!', '2016-12-07 03:37:27', '2016-12-07 03:37:27'),
+(11, 1, 1, 0, 'Obrigado Amigo!', '2016-12-07 04:33:52', '2016-12-07 04:33:52'),
+(12, 1, 1, 0, 'mesnasofjbndfioubgvouiadnbfauofnoiaus', '2016-12-07 04:48:10', '2016-12-07 04:48:10'),
+(13, 1, 1, 0, 'fdhjfuhklyultuiltuilpytytuioçiuop´ç~uiç', '2016-12-07 04:49:57', '2016-12-07 04:49:57'),
+(14, 1, 1, 0, '~gfgfkugfugmkfmkghgh,lghghbklhbkh.jkbjkb.', '2016-12-07 04:50:09', '2016-12-07 04:50:09'),
+(15, 1, 1, 0, 'adgszhzgdcgdcjhnjhnmghjnjn', '2016-12-07 04:53:28', '2016-12-07 04:53:28');
 
 -- --------------------------------------------------------
 
