@@ -111,8 +111,8 @@
 								<form class="form-horizontal" method="POST" action="{{url('/admin/mensagens/store')}}">
 								{{ csrf_field() }}								
 										<div class="form-group">
-											<label for="selector1" class="col-sm-2 control-label">Para</label>
-											<div class="col-sm-8"><select name="para_user_id" id="selector1" class="form-control1">
+											<label for="selector1" class="col-sm-3 control-label">Para</label>
+											<div class="col-sm-9"><select name="para_user_id" id="paraUser" class="form-control1">
 												<option value="">Selecione um destinatário...</option>
 												@forelse($usuarios as $usuario)
 												<option value="{{$usuario->id}}">{{$usuario->name}}</option>
@@ -122,14 +122,26 @@
 
 											</select></div>
 										</div>
+										@if(isset($respostapara))
+											<div class="form-group">
+											<label for="focusedinput" class="col-sm-3 control-label">Mensagem Recebida:</label>											
+											<div class="col-sm-9 jlkdfj1">
+												<p class="help-block">{{$respostapara->msg}}</p>
+											</div>
+										</div>
+										@endif
 										<div class="form-group">
-											<label for="focusedinput" class="col-sm-2 control-label">Mensagem:</label>
-											<div class="col-sm-8">
+											<label for="focusedinput" class="col-sm-3 control-label">
+											@if(isset($respostapara))
+												Resposta:
+											@else
+												Mensagem:
+											@endif
+											</label>
+											<div class="col-sm-9">
 												<textarea rows="10" name="msg" class="mess form-control1"></textarea>
 											</div>
-											<div class="col-sm-2 jlkdfj1">
-												<p class="help-block">...!</p>
-											</div>
+											
 										</div>
 										
 										<div class="form-group">											
@@ -166,7 +178,13 @@
         $("#anunciosLink").removeClass("active resp-tab-active");
 
         $(".resp-tabs-list li").attr("aria-controls", "");
-     
+
+        @if(isset($respostapara))
+			$("#paraUser").val({{$respostapara->de_user_id}});
+			$("#paraUser").css('pointer-events','none');
+			
+			
+		@endif
 
     });
 </script>

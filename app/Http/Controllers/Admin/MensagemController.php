@@ -41,8 +41,11 @@ class MensagemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getCreate()
+    public function getCreate($id= null)
     {           
+        if(isset($id) && $id !="" && $id != 0 && $id != null){
+            $data['respostapara'] = Mensagem::find($id);
+        }
         $data['usuarios'] = User::all();
         return view('admin.formmensagem', $data);
     }
