@@ -124,18 +124,7 @@
 											<div id="container">
 											<div class="view-controls-list" id="viewcontrols">
 												<h3><a href="{{url('/anuncio/create')}}" target="_blank"><span class="label label-primary">Criar Novo Anúncio</span></a></h3>
-											</div>
-											<div class="sort">
-											   <div class="sort-by">
-													<label>Ordenar por : </label>
-													<select>
-																	<option value="">Mais recente</option>
-																	<option value="">Mais Antigos</option>
-																	<option value="">Menor Preço</option>
-																	<option value="">Maior Preço</option>
-													</select>
-												   </div>
-												 </div>
+											</div>											
 											<div class="clearfix"></div>
 											@if(session()->has('msg'))
 												<div class="alert">{{session('msg')}}</div>

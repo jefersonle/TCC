@@ -37,6 +37,8 @@ class AnuncioController extends Controller
         $data['anuncios'] = $anuncios;
 
         return view("admin.anuncios", $data);
+
+        
     }
 
     /**

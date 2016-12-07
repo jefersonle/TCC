@@ -52,6 +52,7 @@
 					},
 					quickList: ['en', 'hi', 'he', 'ml', 'ta', 'fr'] //FIXME
 				} );
+
 			} );
 		</script>
 		<link rel="stylesheet" type="text/css" href="{{ url('/') }}/css/easy-responsive-tabs.css " />
@@ -127,7 +128,9 @@
 														<td>{{$mensagem->para->name}}</td>
 														<td>{{$mensagem->msg}}</td>
 														<td>{{$mensagem->created_at}}</td>
-														<td><a href="single.html"><span class="label label-primary">Visualizar</span></a>
+														<td><a href="javascript:void;" 
+														onclick="mostrarMensagem('{{$mensagem->id}}','{{$mensagem->de->name}}','{{$mensagem->para->name}}','{{$mensagem->msg}}');">
+														<span class="label label-primary">Visualizar</span></a>
 														<a href="{{url('/admin/mensagens/destroy')}}/{{$mensagem->id}}"><span class="label label-danger"  onclick="if(!confirm('Tem certeza que deseja excluir esta mensagem?')) return false;">Escluir</span></a></td>
 													</tr>													
 													@empty
@@ -154,8 +157,46 @@
 			</div>
 		</div>
 	</div>
+
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">Visualizar Mensagem</h4>
+		      </div>
+		      <div class="modal-body">
+		        <p><strong>De: </strong><span id="deNome"></span></p>
+		        <br>
+		        <p><strong>Para: </strong><span id="paraNome"></span></p>
+		        <br>
+		        <p><strong>Mensagem:</strong></p>		        
+		        <p id="msg"></p>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+		        <button type="button" class="btn btn-danger" onclick="window.location.href = '{{url('/admin/mensagens/create')}}/'+globalId">Responder</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+
 	<!--Plug-in Initialisation-->
 	<script type="text/javascript">
+	var globalId
+
+	function mostrarMensagem(mensagem_id, de, para, msg){	
+			alert('funcção');	
+			$("#deNome").html(de);
+			$("#paraNome").html(para);
+			$("#msg").html(msg);
+			globalId = mensagem_id; 
+
+			$('#myModal').modal('show');
+
+	}
+	
+
     $(document).ready(function() {
 
         //Vertical Tab
@@ -175,7 +216,7 @@
         });
 
         $("#anunciosLink").removeClass("active resp-tab-active");
-        $(".resp-tabs-list li").attr("aria-controls", "");
+        $(".resp-tabs-list li").attr("aria-controls", "");        
 
     });
 </script>

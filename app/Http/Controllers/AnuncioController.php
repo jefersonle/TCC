@@ -97,25 +97,32 @@ class AnuncioController extends Controller
 
 
     {
+        $teste = Anuncio::orderBy('updated_at', 'desc')->first();
 
-        if(isset($request->f)){
-            switch ($request->f) {
-                case 'antigo':
-                    $anuncios = Anuncio::orderBy('updated_at', 'ASC')->get();
-                    break;
-                case 'recente':
-                   $anuncios = Anuncio::orderBy('updated_at', 'DESC')->get();
-                    break;
-                case 'menorpreco':
-                   $anuncios = Anuncio::orderBy('valor', 'ASC')->get();
-                    break;
-                case 'maiorpreco':
-                    $anuncios = Anuncio::orderBy('valor', 'DESC')->get();
-                    break;                
-            }
-         }else{
-            $anuncios = Anuncio::orderBy('updated_at', 'desc')->get();
-         }         
+        if($teste != null){            
+
+            if(isset($request->f)){
+                switch ($request->f) {
+                    case 'antigo':
+                        $anuncios = Anuncio::orderBy('updated_at', 'ASC')->get();
+                        break;
+                    case 'recente':
+                       $anuncios = Anuncio::orderBy('updated_at', 'DESC')->get();
+                        break;
+                    case 'menorpreco':
+                       $anuncios = Anuncio::orderBy('valor', 'ASC')->get();
+                        break;
+                    case 'maiorpreco':
+                        $anuncios = Anuncio::orderBy('valor', 'DESC')->get();
+                        break;                
+                }
+             }else{
+                $anuncios = Anuncio::orderBy('updated_at', 'desc')->get();
+             }
+
+        }else{
+            $anuncios = array();
+        }    
 
 
         $data['anuncios'] = $anuncios;
@@ -128,11 +135,7 @@ class AnuncioController extends Controller
         $data['bread2'] = "Todos os anúncios";
 
 
-        return view('anuncio', $data);  
-
-        
-
-
+        return view('anuncio', $data); 
 
     }
 
