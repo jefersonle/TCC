@@ -1213,7 +1213,7 @@
 							<input type="checkbox" name="whatsapp">WhatsApp
 							<input type="checkbox" name="facebook">Facebook							
 							@endif
-							<p class="small">Você pode atualizar suas informações de contato clicando aqui.</p>
+							<p class="small">Você pode atualizar suas informações de contato <a href="{{url('/dashboard/perfil')}}" target="_blank">clicando aqui</a>.</p>
 						</div>
 
 						<div class="clearfix"></div>
