@@ -123,7 +123,7 @@
 														<td>{{$status->id}}</td>
 														<td>{{$status->nome}}</td>	
 														<td><a href="{{url('/admin/statuslist/edit')}}/{{$status->id}}"><span class="label label-success">Editar</span></a>
-														<a href="{{url('/admin/statuslist/destroy')}}/{{$status->id}}"><span class="label label-danger">Excluir</span></a>
+														<a href="{{url('/admin/statuslist/destroy')}}/{{$status->id}}"><span class="label label-danger" onclick="if(!confirm('Tem certeza que deseja excluir este status?')) return false;">Excluir</span></a>
 														</td>
 													</tr>	
 												@empty
@@ -133,6 +133,8 @@
 												@endforelse
 												</tbody>
 											  </table> 
+
+											  {!! $statuslist->render() !!}
 											                   
 										</div>										
 									   <div class="clearfix"> </div>  

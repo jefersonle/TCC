@@ -108,12 +108,24 @@
 								@foreach ($errors->all() as $message) 
 									<div class="alert">{{$message}}</div>
 								@endforeach
+
+								@if(isset($edit) && $edit)
+								<form class="form-horizontal" method="POST" action="{{url('/admin/statuslist/update')}}/{{$status->id}}">
+								@else
 								<form class="form-horizontal" method="POST" action="{{url('/admin/statuslist/store')}}">
+								@endif
+
+
+								
 									{{ csrf_field() }}
 										<div class="form-group">
 											<label for="focusedinput" class="col-sm-2 control-label">Nome</label>
 											<div class="col-sm-8">
-												<input type="text" class="form-control1" id="focusedinput" name="nome" placeholder="Digite o nome do status...">
+												<input type="text" class="form-control1" id="focusedinput" name="nome" placeholder="Digite o nome do status..."
+												@if(isset($edit) && $edit)
+													value="{{$status->nome}}"
+												@endif
+												>
 											</div>
 											<div class="col-sm-2 jlkdfj1">
 												<p class="help-block">...!</p>
@@ -125,6 +137,13 @@
 												<input type="submit" class="btn btn-block" value="Salvar">
 											</div>											
 										</div>
+										@if(isset($edit) && $edit)
+										<div class="form-group">											
+											<div class="col-sm-12">
+												<a href="{{url('/admin/statuslist')}}" class="btn btn-block">Cancelar</a>
+											</div>											
+										</div>
+										@endif
 									</form>
 								<div class="clearfix"></div>
 							</div>

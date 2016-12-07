@@ -25,7 +25,8 @@ class MoedaRequest extends Request
     {
         return [
             'nome' => 'required|max:255',
-            'sigla' => 'required|max:3|alpha',                      
+            'sigla' => 'required|max:3|alpha', 
+            'cifra' => 'required',                 
         ];
     }
 
@@ -35,7 +36,9 @@ class MoedaRequest extends Request
             'nome.required' => 'O campo nome é obrigatório.', 
             'sigla.required' => 'O campo sigla é obrigatório.', 
             'sigla.max' => 'O campo sigla deve conter apenas 3 caracteres.',
-            'sigla.alpha' => 'O campo sigla deve conter apenas letras.',          
+            'sigla.alpha' => 'O campo sigla deve conter apenas letras.',     
+            'cifra.required' => 'O campo cifra é obrigatório.', 
+            
         ];
     }
 }

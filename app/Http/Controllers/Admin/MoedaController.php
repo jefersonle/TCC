@@ -15,7 +15,8 @@ class MoedaController extends Controller
    public function __construct()
 
     {
-        $this->middleware('auth');        
+        $this->middleware('auth');
+        $this->middleware('isAdmin');          
 
     }
     /**
@@ -26,7 +27,7 @@ class MoedaController extends Controller
     public function getIndex()
     {
 
-        $moedas = Moeda::orderBy('updated_at', 'desc')->get();
+        $moedas = Moeda::orderBy('updated_at', 'desc')->paginate("10");
 
         $data['moedas'] = $moedas;
 
@@ -55,6 +56,7 @@ class MoedaController extends Controller
         $moeda = new Moeda();
         $moeda->nome = $request->nome;
         $moeda->sigla = $request->sigla;
+        $moeda->cifra = $request->cifra;
         $moeda->save();
         session(['msg' => 'Moeda cadastrada!']);
         return redirect('/admin/moedas');
@@ -78,9 +80,11 @@ class MoedaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function getEdit($id)
     {
-        //
+        $data['moeda'] = Moeda::find($id);
+        $data['edit'] = true;
+        return view('admin.formmoeda', $data);
     }
 
     /**
@@ -90,9 +94,15 @@ class MoedaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function postUpdate(MoedaRequest $request, $id)
     {
-        //
+        $moeda = Moeda::find($id);
+        $moeda->nome = $request->nome;
+        $moeda->sigla = $request->sigla;
+        $moeda->cifra = $request->cifra;
+        $moeda->save();
+        session(['msg' => 'Moeda editada!']);
+        return redirect('/admin/moedas');
     }
 
     /**

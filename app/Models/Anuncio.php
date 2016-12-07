@@ -51,5 +51,10 @@ class Anuncio extends Model
         return $this->belongsTo('App\Models\FormaDeEntrega', 'forma_de_entrega_id');
     }
 
+    public function moeda()
+    {
+        return $this->belongsTo('App\Models\Moeda');
+    }   
+
 
 }

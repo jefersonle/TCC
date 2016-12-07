@@ -19,7 +19,8 @@ class MensagemController extends Controller
     public function __construct()
 
     {
-        $this->middleware('auth');        
+        $this->middleware('auth');       
+        $this->middleware('isAdmin');   
 
     }
 
@@ -27,7 +28,7 @@ class MensagemController extends Controller
 
     {
 
-       $mensagens = Mensagem::orderBy('updated_at', 'desc')->get();
+       $mensagens = Mensagem::orderBy('updated_at', 'desc')->paginate("10");
 
         $data['mensagens'] = $mensagens;
 

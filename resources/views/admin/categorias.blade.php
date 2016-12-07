@@ -123,7 +123,7 @@
 														<td>{{$categoria->id}}</td>
 														<td>{{$categoria->nome}}</td>	
 														<td><a href="{{ url('/admin/categorias/edit') }}/{{$categoria->id}}"><span class="label label-success">Editar</span></a>
-														<a href="{{ url('/admin/categorias/destroy') }}/{{$categoria->id}}"><span class="label label-danger">Excluir</span></a>
+														<a href="{{ url('/admin/categorias/destroy') }}/{{$categoria->id}}"><span class="label label-danger" onclick="if(!confirm('Tem certeza que deseja excluir esta categoria?')) return false;">Excluir</span></a>
 														</td>
 													</tr>
 												@empty
@@ -133,6 +133,7 @@
 												@endforelse
 												</tbody>
 											  </table> 
+											  {!! $categorias->render() !!}
 											                   
 										</div>										
 									   <div class="clearfix"> </div>  

@@ -128,7 +128,7 @@
 														<td>{{$usuario->email}}</td>
 														<td>{{$usuario->created_at}}</td>
 														<td><a href="{{url('/admin/usuarios/edit')}}/{{$usuario->id}}"><span class="label label-success">Editar</span></a>
-														<a href="{{url('/admin/usuarios/destroy')}}/{{$usuario->id}}"><span class="label label-danger">Excluir</span></a>
+														<a href="{{url('/admin/usuarios/destroy')}}/{{$usuario->id}}"><span class="label label-danger"  onclick="if(!confirm('Tem certeza que deseja excluir este usuário?\n\n Isto apagará também todos os anúncios, comentários e mensagens ligadas a este usuário e aos seus anúncios!')) return false;">Excluir</span></a>
 														</td>
 													</tr>	
 												@empty
@@ -139,6 +139,7 @@
 
 												</tbody>
 											  </table> 
+											  {!! $usuarios->render() !!}
 											                   
 										</div>										
 									   <div class="clearfix"> </div>  

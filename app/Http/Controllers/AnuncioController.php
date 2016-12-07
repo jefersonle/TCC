@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use App\Http\Requests\AnuncioRequest;
 
 
 use App\Http\Controllers\Controller;
@@ -39,6 +40,11 @@ use App\Models\FormaDePagamento;
 use App\Models\FormaDeEntrega;
 
 use App\Models\PagamentoAnuncio;
+
+
+use App\Models\Comentario;
+
+use App\Models\Denuncia;
 
 
 
@@ -155,7 +161,7 @@ class AnuncioController extends Controller
 
 
 
-    public function postCreate(Request $request)
+    public function postCreate(AnuncioRequest $request)
 
 
 
@@ -210,7 +216,7 @@ class AnuncioController extends Controller
         $anuncio->contato_fone1 = ($request->telefone != null)?1:0;
         $anuncio->contato_whatsapp = ($request->whatsapp != null)?1:0;
         $anuncio->contato_facebook = ($request->facebook != null)?1:0;
-        $anuncio->contato_mensagem = ($request->mensagem != null)?1:0;
+        $anuncio->contato_mensagem = 1;
 
         $anuncio->save();
 
@@ -326,25 +332,27 @@ class AnuncioController extends Controller
 
 
     {
-
-
-
         $anuncio = Anuncio::find($id);
 
-
-        $data['moedas'] = Moeda::all();
-
-        $data['formasDeEntrega'] = FormaDeEntrega::all();
-
-        $data['formasDePagamento'] = FormaDePagamento::all();
-
-        $data['anuncio'] = $anuncio;
+        if (\Auth::user()->id == $anuncio->user_id || \Auth::user()->id == 1){            
 
 
-        $data['tipo'] = 'editar';
+            $data['moedas'] = Moeda::all();
 
-        return view('formanuncio', $data);
+            $data['formasDeEntrega'] = FormaDeEntrega::all();
 
+            $data['formasDePagamento'] = FormaDePagamento::all();
+
+            $data['anuncio'] = $anuncio;
+
+
+            $data['tipo'] = 'editar';
+
+            return view('formanuncio', $data);
+        }else{
+            return redirect('/dashboard/anuncio');
+        }
+        
     }
 
 
@@ -357,9 +365,7 @@ class AnuncioController extends Controller
 
 
 
-    public function postEdit(Request $request, $id)
-
-
+    public function postEdit(AnuncioRequest $request, $id)
 
     {
 
@@ -369,7 +375,7 @@ class AnuncioController extends Controller
 
 
 
-        if (\Auth::user()->id == $anuncio->user_id){
+        if (\Auth::user()->id == $anuncio->user_id || \Auth::user()->id == 1){
 
            
 
@@ -418,7 +424,7 @@ class AnuncioController extends Controller
             $anuncio->contato_fone1 = ($request->telefone != null)?1:0;
             $anuncio->contato_whatsapp = ($request->whatsapp != null)?1:0;
             $anuncio->contato_facebook = ($request->facebook != null)?1:0;
-            $anuncio->contato_mensagem = ($request->mensagem != null)?1:0;
+            $anuncio->contato_mensagem = 1;
 
             $anuncio->save();
 
@@ -498,24 +504,44 @@ class AnuncioController extends Controller
 
 
         if (\Auth::user()->id == $anuncio->user_id){
-
            
 
-            $anuncio->delete();
+                foreach ($anuncio->imagens as $imagem) {
+                    $imagem = Imagem::find($imagem->id);
 
-        }     
+                    $file = "uploads/".$imagem->nome;
+
+                    if(file_exists($file)){
+                        unlink($file);
+                    }   
+
+                    $imagem->delete();
+                }
+
+                foreach ($anuncio->comentarios as $comentario) {
+                    $comentario = Comentario::destroy($comentario->id);
+                }
+                foreach ($anuncio->formaspagamento as $pagamento) {
+                    $pagamento = PagamentoAnuncio::destroy($pagamento->id);
+                }
+
+                foreach ($anuncio->denuncias as $denuncia) {
+                    $denuncia = Denuncia::destroy($denuncia->id);
+                }
+
+                $anuncio->delete();
+
+
+                session(['msg' => 'Anúncio excluído!']);
+
+                return redirect('/dashboard/anuncio');
+            }
 
 
 
         return redirect('/dashboard/anuncio');
 
     }
-
-
-
-
-
-
 
      public function getCidade($id, Request $request)
 

@@ -25,7 +25,7 @@ class CidadeRequest extends Request
     {
         return [
             'nome' => 'required|max:255', 
-            'ddd' => 'required|max:2|min:2|numeric', 
+            'ddd' => 'required|numeric', 
             'estado_id' => 'required|max:255|numeric',                      
         ];
     }
@@ -34,10 +34,8 @@ class CidadeRequest extends Request
     {
         return [
             'nome.required' => 'O campo nome é obrigatório.',  
-            'ddd.required' => 'O campo DDD é obrigatório.',     
-            'ddd.max' => 'O campo DDD deve conter dois número.',  
-            'ddd.min' => 'O campo DDD deve conter dois número.',  
-            'ddd.numeric' => 'O campo DDD deve conter dois número.',  
+            'ddd.required' => 'O campo DDD é obrigatório.',                    
+            'ddd.numeric' => 'O campo DDD deve conter dois números.',  
             'estado_id.required' => 'O campo estado é obrigatório.',  
             'estado_id.numeric' => 'Erro ao selecionar o estado.',         
         ];

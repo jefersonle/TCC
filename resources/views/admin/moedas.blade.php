@@ -123,7 +123,7 @@
 														<td>{{$moeda->sigla}}</td>
 														<td>{{$moeda->nome}}</td>	
 														<td><a href="{{url('/admin/moedas/edit')}}/{{$moeda->id}}"><span class="label label-success">Editar</span></a>
-														<a href="{{url('/admin/moedas/destroy')}}/{{$moeda->id}}"><span class="label label-danger">Excluir</span></a>
+														<a href="{{url('/admin/moedas/destroy')}}/{{$moeda->id}}"><span class="label label-danger" onclick="if(!confirm('Tem certeza que deseja excluir esta moeda?')) return false;">Excluir</span></a>
 														</td>
 													</tr>	
 												@empty
@@ -132,7 +132,9 @@
 													</tr>
 												@endforelse
 												</tbody>
-											  </table> 
+											  </table>
+
+											  {!! $moedas->render() !!} 
 											                   
 										</div>										
 									   <div class="clearfix"> </div>  

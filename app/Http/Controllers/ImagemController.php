@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\Imagem;;
 
 class ImagemController extends Controller
 {
@@ -80,8 +81,14 @@ class ImagemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function postDestroy(Request $request)
     {
-        //
+        $imagem = Imagem::find($request->imagem_id);
+        if($imagem->anuncio->user_id == $request->user_id || $request->user_id == 1){
+            $imagem->delete();
+            return "Imagem Excluída!";
+        }else{
+            return Response::json(['error' => 'Not Authorized'], 404);
+        }
     }
 }

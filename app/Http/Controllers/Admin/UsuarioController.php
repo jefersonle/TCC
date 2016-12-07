@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\PerfilRequest;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -22,7 +23,8 @@ class UsuarioController extends Controller
    public function __construct()
 
     {
-        $this->middleware('auth');        
+        $this->middleware('auth'); 
+        $this->middleware('isAdmin');         
 
     }
 
@@ -30,7 +32,7 @@ class UsuarioController extends Controller
 
     {
 
-       $usuarios = User::orderBy('name', 'asc')->get();
+       $usuarios = User::orderBy('name', 'asc')->paginate("10");
 
         $data['usuarios'] = $usuarios;
 
@@ -99,9 +101,12 @@ class UsuarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function getEdit($id)
     {
-        //
+        $data['usuario'] = User::find($id);
+        $data['edit'] = true;
+        $data['estados'] = Estado::all();
+        return view('admin.formusuario', $data);
     }
 
     /**
@@ -111,9 +116,30 @@ class UsuarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function postUpdate(PerfilRequest $request, $id)
     {
-        //
+            $usuario = User::find($id);
+            $usuario->name = $request->nome;
+            $usuario->email = $request->email;
+            if($request->senha !== "" && $request->senha !== null && $request->senha !== " "){
+                $usuario->password = bcrypt($request->senha);
+            }
+            $usuario->cpf = $request->cpf;
+            $usuario->contato_fone = $request->telefone;
+            $usuario->contato_facebook = $request->facebook;
+            $usuario->contato_whatsapp = $request->whatsapp;
+            $usuario->cep = $request->cep;
+            $usuario->cidade_id = $request->cidade_id;
+            $usuario->logradouro = $request->logradouro;
+            $usuario->numero = $request->numero;
+            $usuario->complemento = $request->complemento;
+            $usuario->bairro = $request->bairro;
+
+            $usuario->save();
+
+            session(['msg' => 'Usuário editado!']);
+
+            return redirect('/admin/usuarios');
     }
 
     /**

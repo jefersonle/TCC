@@ -15,7 +15,8 @@ class FormaDeEntregaController extends Controller
     public function __construct()
 
     {
-        $this->middleware('auth');        
+        $this->middleware('auth');
+        $this->middleware('isAdmin');          
 
     }
     /**
@@ -26,7 +27,7 @@ class FormaDeEntregaController extends Controller
     public function getIndex()
     {
 
-        $formasdeentrega = FormaDeEntrega::orderBy('updated_at', 'desc')->get();
+        $formasdeentrega = FormaDeEntrega::orderBy('updated_at', 'desc')->paginate("10");
 
         $data['formasdeentrega'] = $formasdeentrega;
 
@@ -76,9 +77,11 @@ class FormaDeEntregaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function getEdit($id)
     {
-        //
+        $data['entrega'] = FormaDeEntrega::find($id);
+        $data['edit'] = true;
+        return view('admin.formentrega', $data);
     }
 
     /**
@@ -88,9 +91,13 @@ class FormaDeEntregaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function postUpdate(NomeObrigatorioRequest $request, $id)
     {
-        //
+        $entrega = FormaDeEntrega::find($id);
+        $entrega->nome = $request->nome;
+        $entrega->save();
+        session(['msg' => 'Forma de entrega editada!']);
+        return redirect('/admin/entrega');
     }
 
     /**

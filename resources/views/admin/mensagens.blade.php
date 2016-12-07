@@ -128,7 +128,7 @@
 														<td>{{$mensagem->msg}}</td>
 														<td>{{$mensagem->created_at}}</td>
 														<td><a href="single.html"><span class="label label-primary">Visualizar</span></a>
-														<a href="{{url('/admin/mensagens/destroy')}}/{{$mensagem->id}}"><span class="label label-danger">Escluir</span></a></td>
+														<a href="{{url('/admin/mensagens/destroy')}}/{{$mensagem->id}}"><span class="label label-danger"  onclick="if(!confirm('Tem certeza que deseja excluir esta mensagem?')) return false;">Escluir</span></a></td>
 													</tr>													
 													@empty
 														<tr>
@@ -138,6 +138,7 @@
 													
 												</tbody>
 											  </table> 
+											  {!! $mensagens->render() !!}
 											                   
 										</div>										
 									   <div class="clearfix"> </div>  

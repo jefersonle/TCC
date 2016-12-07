@@ -127,7 +127,7 @@
 														<td>{{$estado->nome}}</td>
 														<td>{{$estado->uf}}</td>														
 														<td><a href="{{url('/admin/estados/edit')}}/{{$estado->id}}"><span class="label label-success">Editar</span></a>
-														<a href="{{url('/admin/estados/destroy')}}/{{$estado->id}}"><span class="label label-danger">Excluir</span></a>
+														<a href="{{url('/admin/estados/destroy')}}/{{$estado->id}}"><span class="label label-danger" onclick="if(!confirm('Tem certeza que deseja excluir este estado?')) return false;">Excluir</span></a>
 														</td>
 													</tr>	
 													@empty
@@ -137,6 +137,7 @@
 													@endforelse
 												</tbody>
 											  </table> 
+											  {!! $estados->render() !!}
 											                   
 										</div>										
 									   <div class="clearfix"> </div>  

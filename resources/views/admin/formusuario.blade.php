@@ -111,12 +111,24 @@
 								@foreach ($errors->all() as $message) 
 									<div class="alert">{{$message}}</div>
 								@endforeach
+
+								@if(isset($edit) && $edit)
+								<form class="form-horizontal" method="POST" action="{{url('/admin/usuarios/update')}}/{{$usuario->id}}">
+								@else
 								<form class="form-horizontal" method="POST" action="{{url('/admin/usuarios/store')}}">
+								@endif
+
+
+								
 								{{ csrf_field() }}
 										<div class="form-group" method="POST" action="{{url('/admin/usuarios/store')}}">
 											<label for="focusedinput" class="col-sm-2 control-label">Nome</label>
 											<div class="col-sm-8">
-												<input type="text" name="nome" class="form-control1" id="focusedinput" placeholder="Digite o nome do usuário...">
+												<input type="text" name="nome" class="form-control1" id="focusedinput" placeholder="Digite o nome do usuário..."
+												@if(isset($edit) && $edit)
+													value="{{$usuario->name}}"
+												@endif
+												>
 											</div>
 											<div class="col-sm-2 jlkdfj1">
 												<p class="help-block">...!</p>
@@ -125,7 +137,11 @@
 										<div class="form-group">
 											<label for="focusedinput" class="col-sm-2 control-label">Email</label>
 											<div class="col-sm-8">
-												<input type="email" name="email" class="form-control1" id="focusedinput" placeholder="Digite o email do usuário...">
+												<input type="email" name="email" class="form-control1" id="focusedinput" placeholder="Digite o email do usuário..."
+												@if(isset($edit) && $edit)
+													value="{{$usuario->email}}"
+												@endif
+												>
 											</div>
 											<div class="col-sm-2 jlkdfj1">
 												<p class="help-block">...!</p>
@@ -152,7 +168,11 @@
 										<div class="form-group">
 											<label for="focusedinput" class="col-sm-2 control-label">CPF:</label>
 											<div class="col-sm-8">
-												<input type="text" name="cpf" class="form-control1" id="focusedinput" placeholder="Digite o CPF do usuário...">
+												<input type="text" name="cpf" class="form-control1" id="focusedinput" placeholder="Digite o CPF do usuário..."
+												@if(isset($edit) && $edit)
+													value="{{$usuario->cpf}}"
+												@endif
+												>
 											</div>
 											<div class="col-sm-2 jlkdfj1">
 												<p class="help-block">...!</p>
@@ -161,7 +181,11 @@
 										<div class="form-group">
 											<label for="focusedinput" class="col-sm-2 control-label">Telefone:</label>
 											<div class="col-sm-8">
-												<input type="text" name="telefone" class="form-control1" id="focusedinput" placeholder="Digite o telefone do usuário...">
+												<input type="text" name="telefone" class="form-control1" id="focusedinput" placeholder="Digite o telefone do usuário..."
+												@if(isset($edit) && $edit)
+													value="{{$usuario->contato_fone}}"
+												@endif
+												>
 											</div>
 											<div class="col-sm-2 jlkdfj1">
 												<p class="help-block">...!</p>
@@ -170,7 +194,11 @@
 										<div class="form-group">
 											<label for="focusedinput" class="col-sm-2 control-label">WhatsApp:</label>
 											<div class="col-sm-8">
-												<input type="text" name="whatsapp" class="form-control1" id="focusedinput" placeholder="Digite o WhatsApp do usuário...">
+												<input type="text" name="whatsapp" class="form-control1" id="focusedinput" placeholder="Digite o WhatsApp do usuário..."
+												@if(isset($edit) && $edit)
+													value="{{$usuario->contato_whatsapp}}"
+												@endif
+												>
 											</div>
 											<div class="col-sm-2 jlkdfj1">
 												<p class="help-block">...!</p>
@@ -179,7 +207,11 @@
 										<div class="form-group">
 											<label for="focusedinput" class="col-sm-2 control-label">Facebook:</label>
 											<div class="col-sm-8">
-												<input type="text" name="facebook" class="form-control1" id="focusedinput" placeholder="Digite o link do perfil do usuário no facebook...">
+												<input type="text" name="facebook" class="form-control1" id="focusedinput" placeholder="Digite o link do perfil do usuário no facebook..."
+												@if(isset($edit) && $edit)
+													value="{{$usuario->contato_facebook}}"
+												@endif
+												>
 											</div>
 											<div class="col-sm-2 jlkdfj1">
 												<p class="help-block">...!</p>
@@ -188,7 +220,11 @@
 										<div class="form-group">
 											<label for="focusedinput" class="col-sm-2 control-label">CEP:</label>
 											<div class="col-sm-8">
-												<input type="text" name="cep" class="form-control1" id="focusedinput" placeholder="Digite o CEP do usuário...">
+												<input type="text" name="cep" class="form-control1" id="focusedinput" placeholder="Digite o CEP do usuário..."
+												@if(isset($edit) && $edit)
+													value="{{$usuario->cep}}"
+												@endif
+												>
 											</div>
 											<div class="col-sm-2 jlkdfj1">
 												<p class="help-block">...!</p>
@@ -198,12 +234,17 @@
 											<label for="selector1" class="col-sm-2 control-label">Estado</label>
 											<div class="col-sm-8"><select name="estado" id="selector1" class="form-control1" onchange="loadCidades(this);">
 												<option value="">Selecione um estado.</option>
-												@forelse($estados as $estado)
-												<option value="{{$estado->id}}">{{$estado->nome}}</option>
-												@empty
-												<option value="">Nenhum estado encontrado.</option>
-												@endforelse
+												@foreach($estados as $estado)
+												<option value="{{$estado->id}}">{{$estado->nome}}</option		
+												@if(isset($edit) && $edit)										
+													@if($usuario->city->estado->id == $estado->id)
+															selected="selected"
+													@endif
+												@endif
+												>
+												@endforeach
 											</select></div>
+											
 										</div>
 										<div class="form-group">
 											<label for="selector1" class="col-sm-2 control-label">Cidade</label>
@@ -214,7 +255,11 @@
 										<div class="form-group">
 											<label for="focusedinput" class="col-sm-2 control-label">Logradouro:</label>
 											<div class="col-sm-8">
-												<input type="text" name="logradouro" class="form-control1" id="focusedinput" placeholder="Digite o logradouro do usuário...">
+												<input type="text" name="logradouro" class="form-control1" id="focusedinput" placeholder="Digite o logradouro do usuário..."
+												@if(isset($edit) && $edit)
+													value="{{$usuario->logradouro}}"
+												@endif
+												>
 											</div>
 											<div class="col-sm-2 jlkdfj1">
 												<p class="help-block">...!</p>
@@ -223,7 +268,11 @@
 										<div class="form-group">
 											<label for="focusedinput" class="col-sm-2 control-label">Número:</label>
 											<div class="col-sm-8">
-												<input type="text" name="numero" class="form-control1" id="focusedinput" placeholder="Digite o número da casa do usuário...">
+												<input type="text" name="numero" class="form-control1" id="focusedinput" placeholder="Digite o número da casa do usuário..."
+												@if(isset($edit) && $edit)
+													value="{{$usuario->numero}}"
+												@endif
+												>
 											</div>
 											<div class="col-sm-2 jlkdfj1">
 												<p class="help-block">...!</p>
@@ -232,7 +281,11 @@
 										<div class="form-group">
 											<label for="focusedinput" class="col-sm-2 control-label">Complemento:</label>
 											<div class="col-sm-8">
-												<input type="text" name="complemento" class="form-control1" id="focusedinput" placeholder="Digite um complemento...">
+												<input type="text" name="complemento" class="form-control1" id="focusedinput" placeholder="Digite um complemento..."
+												@if(isset($edit) && $edit)
+													value="{{$usuario->complemento}}"
+												@endif
+												>
 											</div>
 											<div class="col-sm-2 jlkdfj1">
 												<p class="help-block">...!</p>
@@ -241,7 +294,11 @@
 										<div class="form-group">
 											<label for="focusedinput" class="col-sm-2 control-label">Bairro:</label>
 											<div class="col-sm-8">
-												<input type="text" name="bairro" class="form-control1" id="focusedinput" placeholder="Digite o bairro do usuário...">
+												<input type="text" name="bairro" class="form-control1" id="focusedinput" placeholder="Digite o bairro do usuário..."
+												@if(isset($edit) && $edit)
+													value="{{$usuario->bairro}}"
+												@endif
+												>
 											</div>
 											<div class="col-sm-2 jlkdfj1">
 												<p class="help-block">...!</p>
@@ -253,6 +310,13 @@
 												<input type="submit" class="btn btn-block" value="Salvar">
 											</div>											
 										</div>
+										@if(isset($edit) && $edit)
+										<div class="form-group">						
+											<div class="col-sm-12">
+												<a href="{{url('/admin/usuarios')}}" class="btn btn-block">Cancelar</a>
+											</div>											
+										</div>
+										@endif
 									</form>
 								<div class="clearfix"></div>
 							</div>

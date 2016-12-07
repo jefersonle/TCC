@@ -781,6 +781,10 @@
 
                 @endif
 
+                @foreach ($errors->all() as $message) 
+						<div class="alert">{{$message}}</div>
+				@endforeach
+
 
 
 				<form action="" method="POST" enctype="multipart/form-data"> 
@@ -936,10 +940,10 @@
 								<br/>
 								<ul class="slides">
 										@forelse($anuncio->imagens as $imagem)
-										<li>
+										<li id="imagem-{{$imagem->id}}">
 											
 											<img src="{{url('/')}}/uploads/{{$imagem->nome}}" class="col-md-2"/>
-											<h6><a href="">Excluir</a></h6>
+											<a href="javascript:void;" onclick="excluirFoto({{$imagem->id}});">Excluir</a>
 											
 										</li>
 										@empty
@@ -1106,20 +1110,11 @@
 					    <div class="clearfix"></div>
 
 					    <label>Moeda<span>*</span></label>
-
-
-
-
-
-
-					    @if(isset($tipo) && $tipo == "editar")
-							<select class="" name="moeda" required value="{{$anuncio->moeda_id}}">	
-						@else
-							<select class="" name="moeda" required>	
-						@endif
-
+					    
+						<select class="" name="moeda" id="moeda" required>	
+						
 							@foreach($moedas as $moeda)
-							  <option value="{{$moeda->id}}">{{$moeda->nome}} ({{$moeda->sigla}})</option>		
+							  <option value="{{$moeda->id}}">{{$moeda->nome}} ({{$moeda->sigla}})</option>
 						  	@endforeach
 
 						</select>
@@ -1148,11 +1143,9 @@
 
 
 
-						@if (isset($tipo) && $tipo == "editar")
-						<select class="" name="condicao" value="{{$anuncio->condicao}}" required>	
-						@else
-							<select class="" name="condicao" required>	
-						@endif
+						
+						<select class="" name="condicao" id="condicao" required>	
+						
 
 						  <option value="novo">Novo</option>
 
@@ -1177,11 +1170,9 @@
 
 
 
-						@if (isset($tipo) && $tipo == "editar")
-							<select class="" name="entrega" value="{{$anuncio->forma_de_entrega_id}}" required>	
-						@else
-							<select class="" name="entrega" required>	
-						@endif
+						
+						<select class="" name="entrega" id="entrega" required>	
+						
 
 						  @foreach($formasDeEntrega as $entrega)
 						  		<option value="{{$entrega->id}}">{{$entrega->nome}}</option>
@@ -1219,8 +1210,7 @@
 							<input type="checkbox" name="email"  >Email
 							<input type="checkbox" name="telefone">Telefone
 							<input type="checkbox" name="whatsapp">WhatsApp
-							<input type="checkbox" name="facebook">Facebook
-							<input type="checkbox" name="mensagem"">Mensagem
+							<input type="checkbox" name="facebook">Facebook							
 							@endif
 							<p class="small">Você pode atualizar suas informações de contato clicando aqui.</p>
 						</div>
@@ -1245,7 +1235,55 @@
 
 
 	</div>
+@if (isset($tipo) && $tipo == "editar")
+<script type="text/javascript">
+	function excluirFoto(id_foto){			
 
+			var url = "{{url('/')}}/imagem/destroy";
+
+				$.ajax({						
+			           type: "POST",
+			           url: url,
+			           data: "imagem_id="+id_foto+"&user_id={{Auth::user()->id}}&_token={{ csrf_token() }}", // serializes the form's elements.
+			           success: function(data)
+			           {
+			               alert(data); // show response from the php script.
+			               var limagem = "#imagem-"+id_foto;
+
+			               $(limagem).hide();			              
+			           }
+			    });
+
+	}
+	$(document).ready(function(){
+		var selectMoeda = '{{$anuncio->moeda_id}}';
+		var selectCondicao = '{{$anuncio->condicao}}';
+		var selectEntrega = '{{$anuncio->forma_de_entrega_id}}';		
+		$("#moeda").val(selectMoeda);
+		$("#condicao").val(selectCondicao);
+		$("#entrega").val(selectEntrega);
+
+		var estadoId = "{{$anuncio->cidade->estado_id}}"
+		var Obj = {"value": estadoId};
+		console.log(Obj);
+
+        loadCidades(Obj); 
+
+	});
+
+</script>
+@endif
+
+
+@if(null !== Auth::user())
+<script type="text/javascript">
+	var estadoId = "{{Auth::user()->city->estado_id}}"
+	var Obj = {"value": estadoId};
+	console.log(Obj);
+
+    loadCidades(Obj); 
+</script>             
+@endif      
 
 
 

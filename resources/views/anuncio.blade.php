@@ -190,17 +190,16 @@ var elem=$('#container ul');
 
 			<div class="select-box">
 
-				<div width="100%">
+				<div>
 					<form action="{{url('/')}}/anuncio/busca" method="GET">
 						
-					<div class="search" width="100%">
+					<div class="search">
 
-						<div id="custom-search-input" width="100%">
+						<div id="custom-search-input">
 
-						<div class="input-group" width="100%">
-							
+						<div class="input-group">							
 
-								<input type="text" class="form-control input-lg" name="keyword" placeholder="Buscar" width="100%" />
+								<input type="text" class="form-control input-lg" name="keyword" placeholder="Buscar"/>
 
 								<span class="input-group-btn">
 
@@ -246,92 +245,11 @@ var elem=$('#container ul');
 			</ol>
 
 			<div class="ads-grid">
-
-				<div class="side-bar col-md-3">	
-
-				<div class="featured-ads">
-
-					<h2 class="sear-head fer">Anúncios Relacionados</h2>
-
-					<div class="featured-ad">
-
-						<a href="single.html">
-
-							<div class="featured-ad-left">
-
-								<img src="{{ url('/') }}/images/f1.jpg" title="ad image" alt="" />
-
-							</div>
-
-							<div class="featured-ad-right">
-
-								<h4>Lorem Ipsum is simply dummy text of the printing industry</h4>
-
-								<p>$ 450</p>
-
-							</div>
-
-							<div class="clearfix"></div>
-
-						</a>
-
-					</div>
-
-					<div class="featured-ad">
-
-						<a href="single.html">
-
-							<div class="featured-ad-left">
-
-								<img src="{{ url('/') }}/images/f2.jpg" title="ad image" alt="" />
-
-							</div>
-
-							<div class="featured-ad-right">
-
-								<h4>Lorem Ipsum is simply dummy text of the printing industry</h4>
-
-								<p>$ 380</p>
-
-							</div>
-
-							<div class="clearfix"></div>
-
-						</a>
-
-					</div>
-
-					<div class="featured-ad">
-
-						<a href="single.html">
-
-							<div class="featured-ad-left">
-
-								<img src="{{ url('/') }}/images/f3.jpg" title="ad image" alt="" />
-
-							</div>
-
-							<div class="featured-ad-right">
-
-								<h4>Lorem Ipsum is simply dummy text of the printing industry</h4>
-
-								<p>$ 560</p>
-
-							</div>
-
-							<div class="clearfix"></div>
-
-						</a>
-
-					</div>
-
-					<div class="clearfix"></div>
+				
 
 				</div>
 
-				</div>
-
-				<div class="ads-display col-md-9">
+				<div class="ads-display col-md-12">
 
 					<div class="wrapper">					
 
@@ -421,7 +339,8 @@ var elem=$('#container ul');
 								</form>
 
 								<div class="clearfix"></div>
-
+							<div class="row" style="padding: 0 10px">								
+							
 							<ul class="list">
 
 								@forelse($anuncios as $anuncio)
@@ -431,9 +350,9 @@ var elem=$('#container ul');
 									<li>
 
 									@if($anuncio->imagens->count() > 0)
-										<img src="{{ url('/') }}/uploads/{{ $anuncio->imagens[0]->nome }}" title="" alt="" />
+										<img src="{{ url('/') }}/uploads/{{ $anuncio->imagens[0]->nome }}" title="" alt="" width="300px" height="200px" />
 									@else
-										<img src="{{ url('/') }}/images/m1.jpg" title="" alt="" />
+										<img src="{{ url('/') }}/images/m1.jpg" title="" alt="" width="300px" height="200px"/>
 									@endif
 
 									<section class="list-left">
@@ -469,6 +388,7 @@ var elem=$('#container ul');
 								
 
 							</ul>
+							</div>
 
 						</div>
 

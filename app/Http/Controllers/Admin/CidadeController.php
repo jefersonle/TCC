@@ -16,14 +16,15 @@ class CidadeController extends Controller
     public function __construct()
 
     {
-        $this->middleware('auth');        
+        $this->middleware('auth');     
+        $this->middleware('isAdmin');     
 
     }
 
     public function getIndex()
 
     {
-        $cidades = Cidade::orderBy('nome', 'asc')->get();
+        $cidades = Cidade::orderBy('nome', 'asc')->paginate("10");
 
         $data['cidades'] = $cidades;
 
@@ -69,7 +70,7 @@ class CidadeController extends Controller
      */
     public function show($id)
     {
-        //
+       
     }
 
     /**
@@ -78,9 +79,12 @@ class CidadeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function getEdit($id)
     {
-        //
+        $data['cidade'] = Cidade::find($id);
+        $data['edit'] = true;
+        $data['estados'] = Estado::all();
+        return view('admin.formcidade', $data);
     }
 
     /**
@@ -90,9 +94,16 @@ class CidadeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function postUpdate(CidadeRequest $request, $id)
     {
-        //
+        $cidade = Cidade::find($id);
+        $cidade->nome = $request->nome;
+        $cidade->ddd = $request->ddd;
+        $cidade->estado_id = $request->estado_id;
+        $cidade->save();
+
+        session(['msg' => 'Cidade editada!']);
+        return redirect('/admin/cidades');
     }
 
     /**

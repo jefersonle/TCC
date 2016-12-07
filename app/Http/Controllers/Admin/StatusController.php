@@ -15,7 +15,8 @@ class StatusController extends Controller
     public function __construct()
 
     {
-        $this->middleware('auth');        
+        $this->middleware('auth'); 
+        $this->middleware('isAdmin');         
 
     }
     /**
@@ -26,7 +27,7 @@ class StatusController extends Controller
     public function getIndex()
     {
 
-        $statuslist = Status::orderBy('updated_at', 'desc')->get();
+        $statuslist = Status::orderBy('updated_at', 'desc')->paginate("10");
 
         $data['statuslist'] = $statuslist;
 
@@ -78,9 +79,11 @@ class StatusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function getEdit($id)
     {
-        //
+        $data['status'] = Status::find($id);
+        $data['edit'] = true;
+        return view('admin.formstatus', $data);
     }
 
     /**
@@ -90,9 +93,13 @@ class StatusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function postUpdate(NomeObrigatorioRequest $request, $id)
     {
-        //
+        $status = Status::find($id);
+        $status->nome = $request->nome;
+        $status->save();
+        session(['msg' => 'Status editado!']);
+        return redirect('/admin/statuslist');
     }
 
     /**

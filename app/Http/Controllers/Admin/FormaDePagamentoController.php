@@ -14,7 +14,8 @@ class FormaDePagamentoController extends Controller
      public function __construct()
 
     {
-        $this->middleware('auth');        
+        $this->middleware('auth'); 
+        $this->middleware('isAdmin');         
 
     }
     /**
@@ -25,7 +26,7 @@ class FormaDePagamentoController extends Controller
     public function getIndex()
     {
 
-        $formasdepagamento = FormaDePagamento::orderBy('updated_at', 'desc')->get();
+        $formasdepagamento = FormaDePagamento::orderBy('updated_at', 'desc')->paginate("10");
 
         $data['formasdepagamento'] = $formasdepagamento;
 
@@ -75,9 +76,11 @@ class FormaDePagamentoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function getEdit($id)
     {
-        //
+        $data['pagamento'] = FormaDePagamento::find($id);
+        $data['edit'] = true;
+        return view('admin.formpagamento', $data);
     }
 
     /**
@@ -87,9 +90,13 @@ class FormaDePagamentoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function postUpdate(NomeObrigatorioRequest $request, $id)
     {
-        //
+        $pagamento = FormaDePagamento::find($id);
+        $pagamento->nome = $request->nome;
+        $pagamento->save();
+        session(['msg' => 'Forma de pagamento editada!']);
+        return redirect('/admin/pagamento');
     }
 
     /**

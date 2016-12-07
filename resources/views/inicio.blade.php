@@ -147,7 +147,11 @@
                                 @endif
                                     <div class="col-md-3 biseller-column">
                                         <a href="{{ url('/anuncio/show') }}/{{ $anuncio->id }}">
-                                            <img src="images/p1.jpg"/>
+                                            @if($anuncio->imagens->count() != 0)
+                                                <img src="{{url('/uploads')}}/{{$anuncio->imagens[0]->nome}}" width="300px" height="300px" />
+                                            @else
+                                                <img src="images/p1.jpg"/>
+                                            @endif
                                             <span class="price">R&#36; {{ $anuncio->valor }}</span>
                                         </a> 
                                         <div class="ad-info">

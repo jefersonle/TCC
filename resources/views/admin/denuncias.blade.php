@@ -120,9 +120,9 @@
 													<tr>
 														<td>{{$denuncia->anuncio->titulo}}</td>
 														<td>{{$denuncia->created_at}}</td>	
-														<td><a href="{{url('/anuncio/show')}}/{{$denuncia->anuncio->id}}"><span class="label label-success">Ver Anúncio</span></a>
-														<a href="{{url('/anuncio/destroy')}}/{{$denuncia->anuncio->id}}""><span class="label label-warning">Excluir Anúncio</span></a>
-														<a href="{{url('/admin/denuncias/destroy')}}/{{$denuncia->id}}""><span class="label label-danger">Excluir Denúncia</span></a>
+														<td><a href="{{url('/anuncio/show')}}/{{$denuncia->anuncio->id}}" target="_blank"><span class="label label-success">Ver Anúncio</span></a>
+														<a href="{{url('/anuncio/destroy')}}/{{$denuncia->anuncio->id}}"  onclick="if(!confirm('Tem certeza que deseja excluir este anúncio\n\n Isto excluirá permantentemente o anúncio, juntamente com suas imagens e comentários!')) return false;"><span class="label label-warning">Excluir Anúncio</span></a>
+														<a href="{{url('/admin/denuncias/destroy')}}/{{$denuncia->id}}"  onclick="if(!confirm('Tem certeza que deseja excluir esta denúncia?')) return false;"><span class="label label-danger">Excluir Denúncia</span></a>
 														</td>
 													</tr>
 												@empty
@@ -131,7 +131,9 @@
 													</tr>
 												@endforelse
 												</tbody>
-											  </table> 
+											  </table>
+
+											  {!! $denuncias->render() !!} 
 											                   
 										</div>										
 									   <div class="clearfix"> </div>  

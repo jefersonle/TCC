@@ -49,7 +49,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     function loadCidades(id_estado){
                 $("#selectCidadesForm").val("0");
                 @if(null !== Auth::user())
-                  var user_cidade = '{{Auth::user()->cidade_id}}';
+                  @if(isset($tipo) && $tipo == "editar")
+                      var user_cidade = 0;
+                  @else
+                      var user_cidade = '{{Auth::user()->cidade_id}}';
+                  @endif
+                  
                 @else
                   var user_cidade = 0;
                 @endif
@@ -85,11 +90,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 });
 
                 
-        }   
-    @if (isset($tipo) && isset($anuncio) && $tipo == "editar")    
-        var Obj = {"value":"{{$anuncio->cidade->estado_id}}"};
-        loadCidades(Obj); 
-    @endif
+        }
 
     function loadAnuncios(id_cidade){
                 var page = "{{ url('/anuncio/cidade') }}/" + id_cidade.value;
@@ -97,6 +98,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         }   
   $(document).ready(function () {   
     var estados = [];    
+                @if(null !== Auth::user())
+                  var user_estado = '{{Auth::user()->city->estado_id}}';
+                @else
+                  var user_estado = 0;
+                @endif
 
         $.ajax({
             url: '{{ url('/estado') }}',
@@ -118,8 +124,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
                     $("#selectEstadosForm").val({{$anuncio->cidade->estado_id}});
                                                          
+                    @else
 
-                 @endif              
+                    $("#selectEstadosForm").val(user_estado);
+                 @endif
+
             }           
         });
       
@@ -130,36 +139,41 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <body>
     <div class="header">
         <div class="container">
-            <div class="logo">
+            <div class="logo col-md-3 col-sm-12 col-xs-12">
                 <a href="{{ url('/') }}"><span>Agro</span>Anúncios</a>
             </div>
-            <div class="header-right">
-            @if (Auth::guest())
-                        <a class="account" href="{{ url('/dashboard/anuncio') }}">Minha Conta</a>
-              @else
-                        <a class="account" href="{{ url('/dashboard/anuncio') }}">{{ Auth::user()->name }}</a>  
-                        <a class="account" href="{{ url('/logout') }}">Sair</a>                         
-                @endif
-                
-            
-            <!-- <span class="active uls-trigger">Idioma</span> -->
-    <!-- Large modal -->
-            <div class="selectregion">
-                <div id="project-label">                    
-                    <form class="form-horizontal" role="form" id="formcidaderegiao">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="input-group">                                  
-                                 <input class="form-control" placeholder="Digite o nome da cidade aqui..." id="project">
-                                  <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
-                                  </span>
-                                </div><!-- /input-group -->
-                              </div><!-- /.col-lg-6 -->
-                        </div>                        
-                    </form>                
-                </div> 
-            </div>
+            <div class="header-right col-md-9 col-sm-12 col-xs-12"">
+                <!-- <span class="active uls-trigger">Idioma</span> -->
+        <!-- Large modal -->
+               
+                <div class="col-md-5 col-sm-12 col-xs-12 pull-right">
+                   <form class="form-horizontal busca" role="form" id="formcidaderegiao">
+                            <div class="row">
+                                <div class="form-group col-lg-12">
+                                    <div class="input-group">                                  
+                                     <input class="form-control" placeholder="Buscar por cidade ou região..." id="project">
+                                      <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                                      </span>
+                                    </div><!-- /input-group -->
+                                  </div><!-- /.col-lg-6 -->
+                            </div>                        
+                        </form>  
+                </div>  
+
+                <div class="col-md-7 col-sm-12 col-xs-12 pull-right">
+                   @if (Auth::guest())
+                            <a class="account pull-right text-center" href="{{ url('/dashboard/anuncio') }}">Acessar Minha Conta</a>
+                  @else
+                            
+                            <a class="account pull-right text-center col-sm-4 col-xs-12" href="{{ url('/logout') }}">Sair</a>
+                            <a class="account pull-right text-center col-sm-4 col-xs-12" style="border-right:1px solid #DDD;" href="{{ url('/dashboard/anuncio') }}">Meu Painel</a>  
+                            @if(Auth::user()->id == 1)
+                                <a class="account pull-right text-center col-sm-4 col-xs-12" href="{{ url('/admin/anuncios') }}" style="border-right: 1px solid #DDD;">Gerenciar</a>  
+                            @endif
+                                                     
+                    @endif
+                </div>
         </div>
         </div>
     </div>

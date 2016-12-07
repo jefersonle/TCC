@@ -123,7 +123,7 @@
 														<td>{{$entrega->id}}</td>
 														<td>{{$entrega->nome}}</td>	
 														<td><a href="{{url('/admin/entrega/edit')}}/{{$entrega->id}}"><span class="label label-success">Editar</span></a>
-														<a href="{{url('/admin/entrega/destroy')}}/{{$entrega->id}}"><span class="label label-danger">Excluir</span></a>
+														<a href="{{url('/admin/entrega/destroy')}}/{{$entrega->id}}"><span class="label label-danger" onclick="if(!confirm('Tem certeza que deseja excluir esta forma de entrega?')) return false;">Excluir</span></a>
 														</td>
 													</tr>	
 												@empty
@@ -133,6 +133,7 @@
 												@endforelse
 												</tbody>
 											  </table> 
+											  {!! $formasdeentrega->render() !!}
 											                   
 										</div>										
 									   <div class="clearfix"> </div>  

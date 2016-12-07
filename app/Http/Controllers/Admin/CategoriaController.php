@@ -16,13 +16,13 @@ class CategoriaController extends Controller
 
     {
         $this->middleware('auth');        
-
+        $this->middleware('isAdmin');  
     }
 
     public function getIndex()
 
     {
-        $categorias = Categoria::orderBy('nome', 'asc')->get();
+        $categorias = Categoria::orderBy('nome', 'asc')->paginate("10");
 
 
         $data['categorias'] = $categorias;
@@ -82,9 +82,12 @@ class CategoriaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function getEdit($id)
     {
-        //
+        $data['categoriatoedit'] = Categoria::find($id);
+        $data['edit'] = true;
+        $data['categorias'] = Categoria::all();
+        return view('admin.formcategoria', $data);
     }
 
     /**
@@ -94,9 +97,20 @@ class CategoriaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function postUpdate(NomeObrigatorioRequest $request, $id)
     {
-        //
+        $categoria = Categoria::find($id);
+        $categoria->nome = $request->nome;
+        if(isset($request->categoria_id) && $request->categoria_id !=""){
+            if($categoriaPai = Categoria::find($request->categoria_id)){
+                $categoria->categoria_id = $request->categoria_id;
+            }
+        }
+        
+        $categoria->save();
+
+        session(['msg' => 'Categoria editada!']);
+        return redirect('/admin/categorias');
     }
 
     /**

@@ -108,12 +108,23 @@
 								@foreach ($errors->all() as $message) 
 									<div class="alert">{{$message}}</div>
 								@endforeach	
+
+								@if(isset($edit) && $edit)
+								<form class="form-horizontal" method="POST" action="{{url('/admin/estados/update')}}/{{$estado->id}}">
+								@else
 								<form class="form-horizontal" method="POST" action="{{url('/admin/estados/store')}}">
+								@endif
+
+								
 								{{ csrf_field() }}
 										<div class="form-group">
 											<label for="focusedinput" class="col-sm-2 control-label">Nome</label>
 											<div class="col-sm-8">
-												<input type="text" class="form-control1" name="nome" id="focusedinput" placeholder="Digite o nome do estado...">
+												<input type="text" class="form-control1" name="nome" id="focusedinput" placeholder="Digite o nome do estado..."
+												@if(isset($edit) && $edit)
+													value="{{$estado->nome}}"
+												@endif
+												>
 											</div>
 											<div class="col-sm-2 jlkdfj1">
 												<p class="help-block">...!</p>
@@ -122,7 +133,11 @@
 										<div class="form-group">
 											<label for="focusedinput" class="col-sm-2 control-label">UF</label>
 											<div class="col-sm-8">
-												<input type="text" class="form-control1" name="uf" id="focusedinput" placeholder="Digite a sigla UF do estado...">
+												<input type="text" class="form-control1" name="uf" id="focusedinput" placeholder="Digite a sigla UF do estado..."
+												@if(isset($edit) && $edit)
+													value="{{$estado->uf}}"
+												@endif
+												>
 											</div>
 											<div class="col-sm-2 jlkdfj1">
 												<p class="help-block">...!</p>
@@ -133,6 +148,13 @@
 												<input type="submit" class="btn btn-block" value="Salvar Alterações">
 											</div>											
 										</div>
+										@if(isset($edit) && $edit)
+										<div class="form-group">						
+											<div class="col-sm-12">
+												<a href="{{url('/admin/estados')}}" class="btn btn-block">Cancelar</a>
+											</div>											
+										</div>
+										@endif
 									</form>
 								<div class="clearfix"></div>
 							</div>

@@ -124,8 +124,8 @@
 														<td>{{$comentario->user->name}}</td>
 														<td>{{$comentario->comentario}}</td>
 														<td>{{$comentario->updated_at}}</td>
-														<td><a href="{{url('/anuncio/show')}}/{{$comentario->anuncio->id}}"><span class="label label-primary">Visualizar</span></a>
-														<a href="{{url('/admin/comentarios/destroy')}}/{{$comentario->id}}"><span class="label label-danger">Remover</span></a></td>
+														<td><a href="{{url('/anuncio/show')}}/{{$comentario->anuncio->id}}" target="_blank"><span class="label label-primary">Visualizar</span></a>
+														<a href="{{url('/admin/comentarios/destroy')}}/{{$comentario->id}}"><span class="label label-danger"  onclick="if(!confirm('Tem certeza que deseja excluir este comentário?')) return false;">Excluir</span></a></td>
 													</tr>
 													@empty
 														<tr>
@@ -137,6 +137,7 @@
 													
 												</tbody>
 											  </table> 
+											  {!! $comentarios->render() !!}
 
 										</div>										
 									   <div class="clearfix"> </div>  

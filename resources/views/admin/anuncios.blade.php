@@ -123,7 +123,7 @@
 									   <div>
 											<div id="container">
 											<div class="view-controls-list" id="viewcontrols">
-												<h3><a href="{{url('/anuncio/create')}}"><span class="label label-primary">Criar Novo Anúncio</span></a></h3>
+												<h3><a href="{{url('/anuncio/create')}}" target="_blank"><span class="label label-primary">Criar Novo Anúncio</span></a></h3>
 											</div>
 											<div class="sort">
 											   <div class="sort-by">
@@ -142,11 +142,16 @@
 												{{session()->forget('msg')}}
 											@endif
 										<ul class="list">
-												@forelse($anuncios as $anuncio)									
+
+												@forelse($anuncios as $anuncio)								
 													<li>
+														@if($anuncio->imagens->count() !=0)
 														<img src="{{ url('/') }}/uploads/{{$anuncio->imagens[0]->nome}}" title="" alt="" />
+														@else
+														<img src="{{ url('/') }}/images/p1.jpg" title="" alt="" />
+														@endif
 														<section class="list-left">
-														<a href="{{ url('/anuncio/show') }}/{{$anuncio->id}}"><h5 class="title">{{$anuncio->titulo}}</h5></a>
+														<a href="{{ url('/anuncio/show') }}/{{$anuncio->id}}" target="_blank"><h5 class="title">{{$anuncio->titulo}}</h5></a>
 														<span class="adprice">{{$anuncio->valor}}</span>
 														<p class="catpath">{{$anuncio->categoria->nome}}</p>
 														</section>
@@ -154,7 +159,7 @@
 														<span class="date">{{$anuncio->updated_at}}</span>
 														<span class="cityname">{{$anuncio->cidade->nome}}</span>
 														<a href="{{ url('/anuncio/edit') }}/{{$anuncio->id}}"><span class="label label-success">Editar</span></a>
-														<a href="{{ url('/admin/anuncios/destroy') }}/{{$anuncio->id}}"><span class="label label-danger">Excluir</span></a>
+														<a href="{{ url('/admin/anuncios/destroy') }}/{{$anuncio->id}}"><span class="label label-danger" onclick="if(!confirm('Tem certeza que deseja excluir este anúncio\n\n Isto excluirá permantentemente o anúncio, juntamente com suas imagens e comentários!')) return false;">Excluir</span></a>
 														</section>
 														<div class="clearfix"></div>
 													</li>
@@ -168,18 +173,8 @@
 										</div>
 									</div>							
 									
-									<ul class="pagination pagination-sm">
-										<li><a href="#">Anterior</a></li>
-										<li><a href="#">1</a></li>
-										<li><a href="#">2</a></li>
-										<li><a href="#">3</a></li>
-										<li><a href="#">4</a></li>
-										<li><a href="#">5</a></li>
-										<li><a href="#">6</a></li>
-										<li><a href="#">7</a></li>
-										<li><a href="#">8</a></li>
-										<li><a href="#">Próxima</a></li>
-									</ul>
+									{!! $anuncios->render() !!}
+
 								  </div>
 								</div>
 							</div>

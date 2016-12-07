@@ -108,12 +108,22 @@
 								@foreach ($errors->all() as $message) 
 									<div class="alert">{{$message}}</div>
 								@endforeach
+								
+								@if(isset($edit) && $edit)
+								<form class="form-horizontal" method="POST" action="{{url('/admin/categorias/update')}}/{{$categoriatoedit->id}}">
+								@else
 								<form class="form-horizontal" method="POST" action="{{url('/admin/categorias/store')}}">
+								@endif
+
 								{{ csrf_field() }}
 										<div class="form-group">
 											<label for="focusedinput" class="col-sm-2 control-label">Nome</label>
 											<div class="col-sm-8">
-												<input type="text" name="nome" class="form-control1" id="focusedinput" placeholder="Digite o nome da categoria...">
+												<input type="text" name="nome" class="form-control1" id="focusedinput" placeholder="Digite o nome da categoria..."
+												@if(isset($edit) && $edit)
+													value="{{$categoriatoedit->nome}}"
+												@endif
+												>
 											</div>
 											<div class="col-sm-2 jlkdfj1">
 												<p class="help-block">...!</p>
@@ -126,7 +136,13 @@
 											<div class="col-sm-8"><select name="categoria_id" id="selector1" class="form-control1">
 												<option value="">Selecione uma categoria pai...</option>
 												@forelse($categorias as $categoria)
-												<option value="{{$categoria->id}}">{{$categoria->nome}}</option>
+												<option value="{{$categoria->id}}"
+												@if(isset($edit) && $edit)
+													@if($categoriatoedit->categoria_id == $categoria->id)
+														selected="selected"
+													@endif
+												@endif
+												>{{$categoria->nome}}</option>
 												@empty
 												<option>Nenhuma categoria encontrada...</option>
 												@endforelse												
@@ -137,6 +153,13 @@
 												<input type="submit" class="btn btn-block" value="Salvar Alterações">
 											</div>											
 										</div>
+										@if(isset($edit) && $edit)
+										<div class="form-group">											
+											<div class="col-sm-12">
+												<a href="{{url('/admin/categorias')}}" class="btn btn-block">Cancelar</a>
+											</div>											
+										</div>
+										@endif
 									</form>
 								<div class="clearfix"></div>
 							</div>

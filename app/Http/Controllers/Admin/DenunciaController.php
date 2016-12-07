@@ -13,7 +13,8 @@ class DenunciaController extends Controller
     public function __construct()
 
     {
-        $this->middleware('auth');        
+        $this->middleware('auth');  
+        $this->middleware('isAdmin');        
 
     }
 
@@ -21,7 +22,7 @@ class DenunciaController extends Controller
 
     {
 
-      $denuncias = Denuncia::orderBy('updated_at', 'desc')->get();
+      $denuncias = Denuncia::orderBy('updated_at', 'desc')->paginate("10");
 
         $data['denuncias'] = $denuncias;
 

@@ -108,12 +108,23 @@
 								@foreach ($errors->all() as $message) 
 									<div class="alert">{{$message}}</div>
 								@endforeach
+
+								@if(isset($edit) && $edit)
+								<form class="form-horizontal" method="POST" action="{{url('/admin/moedas/update')}}/{{$moeda->id}}">
+								@else
 								<form class="form-horizontal" method="POST" action="{{url('/admin/moedas/store')}}">
+								@endif
+
+								
 								{{ csrf_field() }}
 										<div class="form-group">
 											<label for="focusedinput" class="col-sm-2 control-label">Nome</label>
 											<div class="col-sm-8">
-												<input type="text" class="form-control1" name="nome" id="focusedinput" placeholder="Digite o nome da moeda...">
+												<input type="text" class="form-control1" name="nome" id="focusedinput" placeholder="Digite o nome da moeda..."
+												@if(isset($edit) && $edit)
+													value="{{$moeda->nome}}"
+												@endif
+												>
 											</div>
 											<div class="col-sm-2 jlkdfj1">
 												<p class="help-block">...!</p>
@@ -122,7 +133,24 @@
 										<div class="form-group">
 											<label for="focusedinput" class="col-sm-2 control-label">Sigla</label>
 											<div class="col-sm-8">
-												<input type="text" name="sigla" class="form-control1" id="focusedinput" placeholder="Digite a sigla da moeda...">
+												<input type="text" name="sigla" class="form-control1" id="focusedinput" placeholder="Digite a sigla da moeda..."
+												@if(isset($edit) && $edit)
+													value="{{$moeda->sigla}}"
+												@endif
+												>
+											</div>
+											<div class="col-sm-2 jlkdfj1">
+												<p class="help-block">...!</p>
+											</div>
+										</div>		
+										<div class="form-group">
+											<label for="focusedinput" class="col-sm-2 control-label">Cifra</label>
+											<div class="col-sm-8">
+												<input type="text" name="cifra" class="form-control1" id="focusedinput" placeholder="Digite a cifra da moeda..."
+												@if(isset($edit) && $edit)
+													value="{{$moeda->cifra}}"
+												@endif
+												>
 											</div>
 											<div class="col-sm-2 jlkdfj1">
 												<p class="help-block">...!</p>
@@ -133,6 +161,13 @@
 												<input type="submit" class="btn btn-block" value="Salvar Alterações">
 											</div>											
 										</div>
+										@if(isset($edit) && $edit)
+										<div class="form-group">											
+											<div class="col-sm-12">
+												<a href="{{url('/admin/moedas')}}" class="btn btn-block">Cancelar</a>
+											</div>											
+										</div>
+										@endif
 									</form>
 								<div class="clearfix"></div>
 							</div>

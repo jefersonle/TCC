@@ -15,7 +15,8 @@ class EstadoController extends Controller
     public function __construct()
 
     {
-        $this->middleware('auth');        
+        $this->middleware('auth');  
+        $this->middleware('isAdmin');        
 
     }
 
@@ -23,7 +24,7 @@ class EstadoController extends Controller
 
     {
 
-       $estados = Estado::orderBy('nome', 'asc')->get();
+       $estados = Estado::orderBy('nome', 'asc')->paginate("10");
 
         $data['estados'] = $estados;
 
@@ -78,9 +79,11 @@ class EstadoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function getEdit($id)
     {
-        //
+        $data['estado'] = Estado::find($id);
+        $data['edit'] = true;
+        return view('admin.formestado', $data);
     }
 
     /**
@@ -90,9 +93,15 @@ class EstadoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function postUpdate(EstadoRequest $request, $id)
     {
-        //
+        $estado = Estado::find($id);
+        $estado->nome = $request->nome;
+        $estado->uf = $request->uf;
+        $estado->save();
+
+        session(['msg' => 'Estado editado!']);
+        return redirect('/admin/estados');
     }
 
     /**

@@ -20,7 +20,8 @@ class AnuncioController extends Controller
     public function __construct()
 
     {
-        $this->middleware('auth');        
+        $this->middleware('auth'); 
+        $this->middleware('isAdmin');       
 
     }
     /**
@@ -31,7 +32,7 @@ class AnuncioController extends Controller
     public function getIndex()
     {
 
-        $anuncios = Anuncio::orderBy('updated_at', 'desc')->get();
+        $anuncios = Anuncio::orderBy('updated_at', 'desc')->paginate("10");
 
         $data['anuncios'] = $anuncios;
 

@@ -123,7 +123,7 @@
 														<td>{{$pagamento->id}}</td>
 														<td>{{$pagamento->nome}}</td>	
 														<td><a href="{{url('/admin/pagamento/edit')}}/{{$pagamento->id}}"><span class="label label-success">Editar</span></a>
-														<a href="{{url('/admin/pagamento/destroy')}}/{{$pagamento->id}}"><span class="label label-danger">Excluir</span></a>
+														<a href="{{url('/admin/pagamento/destroy')}}/{{$pagamento->id}}"><span class="label label-danger" onclick="if(!confirm('Tem certeza que deseja excluir esta forma de pagamento?')) return false;">Excluir</span></a>
 														</td>
 													</tr>	
 												@empty
@@ -133,6 +133,8 @@
 												@endforelse
 												</tbody>
 											  </table> 
+
+											  {!! $formasdepagamento->render() !!}
 											                   
 										</div>										
 									   <div class="clearfix"> </div>  

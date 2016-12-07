@@ -312,93 +312,94 @@
 
 					</script>
 
-					<!-- //FlexSlider -->
-					@if (Auth::user())
+					<!-- //FlexSlider -->					
 
 					<div class="product-details">						
-
-						
-
-						<p><button id="gostei">Gostei</button><button id="naogostei">Não Gostei</button><button id="denunciar">Denunciar</button></p>
-
-					
-
-					</div>
-					@endif
-
-					<div class="product-details">						
-
-						<h4><strong>Descrição</strong> :</h4>
+						<hr>
+						<h3>Descrição:</h3>
 
 						<p>{{ $anuncio->descricao }}</p>
 
 					
 
 					</div>
-
+					<hr>
 					<div class="product-details">						
 
 						<div>
 
-							<p>Envio:</p>
-
-							<h4>{{$anuncio->formadeentrega->nome}}</h4>
-
+							<p style="display: inline;">Forma de Entrega:  <h4 style="display: inline;">{{$anuncio->formadeentrega->nome}}</h4></p>
 							<div class="clearfix"></div>
 
 						</div>
 						<div>
 
-							<p>Formas de Pagamento</p>
-
-							<h4>
+							<p style="display: inline;">Formas de Pagamento:  <h4 style="display: inline;">
 							@forelse($anuncio->pagamentos as $pagamento)
 								{{$pagamento->nome}},
 							@empty
 								Nenhuma Forma de Pagamento Informada
 							@endforelse
-							</h4>
+							</h4></p>
+
+							
 
 							<div class="clearfix"></div>
 
 						</div>
+						
+						<div class="col-md-12 text-center">
+						<hr>
+						<h4>
+							<a href="{{url('/')}}/anuncio/usuario/{{ $anuncio->user_id}}">Clique aqui para ver todos os anúncios deste vendedor!</a>
+						</h4>
+						<hr>
+						</div>
 
-						<p><a href="{{url('/')}}/anuncio/usuario/{{ $anuncio->user_id}}">Clique aqui para ver todos os anúncios deste vendedor!</a></p>
-
-					</div>
-					
+					</div>		
 
 
 
 
 					@if (Auth::user())
-					<div class="product-details">						
+					<div class="product-details">	
+											
 
-						<h4><strong>Deixe seu comentário</strong> :</h4>
+						
 
-						<form method="POST" id="comentarioForm">	
-						{{ csrf_field() }}					
-							<div>
-								<textarea class="mess" placeholder="" name="comentario"></textarea>
-								<input type="hidden" name="user_id" value="{{Auth::user()->id}}">	
-								<input type="hidden" name="anuncio_id" value="{{$anuncio->id}}">	
-								<input type="button" id="comentarioSave" value="Publicar">	
-							</div>
+						<div class="col-md-12">
+							<form method="POST" id="comentarioForm">	
+							{{ csrf_field() }}					
+								<div class="form-group">
+									<label><h3>Deixe seu comentário:</h3></label>
+									<textarea class="form-control" placeholder="" name="comentario"></textarea>
+								</div>
+								<div class="form-group">
+									<input type="hidden" name="user_id" value="{{Auth::user()->id}}">	
+									<input type="hidden" name="anuncio_id" value="{{$anuncio->id}}">	
+									<input type="button" id="comentarioSave" class="btn btn-default btn-block" value="Publicar">	
+								</div>
+								
 						</form>
+						</div>
+						
 
 					
 
 					</div>
 					@endif
-					<div class="product-details">						
+					<div class="product-details">	
 
-						<h4><strong>Comentários</strong> :</h4>
+						<div class="col-md-12">
+						<hr>
+							<h3>Comentários:</h3>
 
-						@forelse($anuncio->comentarios as $comentario)
-							<p><strog>{{$comentario->user->name}}: </strong>{{$comentario->comentario}}</p>
-						@empty
-
-						@endforelse
+							@forelse($anuncio->comentarios as $comentario)
+								<p><strog>{{$comentario->user->name}}: </strong>{{$comentario->comentario}}</p>
+							@empty
+								<p>Nenhum comentário encontrado...</p>
+							@endforelse
+						</div>
 
 					
 
@@ -414,7 +415,17 @@
 
 							<p class="p-price">Preço</p>
 
-							<h3 class="rate">R$ {{ $anuncio->valor }}</h3>
+							<h3 class="rate">{{$anuncio->moeda->cifra}} {{ $anuncio->valor }}</h3>
+
+							<div class="clearfix"></div>
+
+						</div>
+
+						<div class="condition">
+
+							<p class="p-price">Moeda</p>
+
+							<h4>{{$anuncio->moeda->nome}}({{$anuncio->moeda->sigla}})</h4>
 
 							<div class="clearfix"></div>
 
@@ -440,7 +451,7 @@
 
 						</div>
 
-					</div>
+					</div>					
 
 					<div class="interested text-center">
 
@@ -458,34 +469,50 @@
 						<p><i class="glyphicon glyphicon-user"></i>Facebook: {{ $anuncio->user->contato_facebook }}</p>
 						@endif
 						@if($anuncio->contato_email == 1)						
-						<p><i class="glyphicon glyphicon-envelope"></i> Email: {{ $anuncio->user->contato_email }}</p>
-						@endif
-
-						@if (Auth::user())
-							@if($anuncio->contato_mensagem == 1)						
-							<p><i class="glyphicon glyphicon-share-alt"></i>Enviar Mensagem</p>
-							@endif						
-							
-							
-							<div class="product-details">						
-
-								<h4><strong>Envie uma mensagem</strong> :</h4>
-
-								<form method="POST" id="mensagemForm">	
-								{{ csrf_field() }}					
-									<div>
-										<textarea class="mess" placeholder="" name="mensagem"></textarea>
-										<input type="hidden" name="user_id" value="{{Auth::user()->id}}">
-										<input type="hidden" name="vendedor_id" value="{{$anuncio->user->id}}">
-										<input type="button" id="mensagemSave" value="Enviar">	
-									</div>
-								</form>
-
-						
-
-							</div>
-						@endif
+						<p><i class="glyphicon glyphicon-envelope"></i> Email: {{ $anuncio->user->email }}</p>
+						@endif						
 					</div>
+					<div class="clearfix"></div>
+					@if (Auth::user())
+							@if($anuncio->contato_mensagem == 1)	
+								<div class="interested text-center" style="background-color: #F4F5F6; padding: 20px 20px;">	
+									<div class="row">
+										<div class="col-md-12">								
+
+											<form method="POST" id="mensagemForm">	
+											{{ csrf_field() }}					
+												<div class="form-group">
+												<label><h4><i class="glyphicon glyphicon-share-alt"></i>Enviar Mensagem Para o Vendedor: </h4></label>
+													<textarea class="form-control" placeholder="" name="mensagem"></textarea>
+												</div>
+												<div class="form-group">
+													<input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+													<input type="hidden" name="vendedor_id" value="{{$anuncio->user->id}}">
+													<input type="button" id="mensagemSave" class="btn btn-default btn-block" value="Enviar">	
+												</div>
+												<hr>
+											</form>						
+
+										</div>
+									</div>
+								</div>
+
+							@endif
+						@endif		
+										
+
+					@if (Auth::user())
+
+					<div class="interested text-center" style="background-color: #F4F5F6; padding: 15px">						
+						<p style="margin-top: 0;">Ajude-nos com sua opinião:</p>
+						<div class="btn-group" role="group" aria-label="...">						
+						  <button class="btn btn-success" id="gostei"><span class="glyphicon glyphicon-thumbs-up"></span> Gostei</button>					  
+						  <button class="btn btn-danger" id="denunciar"> <span class="glyphicon glyphicon-thumbs-down"></span>Denunciar</button>
+						  <button class="btn btn-success" id="naogostei"><span class="glyphicon glyphicon-thumbs-down"></span> Não Gostei</button>
+						</div>
+
+					</div>
+					@endif
 
 						<!-- <div class="tips">
 

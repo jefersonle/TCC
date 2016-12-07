@@ -139,6 +139,7 @@
 													
 												</tbody>
 											  </table> 
+											  {!! $cidades->render() !!}
 											                   
 										</div>										
 									   <div class="clearfix"> </div>  

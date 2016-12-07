@@ -46,6 +46,7 @@ ul{
 label{
 	margin:0;
 }
+
 .banner {
 	background:url('../images/banner.jpg') no-repeat 0px 0px;
 	background-size:cover;
@@ -227,6 +228,11 @@ a.account {
 a.account:hover {
 	background-color: #f3c500;
 }
+
+.busca {
+    margin-top: 20px;
+}
+
 span.active.uls-trigger {
     float: left;
     cursor: pointer;
@@ -2294,7 +2300,7 @@ h3.rate {
     -ms-border-radius: 0px;
     -o-border-radius: 0px;
     background-color: #fff;
-    width: 80%;
+    width: 100%;
     color: #000;
 }
 
@@ -3474,7 +3480,7 @@ label {
 		width: 85%;
 	}
 	#custom-search-input {
-		width: 95%;
+		width: 100%;
 	}
 	.btn-group.bootstrap-select.show-tick button {
 		width: 100%;
@@ -3956,7 +3962,7 @@ label {
 		width: 100%;
 	}	
 	#custom-search-input {
-		width: 48.5%;
+		width: 100%;
 	}
 	.sitemap-region-grid {
 		width: 50%;
@@ -4237,8 +4243,11 @@ label {
 	.featured-ad:nth-child(3){
 		display:none;
 	}
-	.ads-list select,#custom-search-input {
+	.ads-list select {
 		width: 69.5%;
+	}
+	#custom-search-input {
+		width: 100%;
 	}
 	.search-hotel input[type="text"] {
 		width: 86%;
@@ -4477,8 +4486,11 @@ label {
 	.category {
 		padding: 20px 15px;
 	}
-	.ads-list select, #custom-search-input {
+	.ads-list select {
 		width: 84.5%;
+	}
+	#custom-search-input {
+		width: 100%;
 	}
 	.featured-ad {
 		width: 75%;
@@ -4549,8 +4561,11 @@ label {
 		width: 80%;
 		margin: 2% 10%;
 	}
-	.ads-list select, #custom-search-input {
+	.ads-list select {
 		width: 95.5%;
+	}
+	#custom-search-input {
+		width: 100%;
 	}
 	.breadcrumb {
 		padding: 8px 10px;

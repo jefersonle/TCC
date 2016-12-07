@@ -16,6 +16,7 @@ class CreateMoedasTable extends Migration
             $table->increments('id');
             $table->string('nome');
             $table->string('sigla');
+            $table->string('cifra');
             $table->timestamps();
         });
     }

@@ -92,6 +92,8 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::controller('mensagem', 'MensagemController');
 
+    Route::controller('imagem', 'ImagemController');
+
     Route::controller('likes', 'LikesController');
 
     

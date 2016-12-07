@@ -14,14 +14,15 @@ class ComentarioController extends Controller
    public function __construct()
 
     {
-        $this->middleware('auth');        
+        $this->middleware('auth');     
+        $this->middleware('isAdmin');     
 
     }
 
     public function getIndex()
 
     {
-        $comentarios = Comentario::orderBy('updated_at', 'desc')->get();
+        $comentarios = Comentario::orderBy('updated_at', 'desc')->paginate("10");
 
         $data['comentarios'] = $comentarios;
 
