@@ -1181,7 +1181,17 @@
 						<div>
 						
 							@foreach($formasDePagamento as $pagamento)
-							<input type="checkbox" name="pagamento[]" value="{{$pagamento->id}}">{{$pagamento->nome}}
+								@if (isset($tipo) && $tipo == "editar")
+									<input type="checkbox" name="pagamento[]" value="{{$pagamento->id}}" 
+									@foreach($anuncio->pagamentos as $pag)
+										@if($pagamento->id == $pag->id)
+											checked="checked"	
+										@endif
+									@endforeach
+									>{{$pagamento->nome}}
+								@else
+									<input type="checkbox" name="pagamento[]" value="{{$pagamento->id}}">{{$pagamento->nome}}
+								@endif
 							@endforeach
 						</div>
 

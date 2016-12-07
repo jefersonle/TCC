@@ -463,7 +463,20 @@ class AnuncioController extends Controller
                     }
                 }                                   
 
-            }  
+            }
+
+            foreach ($anuncio->pagamentos as $pag) {
+                    $teste = PagamentoAnuncio::where('anuncio_id', $anuncio->id)->first();
+                    $teste->delete();
+                    
+            }
+
+            foreach ($request->pagamento as $value) {
+                $pagamentoAnuncio = new PagamentoAnuncio();
+                $pagamentoAnuncio->anuncio_id = $anuncio->id;
+                $pagamentoAnuncio->forma_de_pagamento_id = $value;
+                $pagamentoAnuncio->save();                
+            }   
 
         $data['anuncio'] = $anuncio;
 
