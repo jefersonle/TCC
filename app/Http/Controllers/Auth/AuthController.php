@@ -58,7 +58,7 @@ class AuthController extends Controller
 
      */
 
-    protected $redirectTo = '/dashboard/anuncio';
+    protected $redirectTo = '/dashboard/anuncios';
 
 
 
