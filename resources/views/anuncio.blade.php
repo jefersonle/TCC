@@ -166,9 +166,9 @@ var elem=$('#container ul');
 
 	  <div class="container">    
 
-			<h1>Lorem ipsum   <span class="segment-heading">    dolor amet </span> lorem ipsum</h1>
+			<h1>O Maior Portal de Anúncios Agrícola do Brasil</h1>
 
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+			<p>A tecnologia facilitando a vida do home do campo!.</p>
 
 			<a href="{{ url('/anuncio/create') }}">Criar Anúncio</a>
 
