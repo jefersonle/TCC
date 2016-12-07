@@ -231,29 +231,7 @@
 												<h3><a href="{{ url('/anuncio/create') }}"><span class="label label-primary">Criar Novo</span></a></h3>
 
 											</div>
-
-											<div class="sort">
-
-											   <div class="sort-by">
-
-													<label>Ordenar por : </label>
-
-													<select>
-
-																	<option value="">Mais recente</option>
-
-																	<option value="">Mais Antigos</option>
-
-																	<option value="">Menor Preço</option>
-
-																	<option value="">Maior Preço</option>
-
-													</select>
-
-												   </div>
-
-												 </div>
-
+											
 											<div class="clearfix"></div>
 
 										<ul class="list">	
@@ -272,7 +250,7 @@
 
 												<a href="{{ url('/anuncio/show') }}/{{ $anuncio->id }}"><h5 class="title">{{ $anuncio->titulo }}</h5></a>
 
-												<span class="adprice">{{ $anuncio->valor }}</span>
+												<span class="adprice">{{ $anuncio->moeda->cifra }} {{substr_replace($anuncio->valor, ",", strlen($anuncio->valor)-2).substr($anuncio->valor, strlen($anuncio->valor)-2)}}</span>
 
 												<p class="catpath">{{ $anuncio->categoria->nome }}</p>
 

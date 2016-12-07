@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 07-Dez-2016 às 03:56
+-- Generation Time: 07-Dez-2016 às 15:03
 -- Versão do servidor: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -51,16 +51,16 @@ CREATE TABLE IF NOT EXISTS `anuncios` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=38 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=39 ;
 
 --
 -- Extraindo dados da tabela `anuncios`
 --
 
 INSERT INTO `anuncios` (`id`, `cidade_id`, `user_id`, `categoria_id`, `moeda_id`, `forma_de_entrega_id`, `ddd`, `titulo`, `descricao`, `valor`, `condicao`, `status_id`, `tipo`, `views`, `gostei`, `nao_gostei`, `contato_email`, `contato_fone1`, `contato_whatsapp`, `contato_facebook`, `contato_mensagem`, `created_at`, `updated_at`) VALUES
-(35, 3060, 1, 1, 2, 6, 42, 'Anuncio em Agricultura', 'Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura ', 100.00, 'novo', 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, '2016-12-07 01:46:35', '2016-12-07 01:46:35'),
-(36, 3060, 1, 7, 2, 2, 42, 'Anúncio na Categoria Grãos', 'Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos ', 200.00, 'novo', 1, 0, 0, 0, 0, 1, 1, 0, 0, 1, '2016-12-07 01:51:17', '2016-12-07 01:51:17'),
-(37, 3060, 1, 1, 2, 5, 42, 'Anúncio na Categoria Agricultura', 'Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura Anúncio na Categoria Agricultura ', 300.00, 'novo', 1, 0, 0, 1, 1, 0, 1, 0, 1, 1, '2016-12-07 01:53:45', '2016-12-07 03:37:35');
+(35, 3060, 1, 1, 2, 6, 42, 'Anuncio em Agricultura', 'Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura Anuncio em Agricultura ', 100.00, 'novo', 1, 0, 0, 2, 2, 1, 1, 1, 1, 1, '2016-12-07 01:46:35', '2016-12-07 15:31:44'),
+(36, 3060, 1, 7, 2, 2, 42, 'Anúncio na Categoria Grãos', 'Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos Anúncio na Categoria Grãos ', 200.00, 'novo', 1, 0, 0, 5, 5, 1, 1, 0, 0, 1, '2016-12-07 01:51:17', '2016-12-07 01:51:17'),
+(38, 79, 5, 1, 2, 6, 68, 'Arroz', 'Teste de descrição do produto', 3000.00, 'usado', 1, 0, 0, 11, 11, 1, 0, 0, 0, 1, '2016-12-07 15:04:19', '2016-12-07 15:50:29');
 
 -- --------------------------------------------------------
 
@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `categorias` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=15 ;
 
 --
 -- Extraindo dados da tabela `categorias`
@@ -5694,14 +5694,7 @@ CREATE TABLE IF NOT EXISTS `comentarios` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=11 ;
-
---
--- Extraindo dados da tabela `comentarios`
---
-
-INSERT INTO `comentarios` (`id`, `anuncio_id`, `user_id`, `comentario`, `created_at`, `updated_at`) VALUES
-(10, 37, 1, 'Muito bom este produto. Está indicado!', '2016-12-07 03:37:12', '2016-12-07 03:37:12');
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=12 ;
 
 -- --------------------------------------------------------
 
@@ -5716,14 +5709,14 @@ CREATE TABLE IF NOT EXISTS `denuncias` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
 
 --
 -- Extraindo dados da tabela `denuncias`
 --
 
 INSERT INTO `denuncias` (`id`, `anuncio_id`, `motivo`, `created_at`, `updated_at`) VALUES
-(3, 37, '', '2016-12-07 03:37:39', '2016-12-07 03:37:39');
+(5, 38, '', '2016-12-07 15:50:38', '2016-12-07 15:50:38');
 
 -- --------------------------------------------------------
 
@@ -5840,7 +5833,7 @@ CREATE TABLE IF NOT EXISTS `imagems` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=51 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=52 ;
 
 --
 -- Extraindo dados da tabela `imagems`
@@ -5854,11 +5847,33 @@ INSERT INTO `imagems` (`id`, `anuncio_id`, `nome`, `created_at`, `updated_at`) V
 (43, 36, '0.61818700 1481068277_1920178_207987882743237_1285273487_n - Copia.jpg', '2016-12-07 01:51:17', '2016-12-07 01:51:17'),
 (44, 36, '0.65012100 1481068277_1920178_207987882743237_1285273487_n.jpg', '2016-12-07 01:51:17', '2016-12-07 01:51:17'),
 (45, 36, '0.68413600 1481068277_1920425_207988329409859_869235141_n - Copia.jpg', '2016-12-07 01:51:17', '2016-12-07 01:51:17'),
-(46, 37, '0.21743300 1481068425_10453316_266243350251023_2015094708197778634_n.jpg', '2016-12-07 01:53:45', '2016-12-07 01:53:45'),
-(47, 37, '0.24181000 1481068425_10457525_264347143773977_6452604972905416381_n.jpg', '2016-12-07 01:53:45', '2016-12-07 01:53:45'),
-(48, 37, '0.25876100 1481068425_10473139_266242750251083_8942507904597176475_n.jpg', '2016-12-07 01:53:45', '2016-12-07 01:53:45'),
-(49, 37, '0.29199400 1481068425_10517504_266243320251026_5410910902879823440_n.jpg', '2016-12-07 01:53:45', '2016-12-07 01:53:45'),
-(50, 37, '0.32512400 1481068425_10532797_266242706917754_8156535800521379358_n.jpg', '2016-12-07 01:53:45', '2016-12-07 01:53:45');
+(51, 38, '0.37400300 1481115859_10473139_266242750251083_8942507904597176475_n.jpg', '2016-12-07 15:04:19', '2016-12-07 15:04:19');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `likes`
+--
+
+CREATE TABLE IF NOT EXISTS `likes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `tipo` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `anuncio_id` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Extraindo dados da tabela `likes`
+--
+
+INSERT INTO `likes` (`id`, `tipo`, `user_id`, `anuncio_id`, `created_at`, `updated_at`) VALUES
+(1, 1, 5, 35, '2016-12-07 15:31:25', '2016-12-07 15:31:25'),
+(2, 0, 5, 35, '2016-12-07 15:31:44', '2016-12-07 15:31:44'),
+(3, 1, 1, 38, '2016-12-07 15:50:21', '2016-12-07 15:50:21'),
+(4, 0, 1, 38, '2016-12-07 15:50:29', '2016-12-07 15:50:29');
 
 -- --------------------------------------------------------
 
@@ -5889,8 +5904,7 @@ INSERT INTO `mensagems` (`id`, `de_user_id`, `para_user_id`, `status_id`, `msg`,
 (11, 1, 1, 0, 'Obrigado Amigo!', '2016-12-07 04:33:52', '2016-12-07 04:33:52'),
 (12, 1, 1, 0, 'mesnasofjbndfioubgvouiadnbfauofnoiaus', '2016-12-07 04:48:10', '2016-12-07 04:48:10'),
 (13, 1, 1, 0, 'fdhjfuhklyultuiltuilpytytuioçiuop´ç~uiç', '2016-12-07 04:49:57', '2016-12-07 04:49:57'),
-(14, 1, 1, 0, '~gfgfkugfugmkfmkghgh,lghghbklhbkh.jkbjkb.', '2016-12-07 04:50:09', '2016-12-07 04:50:09'),
-(15, 1, 1, 0, 'adgszhzgdcgdcjhnjhnmghjnjn', '2016-12-07 04:53:28', '2016-12-07 04:53:28');
+(14, 1, 1, 0, '~gfgfkugfugmkfmkghgh,lghghbklhbkh.jkbjkb.', '2016-12-07 04:50:09', '2016-12-07 04:50:09');
 
 -- --------------------------------------------------------
 
@@ -5963,7 +5977,7 @@ CREATE TABLE IF NOT EXISTS `pagamento_anuncios` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=37 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=38 ;
 
 --
 -- Extraindo dados da tabela `pagamento_anuncios`
@@ -5978,8 +5992,7 @@ INSERT INTO `pagamento_anuncios` (`id`, `anuncio_id`, `forma_de_pagamento_id`, `
 (32, 36, 3, '2016-12-07 01:51:17', '2016-12-07 01:51:17'),
 (33, 36, 5, '2016-12-07 01:51:17', '2016-12-07 01:51:17'),
 (34, 36, 8, '2016-12-07 01:51:17', '2016-12-07 01:51:17'),
-(35, 37, 4, '2016-12-07 01:53:45', '2016-12-07 01:53:45'),
-(36, 37, 6, '2016-12-07 01:53:45', '2016-12-07 01:53:45');
+(37, 38, 1, '2016-12-07 15:04:19', '2016-12-07 15:04:19');
 
 -- --------------------------------------------------------
 
@@ -6047,16 +6060,17 @@ CREATE TABLE IF NOT EXISTS `users` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
 
 --
 -- Extraindo dados da tabela `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `cpf`, `cep`, `logradouro`, `numero`, `complemento`, `bairro`, `contato_fone`, `contato_email`, `contato_whatsapp`, `contato_facebook`, `cidade_id`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Jeferson Luis Eurides', 'jeferson_eurides@hotmail.com', '$2y$10$xnHK9KAyneropBAXlvCGzuef5.7TmUJH5uSm0NahBkh36LdFB/JdW', '06939440992', '84016688', 'Rua Babilônia', '715', 'Casa', 'Santa Mônica', '4299177519', '', '4299177519', 'Http://facenook.com/JefersonEurides', 3060, 'lGNob0DJ6gj2oGP2CoQGCLMBsyJfaglOZ222Hm5emJF6qbuNmKjC5NySmkS0', '2016-12-05 22:10:02', '2016-12-06 23:54:37'),
+(1, 'Jeferson Luis Eurides', 'jeferson_eurides@hotmail.com', '$2y$10$xnHK9KAyneropBAXlvCGzuef5.7TmUJH5uSm0NahBkh36LdFB/JdW', '06939440992', '84016688', 'Rua Babilônia', '715', 'Casa', 'Santa Mônica', '4299177519', '', '4299177519', 'Http://facenook.com/JefersonEurides', 3060, 'YvF2OQDmj4eAdah2Rotqk3xQKJEWWbmiIdd1bs5i0BeE6iarPD2EQH1RSouz', '2016-12-05 22:10:02', '2016-12-07 14:58:17'),
 (2, 'Luana Eurides', 'luana@email.com', '$2y$10$7JzB6yigSskhUkyYQFK9W.thyvwOLq1VbGSd9LfrAQSxFzJc0xcxK', '', '84016-688', 'Rua Babilônia', '715', 'Casa', 'Santa Mônica', '99877845', '', '998877878', 'http://facebook.com/luanaeurides', 3060, '1mQGs0Gb9WvnIyaDdroQCEKBMtZprbPFgFhdqLZGRKPWYz0PvTy5hiVtDfO0', '2016-12-06 02:42:45', '2016-12-06 23:57:19'),
-(4, 'teste', 'teste@teste.com', '$2y$10$Lvb7x209Qt6ERLCUm2e9j.2B4ZPdj/Aq2j1sshIFYPHfRKYKwpSbu', '', '', '', '', '', '', '', '', '', '', 0, NULL, '2016-12-06 03:33:10', '2016-12-06 03:33:10');
+(4, 'teste', 'teste@teste.com', '$2y$10$Lvb7x209Qt6ERLCUm2e9j.2B4ZPdj/Aq2j1sshIFYPHfRKYKwpSbu', '', '', '', '', '', '', '', '', '', '', 0, NULL, '2016-12-06 03:33:10', '2016-12-06 03:33:10'),
+(5, 'Jefo', 'jefo@email.coom', '$2y$10$gwDqL4lqzHD8gH116TPKquS8aHpITilW4fjxtGyx0umobz4UEkLL6', '', '', '', '', '', '', '', '', '', '', 0, 'oJrXXlRcWutcneFavud7VKCzd3uxF40y7SmQCml1LQW1b3Fdl2UKuvWotZua', '2016-12-07 14:59:09', '2016-12-07 15:32:22');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

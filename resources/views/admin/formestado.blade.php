@@ -102,12 +102,17 @@
 							<div class="category">
 								<h3 class="head-top">Cadastro de Estados</h3>
 								@if(session()->has('msg'))
-												<div class="alert">{{session('msg')}}</div>
-												{{session()->forget('msg')}}
-											@endif
+									<div class="clearfix"></div>
+												
+										<div class="alert alert-success" role="alert">{{session('msg')}}
+									</div>	
+									{{session()->forget('msg')}}
+								@endif		
+
 								@foreach ($errors->all() as $message) 
-									<div class="alert">{{$message}}</div>
-								@endforeach	
+									<div class="clearfix"></div>
+									<div class="alert alert-danger" role="alert">{{$message}}</div>
+								@endforeach
 
 								@if(isset($edit) && $edit)
 								<form class="form-horizontal" method="POST" action="{{url('/admin/estados/update')}}/{{$estado->id}}">

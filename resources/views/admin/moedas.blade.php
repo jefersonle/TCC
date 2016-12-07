@@ -105,10 +105,15 @@
 									    	<div class="view-controls-list" id="viewcontrols">
 													<h3><a href="{{url('/admin/moedas/create')}}"><span class="label label-primary">Nova Moeda</span></a></h3>
 												</div>		
-												@if(session()->has('msg'))
-												<div class="alert">{{session('msg')}}</div>
+											@if(session()->has('msg'))
+												<div class="clearfix"></div>
+												
+													<div class="alert alert-success" role="alert">{{session('msg')}}
+												</div>
+												
+												
 												{{session()->forget('msg')}}
-											@endif									
+												@endif										
 								              <table class="table table-bordered">
 												<thead>
 													<tr>

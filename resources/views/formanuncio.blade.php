@@ -64,6 +64,8 @@
 
 <script src="{{ url('/') }}/js/bootstrap-select.js"></script>
 
+<script src="{{ url('/') }}/js/inputmask.js"></script>
+
 
 
 
@@ -404,6 +406,7 @@
     });
 
 
+    $('#valor').mask('000.000.000.000.000,00', {reverse: true});
 
 
 
@@ -761,12 +764,7 @@
 
 
 
-                    <div class="alert alert-success alert-dismissible" role="alert">
-
-
-
-                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-
+                    <div class="alert alert-success" role="alert">
 
                       @if (isset($tipo) && $tipo == "editar")
                       	Anúncio atualizado com sucesso!
@@ -782,7 +780,7 @@
                 @endif
 
                 @foreach ($errors->all() as $message) 
-						<div class="alert">{{$message}}</div>
+						<div class="alert alert-danger" role="alert">{{$message}}</div>
 				@endforeach
 
 
@@ -842,7 +840,7 @@
 
 
 
-					<input type="text" class="phone" placeholder="" name="titulo" required
+					<input type="text" class="phone" placeholder="Digite o título do anúncio..." name="titulo" required
 
 					     @if (isset($tipo) && $tipo == "editar")
 
@@ -874,7 +872,7 @@
 
 
 
-					<textarea class="mess" placeholder="Write few lines about your product" name="descricao" required>@if (isset($tipo) && $tipo == "editar"){{ $anuncio->descricao }}@endif</textarea>
+					<textarea class="mess" placeholder="Digite a descrição do anúncio..." name="descricao" required>@if (isset($tipo) && $tipo == "editar"){{ $anuncio->descricao }}@endif</textarea>
 
 
 
@@ -1097,7 +1095,7 @@
 
 
 
-						<input type="text" class="name" placeholder="" name="valor" required
+						<input type="text" class="name" placeholder="Ex: 199,90" name="valor" id="valor" required
 
 					     @if (isset($tipo) && $tipo == "editar")
 
@@ -1275,7 +1273,7 @@
 @endif
 
 
-@if(null !== Auth::user())
+@if(null !== Auth::user() && Auth::user()->city()->count() != 0)
 <script type="text/javascript">
 	var estadoId = "{{Auth::user()->city->estado_id}}"
 	var Obj = {"value": estadoId};

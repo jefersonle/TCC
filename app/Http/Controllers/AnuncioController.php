@@ -114,6 +114,9 @@ class AnuncioController extends Controller
                         break;
                     case 'maiorpreco':
                         $anuncios = Anuncio::orderBy('valor', 'DESC')->get();
+                        break;  
+                    case 'top':
+                        $anuncios = Anuncio::orderBy('gostei', 'DESC')->get();
                         break;                
                 }
              }else{
@@ -567,7 +570,10 @@ class AnuncioController extends Controller
                         break;
                     case 'maiorpreco':
                         $anuncios = Anuncio::where('cidade_id', $id)->orderBy('valor', 'DESC')->get();
-                        break;                
+                        break;      
+                    case 'top':
+                        $anuncios = Anuncio::where('cidade_id', $id)->orderBy('gostei', 'DESC')->get();
+                        break;             
                 }
                 $data['bread2'] = $anuncios[0]->cidade->nome;
              }else{
@@ -619,7 +625,10 @@ class AnuncioController extends Controller
                         break;
                     case 'maiorpreco':
                         $anuncios = Anuncio::where('ddd', $id)->orderBy('valor', 'DESC')->get();
-                        break;                
+                        break;     
+                    case 'top':
+                        $anuncios = Anuncio::where('ddd', $id)->orderBy('gostei', 'DESC')->get();
+                        break;             
                 }
              }else{
                 $anuncios = Anuncio::where('ddd', $id)->orderBy('updated_at', 'desc')->get();
@@ -704,7 +713,10 @@ class AnuncioController extends Controller
                             break;
                         case 'maiorpreco':
                             $anuncios = Anuncio::where('categoria_id', $id)->orderBy('valor', 'DESC')->get();
-                            break;                
+                            break; 
+                        case 'top':
+                            $anuncios = Anuncio::where('categoria_id', $id)->orderBy('gostei', 'DESC')->get();
+                            break;                 
                     }
                  }else{
                        $anuncios = Anuncio::where('categoria_id', $id)->orderBy('updated_at', 'desc')->get();            
@@ -758,7 +770,10 @@ class AnuncioController extends Controller
                     break;
                 case 'maiorpreco':
                     $anuncios = Anuncio::where('titulo', 'LIKE', '%'.$request->keyword.'%')->orderBy('valor', 'DESC')->get();
-                    break;                
+                    break;  
+                case 'top':
+                        $anuncios = Anuncio::where('titulo', 'LIKE', '%'.$request->keyword.'%')->orderBy('gostei', 'DESC')->get();
+                        break;              
             }
          }else{
             $anuncios = Anuncio::where('titulo', 'LIKE', '%'.$request->keyword.'%')->orderBy('updated_at', 'desc')->get(); 
@@ -808,7 +823,12 @@ class AnuncioController extends Controller
                         break;
                     case 'maiorpreco':
                         $anuncios = Anuncio::where('user_id', $id)->orderBy('valor', 'DESC')->get();
-                        break;                
+                        break;
+                    case 'top':
+                        $anuncios = Anuncio::where('user_id', $id)->orderBy('gostei', 'DESC')->get();
+                        break; 
+
+
                 }
              }else{
                 $anuncios = Anuncio::where('user_id', $id)->orderBy('updated_at', 'desc')->get();

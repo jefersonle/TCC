@@ -99,9 +99,7 @@
 			
 			@if (Auth::user())
 
-			$("#comentarioSave").click(function(){
-				alert("comentario");
-				
+			$("#comentarioSave").click(function(){							
 
 				var url = "{{url('/')}}/comentario/store";
 				$.ajax({
@@ -123,8 +121,7 @@
 			});
 
 			$("#mensagemSave").click(function(){
-				alert("mensagem");
-				
+							
 					
 				var url = "{{url('/')}}/mensagem/store";
 				$.ajax({
@@ -143,10 +140,7 @@
 
 			
 			
-	        $("#gostei").click(function(){
-
-				alert("gostei");
-				
+	        $("#gostei").click(function(){							
 					
 				var url = "{{url('/')}}/likes/gostei";
 
@@ -165,9 +159,7 @@
 			});     
 
 	        $("#naogostei").click(function(){
-
-				alert("nao gostei");
-				
+		
 					
 				var url = "{{url('/')}}/likes/naogostei";
 
@@ -186,10 +178,7 @@
 			});
 
 			$("#denunciar").click(function(){
-
-				alert("denunciar");
-				
-					
+									
 				var url = "{{url('/')}}/likes/denunciar";
 
 				$.ajax({						
@@ -263,7 +252,7 @@
 
 					<h2>{{ $anuncio->titulo }}</h2>
 
-					<p> <i class="glyphicon glyphicon-map-marker"></i><a href="#">{{ $anuncio->cidade->estado->nome }}</a>, <a href="#">{{ $anuncio->cidade->nome }},</a> <a href="#">Região ({{ $anuncio->ddd}})</a>| Adicionado em {{ date_format($anuncio->created_at, 'd-m-Y H:i') }}, ID: {{ $anuncio->id }}</p>
+					<p> <i class="glyphicon glyphicon-map-marker"></i><a href="javascript:void;">{{ $anuncio->cidade->estado->nome }}</a>, <a href="{{url('/anuncio/cidade')}}/{{ $anuncio->cidade->id }}">{{ $anuncio->cidade->nome }},</a> <a href="{{url('/anuncio/regiao')}}/{{ $anuncio->ddd }}">Região DDD ({{ $anuncio->ddd}})</a>| Adicionado em {{ date_format($anuncio->created_at, 'd-m-Y H:i') }}, ID: {{ $anuncio->id }}</p>
 
 					<div class="flexslider">
 
@@ -415,7 +404,7 @@
 
 							<p class="p-price">Preço</p>
 
-							<h3 class="rate">{{$anuncio->moeda->cifra}} {{ $anuncio->valor }}</h3>
+							<h3 class="rate">{{$anuncio->moeda->cifra}} {{substr_replace($anuncio->valor, ",", strlen($anuncio->valor)-2).substr($anuncio->valor, strlen($anuncio->valor)-2)}}</h3>
 
 							<div class="clearfix"></div>
 
@@ -473,7 +462,7 @@
 						@endif						
 					</div>
 					<div class="clearfix"></div>
-					@if (Auth::user())
+					@if (Auth::user() && Auth::user()->id != $anuncio->user->id)
 							@if($anuncio->contato_mensagem == 1)	
 								<div class="interested text-center" style="background-color: #F4F5F6; padding: 20px 20px;">	
 									<div class="row">
@@ -501,14 +490,14 @@
 						@endif		
 										
 
-					@if (Auth::user())
+					@if (Auth::user() && Auth::user()->id != $anuncio->user->id)
 
 					<div class="interested text-center" style="background-color: #F4F5F6; padding: 15px">						
-						<p style="margin-top: 0;">Ajude-nos com sua opinião:</p>
+						<p style="margin-top: 0;">O que achou deste anúncio?</p>
 						<div class="btn-group" role="group" aria-label="...">						
-						  <button class="btn btn-success" id="gostei"><span class="glyphicon glyphicon-thumbs-up"></span> Gostei</button>					  
-						  <button class="btn btn-danger" id="denunciar"> <span class="glyphicon glyphicon-thumbs-down"></span>Denunciar</button>
-						  <button class="btn btn-success" id="naogostei"><span class="glyphicon glyphicon-thumbs-down"></span> Não Gostei</button>
+						  <button class="btn btn-success" id="gostei"><span class="glyphicon glyphicon-thumbs-up"></span> {{$anuncio->gostei}}</button>					  
+						  <button class="btn btn-danger" id="denunciar"> <span class="glyphicon glyphicon-remove"></span>Denunciar</button>
+						  <button class="btn btn-success" id="naogostei"><span class="glyphicon glyphicon-thumbs-down"></span> {{$anuncio->nao_gostei}}</button>
 						</div>
 
 					</div>

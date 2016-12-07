@@ -98,7 +98,10 @@ Route::group(['middleware' => 'web'], function () {
 
     
 
-    Route::controller('/dashboard/anuncio', 'Dashboard\AnuncioController');   
+    Route::controller('/dashboard/anuncios', 'Dashboard\AnuncioController');   
+    Route::controller('/dashboard/comentarios', 'Dashboard\ComentarioController');  
+    Route::controller('/dashboard/mensagens', 'Dashboard\MensagemController');
+    Route::controller('/dashboard/perfil', 'Dashboard\PerfilController'); 
 
     Route::controller('/admin/anuncios', 'Admin\AnuncioController');   
     Route::controller('/admin/categorias', 'Admin\CategoriaController');

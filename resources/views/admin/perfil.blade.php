@@ -56,6 +56,14 @@
 		</script>
 		<link rel="stylesheet" type="text/css" href="{{ url('/') }}/css/easy-responsive-tabs.css " />
     <script src="{{ url('/') }}/js/easyResponsiveTabs.js"></script>
+     <script src="{{ url('/') }}/js/inputmask.js"></script>
+    <script type="text/javascript">
+    	$(document).ready(function(){
+    		$('#cpf').mask('000.000.000-00', {reverse: true});
+    		$('#telefone').mask('(00) 9 0000-0000');
+    		$('#whatsapp').mask('(00) 9 0000-0000');
+    	});
+    </script>
     
 @endsection
 
@@ -102,14 +110,16 @@
 							<div class="category">
 								<h3 class="head-top">Meu Perfil</h3>
 								@if(session()->has('msg'))
-												<div class="alert">{{session('msg')}}</div>
-												{{session()->forget('msg')}}
-											@endif	
-								
+									<div class="clearfix"></div>
 												
-												
+										<div class="alert alert-success" role="alert">{{session('msg')}}
+									</div>	
+									{{session()->forget('msg')}}
+								@endif		
+
 								@foreach ($errors->all() as $message) 
-									<div class="alert">{{$message}}</div>
+									<div class="clearfix"></div>
+									<div class="alert alert-danger" role="alert">{{$message}}</div>
 								@endforeach
 								<form class="form-horizontal" method="POST" action="{{url('/admin/perfil/store')}}">
 								{{ csrf_field() }}
@@ -160,7 +170,7 @@
 										<div class="form-group">
 											<label for="focusedinput" class="col-sm-2 control-label">CPF:</label>
 											<div class="col-sm-8">
-												<input type="text" name="cpf" class="form-control1" id="focusedinput" placeholder="Digite o CPF do usuário..."
+												<input type="text" name="cpf" class="form-control1" id="cpf" placeholder="Digite o CPF do usuário..."
 												@if(null !== Auth::user()->cpf)
 													value="{{Auth::user()->cpf}}"
 												@endif
@@ -173,7 +183,7 @@
 										<div class="form-group">
 											<label for="focusedinput" class="col-sm-2 control-label">Telefone:</label>
 											<div class="col-sm-8">
-												<input type="text" name="telefone" class="form-control1" id="focusedinput" placeholder="Digite o telefone do usuário..."
+												<input type="text" name="telefone" class="form-control1" id="telefone" placeholder="Digite o telefone do usuário..."
 												@if(null !== Auth::user()->contato_fone)
 													value="{{Auth::user()->contato_fone}}"
 												@endif
@@ -186,7 +196,7 @@
 										<div class="form-group">
 											<label for="focusedinput" class="col-sm-2 control-label">WhatsApp:</label>
 											<div class="col-sm-8">
-												<input type="text" name="whatsapp" class="form-control1" id="focusedinput" placeholder="Digite o WhatsApp do usuário..."
+												<input type="text" name="whatsapp" class="form-control1" id="whatsapp" placeholder="Digite o WhatsApp do usuário..."
 												@if(null !== Auth::user()->contato_whatsapp)
 													value="{{Auth::user()->contato_whatsapp}}"
 												@endif

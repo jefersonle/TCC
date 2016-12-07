@@ -80,79 +80,92 @@
 			<div class="category-list">
 				<div id="parentVerticalTab">
 					<ul class="resp-tabs-list hor_1">						
-						<li id="anunciosLink" onclick="location.href = '{{url("/admin/anuncios")}}';">Anúncios</li>
-						<li id="categoriasLink" onclick="location.href = '{{url("/admin/categorias")}}';">Categorias</li>
-						<li id="categoriasLink" onclick="location.href = '{{url("/admin/entrega")}}';">Formas de Entrega</li>
-						<li id="categoriasLink" onclick="location.href = '{{url("/admin/pagamento")}}';">Formas de Pagamento</li>
-						<li id="categoriasLink" onclick="location.href = '{{url("/admin/moedas")}}';">Moedas</li>
-						<li id="categoriasLink" onclick="location.href = '{{url("/admin/statuslist")}}';">Status</li>
-						<li id="comentariosLink" class="active resp-tab-active" onclick="location.href = '{{url("/admin/comentarios")}}';">Comentários</li>
-						<li id="mensagensLink" onclick="location.href = '{{url("/admin/mensagens")}}';">Mensagens</li>
-						<li id="denunciasLink" onclick="location.href = '{{url("/admin/denuncias")}}';">Denúncias</li>
-						<li id="cidadesLink" onclick="location.href = '{{url("/admin/cidades")}}';">Cidades</li>
-						<li id="estadosLink" onclick="location.href = '{{url("/admin/estados")}}';">Estados</li>
-						<li id="usuariosLink" onclick="location.href = '{{url("/admin/usuarios")}}';">Usuários</li>
-						<li onclick="location.href = '{{url("/admin/perfil")}}';">Perfil</li>						
+						<li id="anunciosLink" onclick="location.href = '{{url("/dashboard/anuncios")}}';">Anúncios</li>	
+						<li id="comentariosLink" onclick="location.href = '{{url("/dashboard/comentarios")}}';">Comentários</li>
+						<li id="mensagensLink" onclick="location.href = '{{url("/dashboard/mensagens")}}';">Mensagens</li>						
+						<li onclick="location.href = '{{url("/dashboard/perfil")}}';">Perfil</li>						
 						<a href="{{ url('/logout') }}">Sair</a>
 
 					</ul>
 					<div class="resp-tabs-container hor_1">						
-						
 						<div>
-							<div class="category">
-								 <div class="grid_3 grid_5">
-								     <h3 class="head-top">Comentários</h3>								       
-									    <div class="col-md-12 page_1">	
-									    		@if(session()->has('msg'))
-												<div class="clearfix"></div>
+							<div class="ads-display col-md-12">
+								<div class="wrapper">					
+								<div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+								  <ul id="myTab" class="nav nav-tabs nav-tabs-responsive" role="tablist">
+									<li role="presentation" class="active">
+									  <a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">
+										<span class="text">Meus Anúncios</span>
+									  </a>
+									</li>
+									<!-- <li role="presentation" class="next">
+									  <a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">
+										<span class="text">Anúncios </span>
+									  </a>
+									</li>
+									<li role="presentation">
+									  <a href="#samsa" role="tab" id="samsa-tab" data-toggle="tab" aria-controls="samsa">
+										<span class="text">Company</span>
+									  </a>
+									</li> -->
+								  </ul>
+								  <div id="myTabContent" class="tab-content">
+									<div role="tabpanel" class="tab-pane fade in active" id="home" aria-labelledby="home-tab">
+									   <div>
+											<div id="container">
+											<div class="view-controls-list" id="viewcontrols">
+												<h3><a href="{{url('/anuncio/create')}}" target="_blank"><span class="label label-primary">Criar Novo Anúncio</span></a></h3>
+											</div>		
+											<div class="clearfix"></div>									
+											@if(session()->has('msg'))
+												
 												
 													<div class="alert alert-success" role="alert">{{session('msg')}}
 												</div>
 												
 												
 												{{session()->forget('msg')}}
-												@endif			
-								              <table class="table table-bordered">
-												<thead>
-													<tr>
-														<th width="25%">Produto</th>
-														<th width="25%">Autor</th>
-														<th width="25%">Comentário</th>
-														<th width="25%">Data</th>
-														<th width="25%">Ação</th>
-													</tr>
-												</thead>
-												<tbody>												
-												@forelse($comentarios as $comentario)
-													<tr>
-														<td>{{$comentario->anuncio->titulo}}</td>
-														<td>{{$comentario->user->name}}</td>
-														<td>{{$comentario->comentario}}</td>
-														<td>{{$comentario->updated_at}}</td>
-														<td><a href="{{url('/anuncio/show')}}/{{$comentario->anuncio->id}}" target="_blank"><span class="label label-primary">Visualizar</span></a>
-														<a href="{{url('/admin/comentarios/destroy')}}/{{$comentario->id}}"><span class="label label-danger"  onclick="if(!confirm('Tem certeza que deseja excluir este comentário?')) return false;">Excluir</span></a></td>
-													</tr>
-													@empty
-														<tr>
-															<td colspan="5">Nenhum comentario encontrado</td>
-														</tr>
-													@endforelse
-													
-													
-													
-												</tbody>
-											  </table> 
-											  {!! $comentarios->render() !!}
+												@endif	
+										<ul class="list">
 
-										</div>										
-									   <div class="clearfix"> </div>  
-									  
-								    </div>									
-							</div>							
-						</div>						
-			
-					</div>
-					<div class="clearfix"></div>
+												@forelse(Auth::user()->anuncios as $anuncio)								
+													<li>
+														@if($anuncio->imagens->count() !=0)
+														<img src="{{ url('/') }}/uploads/{{$anuncio->imagens[0]->nome}}" title="" alt="" />
+														@else
+														<img src="{{ url('/') }}/images/p1.jpg" title="" alt="" />
+														@endif
+														<section class="list-left">
+														<a href="{{ url('/anuncio/show') }}/{{$anuncio->id}}" target="_blank"><h5 class="title">{{$anuncio->titulo}}</h5></a>
+														<span class="adprice">{{ $anuncio->moeda->cifra }} {{substr_replace($anuncio->valor, ",", strlen($anuncio->valor)-2).substr($anuncio->valor, strlen($anuncio->valor)-2)}}</span>
+														<p class="catpath">{{$anuncio->categoria->nome}}</p>
+														</section>
+														<section class="list-right">
+														<span class="date">{{$anuncio->updated_at}}</span>
+														<span class="cityname">{{$anuncio->cidade->nome}}</span>
+														<a href="{{ url('/anuncio/edit') }}/{{$anuncio->id}}"><span class="label label-success">Editar</span></a>
+														<a href="{{ url('/admin/anuncios/destroy') }}/{{$anuncio->id}}"><span class="label label-danger" onclick="if(!confirm('Tem certeza que deseja excluir este anúncio\n\n Isto excluirá permantentemente o anúncio, juntamente com suas imagens e comentários!')) return false;">Excluir</span></a>
+														</section>
+														<div class="clearfix"></div>
+													</li>
+												@empty
+													<li><h5 class="title">Nenhum anúncio encontrado</h5></li>
+												@endforelse
+											
+											
+										</ul>
+									</div>
+										</div>
+									</div>
+
+								  </div>
+								</div>
+							</div>
+							</div>
+				<div class="clearfix"></div>
+						</div>
+						
+					
 				</div>
 			</div>
 		</div>
@@ -175,10 +188,10 @@
                 $name.text($tab.text());
                 $info.show();
             }
-        });
+        }); 
 
-        $("#anunciosLink").removeClass("active resp-tab-active");
-        $(".resp-tabs-list li").attr("aria-controls", "");
+        $(".resp-tabs-list li").attr("aria-controls", "");      
+
 
     });
 </script>

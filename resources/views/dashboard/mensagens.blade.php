@@ -81,19 +81,10 @@
 			<div class="category-list">
 				<div id="parentVerticalTab">
 					<ul class="resp-tabs-list hor_1">						
-						<li id="anunciosLink" onclick="location.href = '{{url("/admin/anuncios")}}';">Anúncios</li>
-						<li id="categoriasLink" onclick="location.href = '{{url("/admin/categorias")}}';">Categorias</li>
-						<li id="categoriasLink" onclick="location.href = '{{url("/admin/entrega")}}';">Formas de Entrega</li>
-						<li id="categoriasLink" onclick="location.href = '{{url("/admin/pagamento")}}';">Formas de Pagamento</li>
-						<li id="categoriasLink" onclick="location.href = '{{url("/admin/moedas")}}';">Moedas</li>
-						<li id="categoriasLink" onclick="location.href = '{{url("/admin/statuslist")}}';">Status</li>
-						<li id="comentariosLink" onclick="location.href = '{{url("/admin/comentarios")}}';">Comentários</li>
-						<li id="mensagensLink" class="active resp-tab-active" onclick="location.href = '{{url("/admin/mensagens")}}';">Mensagens</li>
-						<li id="denunciasLink" onclick="location.href = '{{url("/admin/denuncias")}}';">Denúncias</li>
-						<li id="cidadesLink" onclick="location.href = '{{url("/admin/cidades")}}';">Cidades</li>
-						<li id="estadosLink" onclick="location.href = '{{url("/admin/estados")}}';">Estados</li>
-						<li id="usuariosLink" onclick="location.href = '{{url("/admin/usuarios")}}';">Usuários</li>
-						<li onclick="location.href = '{{url("/admin/perfil")}}';">Perfil</li>						
+						<li id="anunciosLink" onclick="location.href = '{{url("/dashboard/anuncios")}}';">Anúncios</li>	
+						<li id="comentariosLink" onclick="location.href = '{{url("/dashboard/comentarios")}}';">Comentários</li>
+						<li id="mensagensLink" class="active resp-tab-active" onclick="location.href = '{{url("/dashboard/mensagens")}}';">Mensagens</li>						
+						<li onclick="location.href = '{{url("/dashboard/perfil")}}';">Perfil</li>						
 						<a href="{{ url('/logout') }}">Sair</a>
 
 					</ul>
@@ -101,12 +92,8 @@
 						
 						<div>
 							<div class="category">
-								 <div class="grid_3 grid_5">
-								     <h3 class="head-top">Mensagens</h3>								       
-									    <div class="col-md-12 page_1">
-									    	<div class="view-controls-list" id="viewcontrols">
-													<h3><a href="{{url('/admin/mensagens/create')}}"><span class="label label-primary">Nova Mensagem</span></a></h3>
-												</div>	
+								 <div class="grid_3 grid_5">			     						       
+									    <div class="col-md-12 page_1">									    		
 											@if(session()->has('msg'))
 												<div class="clearfix"></div>
 												
@@ -115,28 +102,29 @@
 												
 												
 												{{session()->forget('msg')}}
-												@endif										
+												@endif
+
 								              <table class="table table-bordered">
 												<thead>
-													<tr>
-														<th width="20%">De:</th>
-														<th width="20%">Para</th>
+													<tr>														
+														<th>De</th>
 														<th>Mensagem</th>
-														<th width="10%">Data</th>
-														<th width="20%">Ação</th>
+														<th width="25%">Data</th>
+														<th width="21%">Ação</th>
 													</tr>
 												</thead>
+												<div class="clearfix"></div>
+												<h3>Mensagens Recebidas</h3>
 												<tbody>
-													@forelse($mensagens as $mensagem)
+													@forelse(Auth::user()->mensagensrecebidas as $mensagem)
 													<tr>
 														<td>{{$mensagem->de->name}}</td>
-														<td>{{$mensagem->para->name}}</td>
-														<td>{{$mensagem->msg}}</td>
+														<td>{{substr($mensagem->msg, 0, 5)}}...</td>
 														<td>{{$mensagem->created_at}}</td>
 														<td><a href="javascript:void;" 
-														onclick="mostrarMensagem('{{$mensagem->id}}','{{$mensagem->de->name}}','{{$mensagem->para->name}}','{{$mensagem->msg}}');">
+														onclick="mostrarMensagem('{{$mensagem->id}}','{{$mensagem->de->name}}','{{$mensagem->para->name}}','{{$mensagem->msg}}', '{{$mensagem->created_at}}','{{$mensagem->de_user_id}}');">
 														<span class="label label-primary">Visualizar</span></a>
-														<a href="{{url('/admin/mensagens/destroy')}}/{{$mensagem->id}}"><span class="label label-danger"  onclick="if(!confirm('Tem certeza que deseja excluir esta mensagem?')) return false;">Escluir</span></a></td>
+														<a href="{{url('/dashboard/mensagens/destroy')}}/{{$mensagem->id}}"><span class="label label-danger"  onclick="if(!confirm('Tem certeza que deseja excluir esta mensagem?')) return false;">Escluir</span></a></td>
 													</tr>													
 													@empty
 														<tr>
@@ -146,7 +134,36 @@
 													
 												</tbody>
 											  </table> 
-											  {!! $mensagens->render() !!}
+											 	<div class="clearfix"></div>
+												<h3>Mensagens Enviadas</h3>											  <table class="table table-bordered">
+												<thead>
+													<tr>														
+														<th>Para</th>
+														<th>Mensagem</th>
+														<th width="10%">Data</th>
+														<th width="21%">Ação</th>
+													</tr>
+												</thead>
+												<tbody>
+													@forelse(Auth::user()->mensagensenviadas as $mensagem)
+													<tr>														
+														<td>{{$mensagem->para->name}}</td>
+														<td>{{substr($mensagem->msg, 0, 5)}}...</td>
+														<td>{{$mensagem->created_at}}</td>
+														<td><a href="javascript:void;" 
+														onclick="mostrarMensagem('{{$mensagem->id}}','{{$mensagem->de->name}}','{{$mensagem->para->name}}','{{$mensagem->msg}}', '{{$mensagem->created_at}}', '{{$mensagem->de_user_id}}');">
+														<span class="label label-primary">Visualizar</span></a>
+														<a href="{{url('/dashboard/mensagens/destroy')}}/{{$mensagem->id}}"><span class="label label-danger"  onclick="if(!confirm('Tem certeza que deseja excluir esta mensagem?')) return false;">Escluir</span></a></td>
+													</tr>													
+													@empty
+														<tr>
+															<td colspan="5">Nenhuma mensagem encontrada</td>
+														</tr>
+													@endforelse
+													
+												</tbody>
+											  </table>
+											  
 											                   
 										</div>										
 									   <div class="clearfix"> </div>  
@@ -175,12 +192,14 @@
 		        <br>
 		        <p><strong>Para: </strong><span id="paraNome"></span></p>
 		        <br>
+		        <p><strong>Data: </strong><span id="dataMsg"></span></p>
+		        <br>
 		        <p><strong>Mensagem:</strong></p>		        
 		        <p id="msg"></p>
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-		        <button type="button" class="btn btn-danger" onclick="window.location.href = '{{url('/admin/mensagens/create')}}/'+globalId">Responder</button>
+		        <button id="responder" type="button" class="btn btn-danger" onclick="window.location.href = '{{url('/dashboard/mensagens/create')}}/'+globalId">Responder</button>
 		      </div>
 		    </div><!-- /.modal-content -->
 		  </div><!-- /.modal-dialog -->
@@ -190,14 +209,22 @@
 	<script type="text/javascript">
 	var globalId
 
-	function mostrarMensagem(mensagem_id, de, para, msg){	
-			alert('funcção');	
+	function mostrarMensagem(mensagem_id, de, para, msg, datamsg, de_id){	
+			
 			$("#deNome").html(de);
 			$("#paraNome").html(para);
 			$("#msg").html(msg);
+			$("#dataMsg").html(datamsg);
+			
 			globalId = mensagem_id; 
 
 			$('#myModal').modal('show');
+
+			if (de_id == {{Auth::user()->id}}) {
+				$("#responder").hide();
+			}else{
+				$("#responder").show();
+			}
 
 	}
 	

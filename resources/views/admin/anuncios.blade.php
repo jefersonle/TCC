@@ -124,12 +124,17 @@
 											<div id="container">
 											<div class="view-controls-list" id="viewcontrols">
 												<h3><a href="{{url('/anuncio/create')}}" target="_blank"><span class="label label-primary">Criar Novo Anúncio</span></a></h3>
-											</div>											
-											<div class="clearfix"></div>
+											</div>		
+											<div class="clearfix"></div>									
 											@if(session()->has('msg'))
-												<div class="alert">{{session('msg')}}</div>
+												
+												
+													<div class="alert alert-success" role="alert">{{session('msg')}}
+												</div>
+												
+												
 												{{session()->forget('msg')}}
-											@endif
+												@endif	
 										<ul class="list">
 
 												@forelse($anuncios as $anuncio)								
@@ -141,7 +146,7 @@
 														@endif
 														<section class="list-left">
 														<a href="{{ url('/anuncio/show') }}/{{$anuncio->id}}" target="_blank"><h5 class="title">{{$anuncio->titulo}}</h5></a>
-														<span class="adprice">{{$anuncio->valor}}</span>
+														<span class="adprice">{{ $anuncio->moeda->cifra }} {{substr_replace($anuncio->valor, ",", strlen($anuncio->valor)-2).substr($anuncio->valor, strlen($anuncio->valor)-2)}}</span>
 														<p class="catpath">{{$anuncio->categoria->nome}}</p>
 														</section>
 														<section class="list-right">

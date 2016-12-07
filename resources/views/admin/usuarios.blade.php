@@ -102,14 +102,20 @@
 							<div class="category">
 								 <div class="grid_3 grid_5">
 								     <h3 class="head-top">Usuários</h3>								       
-									    <div class="col-md-12 page_1">
-									    	<div class="view-controls-list" id="viewcontrols">
+									    <div class="col-md-12 page_1">+
+
+									    		<div class="view-controls-list" id="viewcontrols">
 													<h3><a href="{{url('/admin/usuarios/create')}}"><span class="label label-primary">Criar Novo Usuário</span></a></h3>
-												</div>	
+												</div>
 												@if(session()->has('msg'))
-												<div class="alert">{{session('msg')}}</div>
+												<div class="clearfix"></div>
+												
+													<div class="alert alert-success" role="alert">{{session('msg')}}
+												</div>
+												
+												
 												{{session()->forget('msg')}}
-											@endif											
+												@endif											
 								              <table class="table table-bordered">
 												<thead>
 													<tr>

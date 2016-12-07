@@ -20,7 +20,7 @@ class AnuncioController extends Controller
 
     {
 
-       return view('dashboard');
+       return view('dashboard.anuncios');
 
     }
 }

@@ -106,9 +106,14 @@
 													<h3><a href="{{url('/admin/entrega/create')}}"><span class="label label-primary">Nova Forma de Entrega</span></a></h3>
 												</div>	
 												@if(session()->has('msg'))
-												<div class="alert">{{session('msg')}}</div>
+												<div class="clearfix"></div>
+												
+													<div class="alert alert-success" role="alert">{{session('msg')}}
+												</div>
+												
+												
 												{{session()->forget('msg')}}
-											@endif										
+												@endif											
 								              <table class="table table-bordered">
 												<thead>
 													<tr>

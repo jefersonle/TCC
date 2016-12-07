@@ -80,76 +80,76 @@
 			<div class="category-list">
 				<div id="parentVerticalTab">
 					<ul class="resp-tabs-list hor_1">						
-						<li id="anunciosLink" onclick="location.href = '{{url("/admin/anuncios")}}';">Anúncios</li>
-						<li id="categoriasLink" onclick="location.href = '{{url("/admin/categorias")}}';">Categorias</li>
-						<li id="categoriasLink" onclick="location.href = '{{url("/admin/entrega")}}';">Formas de Entrega</li>
-						<li id="categoriasLink" onclick="location.href = '{{url("/admin/pagamento")}}';">Formas de Pagamento</li>
-						<li id="categoriasLink" onclick="location.href = '{{url("/admin/moedas")}}';">Moedas</li>
-						<li id="categoriasLink" onclick="location.href = '{{url("/admin/statuslist")}}';">Status</li>
-						<li id="comentariosLink" class="active resp-tab-active" onclick="location.href = '{{url("/admin/comentarios")}}';">Comentários</li>
-						<li id="mensagensLink" onclick="location.href = '{{url("/admin/mensagens")}}';">Mensagens</li>
-						<li id="denunciasLink" onclick="location.href = '{{url("/admin/denuncias")}}';">Denúncias</li>
-						<li id="cidadesLink" onclick="location.href = '{{url("/admin/cidades")}}';">Cidades</li>
-						<li id="estadosLink" onclick="location.href = '{{url("/admin/estados")}}';">Estados</li>
-						<li id="usuariosLink" onclick="location.href = '{{url("/admin/usuarios")}}';">Usuários</li>
-						<li onclick="location.href = '{{url("/admin/perfil")}}';">Perfil</li>						
+						<li id="anunciosLink" onclick="location.href = '{{url("/dashboard/anuncios")}}';">Anúncios</li>	
+						<li id="comentariosLink" onclick="location.href = '{{url("/dashboard/comentarios")}}';">Comentários</li>
+						<li id="mensagensLink" class="active resp-tab-active" onclick="location.href = '{{url("/dashboard/mensagens")}}';">Mensagens</li>						
+						<li onclick="location.href = '{{url("/dashboard/perfil")}}';">Perfil</li>						
 						<a href="{{ url('/logout') }}">Sair</a>
 
 					</ul>
-					<div class="resp-tabs-container hor_1">						
+					<div class="resp-tabs-container hor_1">					
 						
 						<div>
 							<div class="category">
-								 <div class="grid_3 grid_5">
-								     <h3 class="head-top">Comentários</h3>								       
-									    <div class="col-md-12 page_1">	
-									    		@if(session()->has('msg'))
-												<div class="clearfix"></div>
+								<h3 class="head-top">Enviar Mensagem</h3>
+								@if(session()->has('msg'))
+									<div class="clearfix"></div>
 												
-													<div class="alert alert-success" role="alert">{{session('msg')}}
-												</div>
-												
-												
-												{{session()->forget('msg')}}
-												@endif			
-								              <table class="table table-bordered">
-												<thead>
-													<tr>
-														<th width="25%">Produto</th>
-														<th width="25%">Autor</th>
-														<th width="25%">Comentário</th>
-														<th width="25%">Data</th>
-														<th width="25%">Ação</th>
-													</tr>
-												</thead>
-												<tbody>												
-												@forelse($comentarios as $comentario)
-													<tr>
-														<td>{{$comentario->anuncio->titulo}}</td>
-														<td>{{$comentario->user->name}}</td>
-														<td>{{$comentario->comentario}}</td>
-														<td>{{$comentario->updated_at}}</td>
-														<td><a href="{{url('/anuncio/show')}}/{{$comentario->anuncio->id}}" target="_blank"><span class="label label-primary">Visualizar</span></a>
-														<a href="{{url('/admin/comentarios/destroy')}}/{{$comentario->id}}"><span class="label label-danger"  onclick="if(!confirm('Tem certeza que deseja excluir este comentário?')) return false;">Excluir</span></a></td>
-													</tr>
-													@empty
-														<tr>
-															<td colspan="5">Nenhum comentario encontrado</td>
-														</tr>
-													@endforelse
-													
-													
-													
-												</tbody>
-											  </table> 
-											  {!! $comentarios->render() !!}
+										<div class="alert alert-success" role="alert">{{session('msg')}}
+									</div>	
+									{{session()->forget('msg')}}
+								@endif		
 
-										</div>										
-									   <div class="clearfix"> </div>  
-									  
-								    </div>									
-							</div>							
-						</div>						
+								@foreach ($errors->all() as $message) 
+									<div class="clearfix"></div>
+									<div class="alert alert-danger" role="alert">{{$message}}</div>
+								@endforeach
+								<form class="form-horizontal" method="POST" action="{{url('/dashboard/mensagens/store')}}">
+								{{ csrf_field() }}								
+										<div class="form-group">
+											<label for="selector1" class="col-sm-3 control-label">Para</label>
+											<div class="col-sm-9"><select name="para_user_id" id="paraUser" class="form-control1">
+												<option value="">Selecione um destinatário...</option>
+												@forelse($usuarios as $usuario)
+												<option value="{{$usuario->id}}">{{$usuario->name}}</option>
+												@empty
+												<option value="">Nenhum usuário encontrado.</option>
+												@endforelse
+
+											</select></div>
+										</div>
+										@if(isset($respostapara))
+											<div class="form-group">
+											<label for="focusedinput" class="col-sm-3 control-label">Mensagem Recebida:</label>											
+											<div class="col-sm-9 jlkdfj1">
+												<p class="help-block">{{$respostapara->msg}}</p>
+											</div>
+										</div>
+										@endif
+										<div class="form-group">
+											<label for="focusedinput" class="col-sm-3 control-label">
+											@if(isset($respostapara))
+												Resposta:
+											@else
+												Mensagem:
+											@endif
+											</label>
+											<div class="col-sm-9">
+												<textarea rows="10" name="msg" class="mess form-control1"></textarea>
+											</div>
+											
+										</div>
+										
+										<div class="form-group">											
+											<div class="col-sm-12">
+												<input type="submit" class="btn btn-block" value="Salvar Alterações">
+											</div>											
+										</div>
+									</form>
+								<div class="clearfix"></div>
+							</div>
+							
+						</div>
 			
 					</div>
 					<div class="clearfix"></div>
@@ -168,17 +168,19 @@
             fit: true, // 100% fit in a container
             closed: 'accordion', // Start closed if in accordion view
             tabidentify: 'hor_1', // The tab groups identifier
-            activate: function(event) { // Callback function if tab is switched
-                var $tab = $(this);
-                var $info = $('#nested-tabInfo2');
-                var $name = $('span', $info);
-                $name.text($tab.text());
-                $info.show();
-            }
+            
         });
 
         $("#anunciosLink").removeClass("active resp-tab-active");
+
         $(".resp-tabs-list li").attr("aria-controls", "");
+
+        @if(isset($respostapara))
+			$("#paraUser").val({{$respostapara->de_user_id}});
+			$("#paraUser").css('pointer-events','none');
+			
+			
+		@endif
 
     });
 </script>

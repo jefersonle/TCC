@@ -26,7 +26,7 @@ class User extends Authenticatable
 
     public function anuncios()
     {
-        return $this->hasMany('App\Models\Anuncio');
+        return $this->hasMany('App\Models\Anuncio')->orderBy('created_at', 'DESC');
     }
     public function comentarios()
     {
@@ -35,12 +35,12 @@ class User extends Authenticatable
 
     public function mensagensenviadas()
     {
-        return $this->hasMany('App\Models\Mensagem', 'de_user_id');
+        return $this->hasMany('App\Models\Mensagem', 'de_user_id')->orderBy('created_at', 'DESC');
     }
 
      public function mensagensrecebidas()
     {
-        return $this->hasMany('App\Models\Mensagem', 'para_user_id');
+        return $this->hasMany('App\Models\Mensagem', 'para_user_id')->orderBy('created_at', 'DESC');
     }
 
     public function city()

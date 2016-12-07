@@ -193,10 +193,10 @@
                                             @else
                                                 <img src="images/p1.jpg"/>
                                             @endif
-                                            <span class="price">R&#36; {{ $anuncio->valor }}</span>
+                                            <span class="price">{{$anuncio->moeda->cifra}} {{substr_replace($anuncio->valor, ",", strlen($anuncio->valor)-2).substr($anuncio->valor, strlen($anuncio->valor)-2)}}</span>
                                         </a> 
                                         <div class="ad-info">
-                                            <h5>{{ $anuncio->titulo }}</h5>
+                                            <h5>{{ substr($anuncio->titulo,0, 35) }}...</h5>
                                             <span>{{ $anuncio->created_at }}</span>
                                         </div>
                                     </div>

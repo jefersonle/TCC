@@ -56,6 +56,14 @@
 		</script>
 		<link rel="stylesheet" type="text/css" href="{{ url('/') }}/css/easy-responsive-tabs.css " />
     <script src="{{ url('/') }}/js/easyResponsiveTabs.js"></script>
+    <script src="{{ url('/') }}/js/inputmask.js"></script>
+    <script type="text/javascript">
+    	$(document).ready(function(){
+    		$('#cpf').mask('000.000.000-00', {reverse: true});
+    		$('#telefone').mask('(00) 9 0000-0000');
+    		$('#whatsapp').mask('(00) 9 0000-0000');
+    	});
+    </script>
     
 @endsection
 
@@ -80,19 +88,10 @@
 			<div class="category-list">
 				<div id="parentVerticalTab">
 					<ul class="resp-tabs-list hor_1">						
-						<li id="anunciosLink" onclick="location.href = '{{url("/admin/anuncios")}}';">Anúncios</li>
-						<li id="categoriasLink" onclick="location.href = '{{url("/admin/categorias")}}';">Categorias</li>
-						<li id="categoriasLink" onclick="location.href = '{{url("/admin/entrega")}}';">Formas de Entrega</li>
-						<li id="categoriasLink" onclick="location.href = '{{url("/admin/pagamento")}}';">Formas de Pagamento</li>
-						<li id="categoriasLink" onclick="location.href = '{{url("/admin/moedas")}}';">Moedas</li>
-						<li id="categoriasLink" onclick="location.href = '{{url("/admin/statuslist")}}';">Status</li>
-						<li id="comentariosLink" onclick="location.href = '{{url("/admin/comentarios")}}';">Comentários</li>
-						<li id="mensagensLink" onclick="location.href = '{{url("/admin/mensagens")}}';">Mensagens</li>
-						<li id="denunciasLink" onclick="location.href = '{{url("/admin/denuncias")}}';">Denúncias</li>
-						<li id="cidadesLink" onclick="location.href = '{{url("/admin/cidades")}}';">Cidades</li>
-						<li id="estadosLink" onclick="location.href = '{{url("/admin/estados")}}';">Estados</li>
-						<li id="usuariosLink" class="active resp-tab-active" onclick="location.href = '{{url("/admin/usuarios")}}';">Usuários</li>
-						<li onclick="location.href = '{{url("/admin/perfil")}}';">Perfil</li>						
+						<li id="anunciosLink" onclick="location.href = '{{url("/dashboard/anuncios")}}';">Anúncios</li>	
+						<li id="comentariosLink" onclick="location.href = '{{url("/dashboard/comentarios")}}';">Comentários</li>
+						<li id="mensagensLink" onclick="location.href = '{{url("/dashboard/mensagens")}}';">Mensagens</li>						
+						<li class="active resp-tab-active" onclick="location.href = '{{url("/dashboard/perfil")}}';">Perfil</li>						
 						<a href="{{ url('/logout') }}">Sair</a>
 
 					</ul>
@@ -100,7 +99,7 @@
 						
 						<div>
 							<div class="category">
-								<h3 class="head-top">Informações do Usuário</h3>
+								<h3 class="head-top">Meu Perfil</h3>
 								@if(session()->has('msg'))
 									<div class="clearfix"></div>
 												
@@ -113,22 +112,14 @@
 									<div class="clearfix"></div>
 									<div class="alert alert-danger" role="alert">{{$message}}</div>
 								@endforeach
-
-								@if(isset($edit) && $edit)
-								<form class="form-horizontal" method="POST" action="{{url('/admin/usuarios/update')}}/{{$usuario->id}}">
-								@else
-								<form class="form-horizontal" method="POST" action="{{url('/admin/usuarios/store')}}">
-								@endif
-
-
-								
+								<form class="form-horizontal" method="POST" action="{{url('/dashboard/perfil/store')}}">
 								{{ csrf_field() }}
-										<div class="form-group" method="POST" action="{{url('/admin/usuarios/store')}}">
+										<div class="form-group">
 											<label for="focusedinput" class="col-sm-2 control-label">Nome</label>
 											<div class="col-sm-8">
 												<input type="text" name="nome" class="form-control1" id="focusedinput" placeholder="Digite o nome do usuário..."
-												@if(isset($edit) && $edit)
-													value="{{$usuario->name}}"
+												@if(null !== Auth::user()->name)
+													value="{{Auth::user()->name}}"
 												@endif
 												>
 											</div>
@@ -140,8 +131,8 @@
 											<label for="focusedinput" class="col-sm-2 control-label">Email</label>
 											<div class="col-sm-8">
 												<input type="email" name="email" class="form-control1" id="focusedinput" placeholder="Digite o email do usuário..."
-												@if(isset($edit) && $edit)
-													value="{{$usuario->email}}"
+												@if(null !== Auth::user()->email)
+													value="{{Auth::user()->email}}"
 												@endif
 												>
 											</div>
@@ -170,9 +161,9 @@
 										<div class="form-group">
 											<label for="focusedinput" class="col-sm-2 control-label">CPF:</label>
 											<div class="col-sm-8">
-												<input type="text" name="cpf" class="form-control1" id="focusedinput" placeholder="Digite o CPF do usuário..."
-												@if(isset($edit) && $edit)
-													value="{{$usuario->cpf}}"
+												<input type="text" name="cpf" class="form-control1" id="cpf" placeholder="Digite o CPF do usuário..."
+												@if(null !== Auth::user()->cpf)
+													value="{{Auth::user()->cpf}}"
 												@endif
 												>
 											</div>
@@ -183,9 +174,9 @@
 										<div class="form-group">
 											<label for="focusedinput" class="col-sm-2 control-label">Telefone:</label>
 											<div class="col-sm-8">
-												<input type="text" name="telefone" class="form-control1" id="focusedinput" placeholder="Digite o telefone do usuário..."
-												@if(isset($edit) && $edit)
-													value="{{$usuario->contato_fone}}"
+												<input type="text" name="telefone" class="form-control1" id="telefone" placeholder="Digite o telefone do usuário..."
+												@if(null !== Auth::user()->contato_fone)
+													value="{{Auth::user()->contato_fone}}"
 												@endif
 												>
 											</div>
@@ -196,9 +187,9 @@
 										<div class="form-group">
 											<label for="focusedinput" class="col-sm-2 control-label">WhatsApp:</label>
 											<div class="col-sm-8">
-												<input type="text" name="whatsapp" class="form-control1" id="focusedinput" placeholder="Digite o WhatsApp do usuário..."
-												@if(isset($edit) && $edit)
-													value="{{$usuario->contato_whatsapp}}"
+												<input type="text" name="whatsapp" class="form-control1" id="whatsapp" placeholder="Digite o WhatsApp do usuário..."
+												@if(null !== Auth::user()->contato_whatsapp)
+													value="{{Auth::user()->contato_whatsapp}}"
 												@endif
 												>
 											</div>
@@ -210,8 +201,8 @@
 											<label for="focusedinput" class="col-sm-2 control-label">Facebook:</label>
 											<div class="col-sm-8">
 												<input type="text" name="facebook" class="form-control1" id="focusedinput" placeholder="Digite o link do perfil do usuário no facebook..."
-												@if(isset($edit) && $edit)
-													value="{{$usuario->contato_facebook}}"
+												@if(null !== Auth::user()->contato_facebook)
+													value="{{Auth::user()->contato_facebook}}"
 												@endif
 												>
 											</div>
@@ -223,8 +214,8 @@
 											<label for="focusedinput" class="col-sm-2 control-label">CEP:</label>
 											<div class="col-sm-8">
 												<input type="text" name="cep" class="form-control1" id="focusedinput" placeholder="Digite o CEP do usuário..."
-												@if(isset($edit) && $edit)
-													value="{{$usuario->cep}}"
+												@if(null !== Auth::user()->cep)
+													value="{{Auth::user()->cep}}"
 												@endif
 												>
 											</div>
@@ -234,14 +225,22 @@
 										</div>
 										<div class="form-group">
 											<label for="selector1" class="col-sm-2 control-label">Estado</label>
-											<div class="col-sm-8"><select name="estado" id="estados" class="form-control1" onchange="loadCidades(this);">
+											<div class="col-sm-8"><select name="estado" id="estado" class="form-control1" onchange="loadCidades(this);">
 												<option value="">Selecione um estado.</option>
-												@foreach($estados as $estado)
-												<option value="{{$estado->id}}">{{$estado->nome}}</option>
-												@endforeach
+												@forelse($estados as $estado)
+												<option value="{{$estado->id}}"
+												@if(Auth::user()->cidade_id !="" && Auth::user()->cidade_id != null)
+													@if(Auth::user()->city->estado_id == $estado->id)
+														selected="selected"
+													@endif
+												@endif
+
+												>{{$estado->nome}}</option>
+												@empty
+												<option value="">Nenhum estado encontrado.</option>
+												@endforelse
 											</select></div>
-											
-										</div>
+										</div>										
 										<div class="form-group">
 											<label for="selector1" class="col-sm-2 control-label">Cidade</label>
 											<div class="col-sm-8"><select name="cidade_id" id="selectCidadesForm" class="form-control1">
@@ -252,8 +251,8 @@
 											<label for="focusedinput" class="col-sm-2 control-label">Logradouro:</label>
 											<div class="col-sm-8">
 												<input type="text" name="logradouro" class="form-control1" id="focusedinput" placeholder="Digite o logradouro do usuário..."
-												@if(isset($edit) && $edit)
-													value="{{$usuario->logradouro}}"
+												@if(null !== Auth::user()->logradouro)
+													value="{{Auth::user()->logradouro}}"
 												@endif
 												>
 											</div>
@@ -265,8 +264,8 @@
 											<label for="focusedinput" class="col-sm-2 control-label">Número:</label>
 											<div class="col-sm-8">
 												<input type="text" name="numero" class="form-control1" id="focusedinput" placeholder="Digite o número da casa do usuário..."
-												@if(isset($edit) && $edit)
-													value="{{$usuario->numero}}"
+												@if(null !== Auth::user()->numero)
+													value="{{Auth::user()->numero}}"
 												@endif
 												>
 											</div>
@@ -278,8 +277,8 @@
 											<label for="focusedinput" class="col-sm-2 control-label">Complemento:</label>
 											<div class="col-sm-8">
 												<input type="text" name="complemento" class="form-control1" id="focusedinput" placeholder="Digite um complemento..."
-												@if(isset($edit) && $edit)
-													value="{{$usuario->complemento}}"
+												@if(null !== Auth::user()->complemento)
+													value="{{Auth::user()->complemento}}"
 												@endif
 												>
 											</div>
@@ -291,8 +290,8 @@
 											<label for="focusedinput" class="col-sm-2 control-label">Bairro:</label>
 											<div class="col-sm-8">
 												<input type="text" name="bairro" class="form-control1" id="focusedinput" placeholder="Digite o bairro do usuário..."
-												@if(isset($edit) && $edit)
-													value="{{$usuario->bairro}}"
+												@if(null !== Auth::user()->bairro)
+													value="{{Auth::user()->bairro}}"
 												@endif
 												>
 											</div>
@@ -306,13 +305,6 @@
 												<input type="submit" class="btn btn-block" value="Salvar">
 											</div>											
 										</div>
-										@if(isset($edit) && $edit)
-										<div class="form-group">						
-											<div class="col-sm-12">
-												<a href="{{url('/admin/usuarios')}}" class="btn btn-block">Cancelar</a>
-											</div>											
-										</div>
-										@endif
 									</form>
 								<div class="clearfix"></div>
 							</div>
@@ -341,17 +333,16 @@
 
         $("#anunciosLink").removeClass("active resp-tab-active");
 
-        $(".resp-tabs-list li").attr("aria-controls", "");
-     	
-     	@if(isset($edit) && $edit && $usuario->city()->count() != 0)
-			$("#estados").val({{$usuario->city->estado->id}});
+        $(".resp-tabs-list li").attr("aria-controls", "");        
 
-			var estadoId = "{{Auth::user()->city->estado_id}}"
-			var Obj = {"value": estadoId};
-			console.log(Obj);
-
-		    loadCidades(Obj); 
+        @if(Auth::user()->cidade_id !="" && Auth::user()->cidade_id != null)
+			var Obj = {"value":"{{Auth::user()->city->estado_id}}"};
+        	loadCidades(Obj);
+			
 		@endif
+
+        
+        
 
     });
 </script>

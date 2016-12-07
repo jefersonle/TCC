@@ -323,6 +323,8 @@ var elem=$('#container ul');
 
 														<option value="">Ordenar</option>
 
+														<option value="top">Relevancia</option>
+
 														<option value="recente">Mais recente</option>
 
 														<option value="antigo">Mais Antigos</option>
@@ -359,7 +361,7 @@ var elem=$('#container ul');
 
 									<h5 class="title">{{ $anuncio->titulo }}</h5>
 
-									<span class="adprice">{{ $anuncio->valor }}</span>
+									<span class="adprice">{{ $anuncio->moeda->cifra }} {{substr_replace($anuncio->valor, ",", strlen($anuncio->valor)-2).substr($anuncio->valor, strlen($anuncio->valor)-2)}}</span>
 
 									<p class="catpath">{{ $anuncio->categoria->nome }}</p>
 

@@ -80,19 +80,10 @@
 			<div class="category-list">
 				<div id="parentVerticalTab">
 					<ul class="resp-tabs-list hor_1">						
-						<li id="anunciosLink" onclick="location.href = '{{url("/admin/anuncios")}}';">Anúncios</li>
-						<li id="categoriasLink" onclick="location.href = '{{url("/admin/categorias")}}';">Categorias</li>
-						<li id="categoriasLink" onclick="location.href = '{{url("/admin/entrega")}}';">Formas de Entrega</li>
-						<li id="categoriasLink" onclick="location.href = '{{url("/admin/pagamento")}}';">Formas de Pagamento</li>
-						<li id="categoriasLink" onclick="location.href = '{{url("/admin/moedas")}}';">Moedas</li>
-						<li id="categoriasLink" onclick="location.href = '{{url("/admin/statuslist")}}';">Status</li>
-						<li id="comentariosLink" class="active resp-tab-active" onclick="location.href = '{{url("/admin/comentarios")}}';">Comentários</li>
-						<li id="mensagensLink" onclick="location.href = '{{url("/admin/mensagens")}}';">Mensagens</li>
-						<li id="denunciasLink" onclick="location.href = '{{url("/admin/denuncias")}}';">Denúncias</li>
-						<li id="cidadesLink" onclick="location.href = '{{url("/admin/cidades")}}';">Cidades</li>
-						<li id="estadosLink" onclick="location.href = '{{url("/admin/estados")}}';">Estados</li>
-						<li id="usuariosLink" onclick="location.href = '{{url("/admin/usuarios")}}';">Usuários</li>
-						<li onclick="location.href = '{{url("/admin/perfil")}}';">Perfil</li>						
+						<li id="anunciosLink" onclick="location.href = '{{url("/dashboard/anuncios")}}';">Anúncios</li>	
+						<li id="comentariosLink" class="active resp-tab-active" onclick="location.href = '{{url("/dashboard/comentarios")}}';">Comentários</li>
+						<li id="mensagensLink" onclick="location.href = '{{url("/dashboard/mensagens")}}';">Mensagens</li>						
+						<li onclick="location.href = '{{url("/dashboard/perfil")}}';">Perfil</li>						
 						<a href="{{ url('/logout') }}">Sair</a>
 
 					</ul>
@@ -101,7 +92,7 @@
 						<div>
 							<div class="category">
 								 <div class="grid_3 grid_5">
-								     <h3 class="head-top">Comentários</h3>								       
+								     <h3 class="head-top">Meus Comentários</h3>								       
 									    <div class="col-md-12 page_1">	
 									    		@if(session()->has('msg'))
 												<div class="clearfix"></div>
@@ -123,14 +114,14 @@
 													</tr>
 												</thead>
 												<tbody>												
-												@forelse($comentarios as $comentario)
+												@forelse(Auth::user()->comentarios as $comentario)
 													<tr>
 														<td>{{$comentario->anuncio->titulo}}</td>
 														<td>{{$comentario->user->name}}</td>
 														<td>{{$comentario->comentario}}</td>
 														<td>{{$comentario->updated_at}}</td>
 														<td><a href="{{url('/anuncio/show')}}/{{$comentario->anuncio->id}}" target="_blank"><span class="label label-primary">Visualizar</span></a>
-														<a href="{{url('/admin/comentarios/destroy')}}/{{$comentario->id}}"><span class="label label-danger"  onclick="if(!confirm('Tem certeza que deseja excluir este comentário?')) return false;">Excluir</span></a></td>
+														<a href="{{url('/dashboard/comentarios/destroy')}}/{{$comentario->id}}"><span class="label label-danger"  onclick="if(!confirm('Tem certeza que deseja excluir este comentário?')) return false;">Excluir</span></a></td>
 													</tr>
 													@empty
 														<tr>
@@ -142,7 +133,7 @@
 													
 												</tbody>
 											  </table> 
-											  {!! $comentarios->render() !!}
+										
 
 										</div>										
 									   <div class="clearfix"> </div>  

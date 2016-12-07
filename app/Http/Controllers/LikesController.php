@@ -12,6 +12,8 @@ use App\Models\Anuncio;
 
 use App\Models\Denuncia;
 
+use App\Models\Likes;
+
 class LikesController extends Controller
 {
     /**
@@ -42,24 +44,50 @@ class LikesController extends Controller
      */
     public function postGostei(Request $request)
     {
-        $anuncio = Anuncio::find($request->anuncio_id);
+        $like = Likes::where('anuncio_id', $request->anuncio_id)->where('user_id', $request->user_id)->where('tipo', 1)->first();
 
-        $anuncio->gostei = $anuncio->gostei + 1;
+        if($like){
+            return "Voce já havia clicado em gostei neste anúncio antes!";
+        }else{
 
-        $anuncio->save();
+            $like = new Likes();
+            $like->tipo = 1;
+            $like->user_id = $request->user_id;
+            $like->anuncio_id = $request->anuncio_id;
+            $like->save();
 
-        return "Você gostou do anuncio";
+            $anuncio = Anuncio::find($request->anuncio_id);
+
+            $anuncio->gostei = $anuncio->gostei + 1;
+
+            $anuncio->save();
+
+            return "Seu gostei foi adicionado ao anúncio!";
+        }
     }
 
     public function postNaogostei(Request $request)
     {
-        $anuncio = Anuncio::find($request->anuncio_id);
+        $like = Likes::where('anuncio_id', $request->anuncio_id)->where('user_id', $request->user_id)->where('tipo', 0)->first();
 
-        $anuncio->nao_gostei = $anuncio->nao_gostei + 1;
+        if($like){
+            return "Voce já havia clicado em não gostei neste anúncio antes!";
+        }else{
 
-        $anuncio->save();
+            $like = new Likes();
+            $like->tipo = 0;
+            $like->user_id = $request->user_id;
+            $like->anuncio_id = $request->anuncio_id;
+            $like->save();
+            
+            $anuncio = Anuncio::find($request->anuncio_id);
 
-        return "Você não gostou do anuncio";
+            $anuncio->nao_gostei = $anuncio->nao_gostei + 1;
+
+            $anuncio->save();
+
+           return "Seu não gostei foi adicionado ao anúncio!";
+        }
     }
 
     public function postDenunciar(Request $request)
@@ -67,7 +95,7 @@ class LikesController extends Controller
         $busca = Denuncia::where('anuncio_id', $request->anuncio_id)->get();
 
         if($busca->count()){
-            return "Este anuncio já está sendo analisado";
+            return "Este anúncio já está sendo analisado pelo suporte. Obrigado!";
         }else{
             $denuncia = new Denuncia();
 
@@ -75,7 +103,7 @@ class LikesController extends Controller
 
             $denuncia->save();
 
-            return "Você denunciou o anuncio";
+            return "Sua denúncia para este anúncio foi recebida com sucesso e será analisada pela equipe de suporte. Obrigado!";
         }
 
         

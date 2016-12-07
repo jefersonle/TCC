@@ -104,9 +104,14 @@
 								     <h3 class="head-top">Denúncias</h3>								       
 									    <div class="col-md-12 page_1">
 									    	@if(session()->has('msg'))
-												<div class="alert">{{session('msg')}}</div>
+												<div class="clearfix"></div>
+												
+													<div class="alert alert-success" role="alert">{{session('msg')}}
+												</div>
+												
+												
 												{{session()->forget('msg')}}
-											@endif											
+												@endif											
 								              <table class="table table-bordered">
 												<thead>
 													<tr>														

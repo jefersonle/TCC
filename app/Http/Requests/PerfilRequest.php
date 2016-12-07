@@ -27,7 +27,7 @@ class PerfilRequest extends Request
             'nome' => 'required|max:255',
             'email' => 'required|email',
             'senha' => 'min:8|max:255|confirmed',
-            'cpf' => 'min:11|max:11',
+            'cpf' => 'min:11|max:14',
         ];
     }
 

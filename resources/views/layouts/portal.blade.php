@@ -51,8 +51,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 @if(null !== Auth::user())
                   @if(isset($tipo) && $tipo == "editar")
                       var user_cidade = 0;
-                  @else
+                  @elseif(Auth::user()->cidade_id != 0 && Auth::user()->cidade_id != "")
                       var user_cidade = '{{Auth::user()->cidade_id}}';
+                  @else
+                     var user_cidade = 0;
                   @endif
                   
                 @else
@@ -98,8 +100,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         }   
   $(document).ready(function () {   
     var estados = [];    
-                @if(null !== Auth::user())
-                  var user_estado = '{{Auth::user()->city->estado_id}}';
+                @if(null !== Auth::user() && Auth::user()->city()->count() != 0)                  
+                    var user_estado = '{{Auth::user()->city->estado_id}}';                  
                 @else
                   var user_estado = 0;
                 @endif
@@ -163,11 +165,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
                 <div class="col-md-7 col-sm-12 col-xs-12 pull-right">
                    @if (Auth::guest())
-                            <a class="account pull-right text-center" href="{{ url('/dashboard/anuncio') }}">Acessar Minha Conta</a>
+                            <a class="account pull-right text-center" href="{{ url('/dashboard/anuncios') }}">Acessar Minha Conta</a>
                   @else
                             
                             <a class="account pull-right text-center col-sm-4 col-xs-12" href="{{ url('/logout') }}">Sair</a>
-                            <a class="account pull-right text-center col-sm-4 col-xs-12" style="border-right:1px solid #DDD;" href="{{ url('/dashboard/anuncio') }}">Meu Painel</a>  
+                            <a class="account pull-right text-center col-sm-4 col-xs-12" style="border-right:1px solid #DDD;" href="{{ url('/dashboard/anuncios') }}">Meu Painel</a>  
                             @if(Auth::user()->id == 1)
                                 <a class="account pull-right text-center col-sm-4 col-xs-12" href="{{ url('/admin/anuncios') }}" style="border-right: 1px solid #DDD;">Gerenciar</a>  
                             @endif

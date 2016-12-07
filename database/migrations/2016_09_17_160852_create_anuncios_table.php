@@ -46,7 +46,7 @@ class CreateAnunciosTable extends Migration
 
             $table->text('descricao', 4096);
 
-            $table->float('valor', 12, 2);
+            $table->integer('valor', 16);
 
             $table->string('condicao');
 
