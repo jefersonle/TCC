@@ -56,6 +56,15 @@
 		</script>
 		<link rel="stylesheet" type="text/css" href="{{ url('/') }}/css/easy-responsive-tabs.css " />
     <script src="{{ url('/') }}/js/easyResponsiveTabs.js"></script>
+    <script src="{{ url('/') }}/js/inputmask.js"></script>
+    <script type="text/javascript">
+    	$(document).ready(function(){
+    		$('#cpf').mask('000.000.000-00', {reverse: true});
+    		$('#telefone').mask('(00) 9 0000-0000');
+    		$('#whatsapp').mask('(00) 9 0000-0000');
+    		$('#cep').mask('00000-000');
+    	});
+    </script>
     
 @endsection
 
@@ -170,7 +179,7 @@
 										<div class="form-group">
 											<label for="focusedinput" class="col-sm-2 control-label">CPF:</label>
 											<div class="col-sm-8">
-												<input type="text" name="cpf" class="form-control1" id="focusedinput" placeholder="Digite o CPF do usuário..."
+												<input type="text" name="cpf" class="form-control1" id="cpf" placeholder="Digite o CPF do usuário..."
 												@if(isset($edit) && $edit)
 													value="{{$usuario->cpf}}"
 												@endif
@@ -183,7 +192,7 @@
 										<div class="form-group">
 											<label for="focusedinput" class="col-sm-2 control-label">Telefone:</label>
 											<div class="col-sm-8">
-												<input type="text" name="telefone" class="form-control1" id="focusedinput" placeholder="Digite o telefone do usuário..."
+												<input type="text" name="telefone" class="form-control1" id="telefone" placeholder="Digite o telefone do usuário..."
 												@if(isset($edit) && $edit)
 													value="{{$usuario->contato_fone}}"
 												@endif
@@ -196,7 +205,7 @@
 										<div class="form-group">
 											<label for="focusedinput" class="col-sm-2 control-label">WhatsApp:</label>
 											<div class="col-sm-8">
-												<input type="text" name="whatsapp" class="form-control1" id="focusedinput" placeholder="Digite o WhatsApp do usuário..."
+												<input type="text" name="whatsapp" class="form-control1" id="whatsapp" placeholder="Digite o WhatsApp do usuário..."
 												@if(isset($edit) && $edit)
 													value="{{$usuario->contato_whatsapp}}"
 												@endif
@@ -222,7 +231,7 @@
 										<div class="form-group">
 											<label for="focusedinput" class="col-sm-2 control-label">CEP:</label>
 											<div class="col-sm-8">
-												<input type="text" name="cep" class="form-control1" id="focusedinput" placeholder="Digite o CEP do usuário..."
+												<input type="text" name="cep" class="form-control1" id="cep" placeholder="Digite o CEP do usuário..."
 												@if(isset($edit) && $edit)
 													value="{{$usuario->cep}}"
 												@endif

@@ -62,6 +62,7 @@
     		$('#cpf').mask('000.000.000-00', {reverse: true});
     		$('#telefone').mask('(00) 9 0000-0000');
     		$('#whatsapp').mask('(00) 9 0000-0000');
+    		$('#cep').mask('00000-000');
     	});
     </script>
     
@@ -213,7 +214,7 @@
 										<div class="form-group">
 											<label for="focusedinput" class="col-sm-2 control-label">CEP:</label>
 											<div class="col-sm-8">
-												<input type="text" name="cep" class="form-control1" id="focusedinput" placeholder="Digite o CEP do usuário..."
+												<input type="text" name="cep" class="form-control1" id="cep" placeholder="Digite o CEP do usuário..."
 												@if(null !== Auth::user()->cep)
 													value="{{Auth::user()->cep}}"
 												@endif
