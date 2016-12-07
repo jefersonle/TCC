@@ -69,9 +69,50 @@
 
     <!-- content-starts-here -->
         <div class="content">
+            <div class="container">
+                <div class="select-box">
+
+                    <div>
+                        <form action="{{url('/')}}/anuncio/busca" method="GET">
+                            
+                        <div class="search">
+
+                            <div id="custom-search-input">
+
+                            <div class="input-group">                           
+
+                                    <input type="text" class="form-control input-lg text-center" name="keyword" placeholder="Buscar produtos no site!"/>
+
+                                    <span class="input-group-btn">
+
+                                        <button class="btn btn-info btn-lg" type="button" onclick="submit();">
+
+                                            <i class="glyphicon glyphicon-search"></i>
+
+                                        </button>
+
+                                    </span>
+                    
+                            </div>
+
+                        </div>
+
+                        </div>
+                    </form>
+
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                </div>
+            </div>
             <div class="categories">
                 <div class="container">
+                    <div class="col-md-12 text-center">
+                            <h2 class="categorias-h2">Categorias</h2>
+                        </div>
                     <div class="col-md-2 focus-grid">
+                        
                         <a href="{{ url('/') }}/categoria">
                             <div class="focus-border">
                                 <div class="focus-layout">
@@ -134,7 +175,7 @@
                     
                     <div class="clearfix"></div>
                 </div>
-            </div>
+            </div>            
             <div class="trending-ads">
                 <div class="container">
                 <!-- slider -->

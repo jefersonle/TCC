@@ -864,7 +864,7 @@ ul#flexiselDemo3.nbs-flexisel-nav-left, ul#flexiselDemo3.nbs-flexisel-nav-right 
     width: 90%;
     margin: 0 auto;
 }
-.trend-ads h2 {
+.trend-ads h2, .categorias-h2{
     color: #f3c500;
     font-size: 40px;
     margin-bottom: 35px;

@@ -92,21 +92,35 @@ class AnuncioController extends Controller
 
 
 
-    public function getIndex()
+    public function getIndex(Request $request)
 
 
 
     {
 
+        if(isset($request->f)){
+            switch ($request->f) {
+                case 'antigo':
+                    $anuncios = Anuncio::orderBy('updated_at', 'ASC')->get();
+                    break;
+                case 'recente':
+                   $anuncios = Anuncio::orderBy('updated_at', 'DESC')->get();
+                    break;
+                case 'menorpreco':
+                   $anuncios = Anuncio::orderBy('valor', 'ASC')->get();
+                    break;
+                case 'maiorpreco':
+                    $anuncios = Anuncio::orderBy('valor', 'DESC')->get();
+                    break;                
+            }
+         }else{
+            $anuncios = Anuncio::orderBy('updated_at', 'desc')->get();
+         }         
 
 
-        $anuncios = Anuncio::orderBy('updated_at', 'desc')->get();
+        $data['anuncios'] = $anuncios;
 
 
-
-        $data['anuncios'] = $anuncios;   
-
-        
         $data['bread1'] = "Categorias";
 
         $data['bread1a'] = "categoria";          
@@ -114,8 +128,9 @@ class AnuncioController extends Controller
         $data['bread2'] = "Todos os anúncios";
 
 
+        return view('anuncio', $data);  
 
-        return view('anuncio', $data);
+        
 
 
 
@@ -126,8 +141,6 @@ class AnuncioController extends Controller
 
 
     public function getCreate()
-
-
 
     {
 
@@ -144,20 +157,7 @@ class AnuncioController extends Controller
         return view('formanuncio', $data);
 
 
-
-
-
-
-
     }
-
-
-
-
-
-
-
-    
 
 
 
@@ -545,41 +545,43 @@ class AnuncioController extends Controller
 
      public function getCidade($id, Request $request)
 
-
-
     {
 
-        if(isset($request->f)){
-            switch ($request->f) {
-                case 'antigo':
-                    $anuncios = Anuncio::where('cidade_id', $id)->orderBy('updated_at', 'ASC')->get();
-                    break;
-                case 'recente':
-                    $anuncios = Anuncio::where('cidade_id', $id)->orderBy('updated_at', 'DESC')->get();
-                    break;
-                case 'menorpreco':
-                    $anuncios = Anuncio::where('cidade_id', $id)->orderBy('valor', 'ASC')->get();
-                    break;
-                case 'maiorpreco':
-                    $anuncios = Anuncio::where('cidade_id', $id)->orderBy('valor', 'DESC')->get();
-                    break;                
-            }
-         }else{
-            $anuncios = Anuncio::where('cidade_id', $id)->orderBy('updated_at', 'desc')->get();
-         }
+         $teste = Anuncio::where('cidade_id', $id)->orderBy('updated_at', 'desc')->first();
 
+        if($teste != null){
 
-        
+            if(isset($request->f)){
+                switch ($request->f) {
+                    case 'antigo':
+                        $anuncios = Anuncio::where('cidade_id', $id)->orderBy('updated_at', 'ASC')->get();
+                        break;
+                    case 'recente':
+                        $anuncios = Anuncio::where('cidade_id', $id)->orderBy('updated_at', 'DESC')->get();
+                        break;
+                    case 'menorpreco':
+                        $anuncios = Anuncio::where('cidade_id', $id)->orderBy('valor', 'ASC')->get();
+                        break;
+                    case 'maiorpreco':
+                        $anuncios = Anuncio::where('cidade_id', $id)->orderBy('valor', 'DESC')->get();
+                        break;                
+                }
+                $data['bread2'] = $anuncios[0]->cidade->nome;
+             }else{
+                $anuncios = Anuncio::where('cidade_id', $id)->orderBy('updated_at', 'desc')->get();
+             }
+            
 
+        }else{
+            $anuncios = array();
+        } 
 
 
         $data['anuncios'] = $anuncios;
 
 
-
         $data['bread1'] = "Cidade";
-        $data['bread1a'] = "cidade";
-        $data['bread2'] = $anuncios[0]->cidade->nome;
+        $data['bread1a'] = "categoria";     
        
         
 
@@ -597,42 +599,44 @@ class AnuncioController extends Controller
 
 
     {
+        $teste = Anuncio::where('ddd', $id)->orderBy('updated_at', 'desc')->first();
 
-        if(isset($request->f)){
-            switch ($request->f) {
-                case 'antigo':
-                    $anuncios = Anuncio::where('ddd', $id)->orderBy('updated_at', 'ASC')->get();
-                    break;
-                case 'recente':
-                    $anuncios = Anuncio::where('ddd', $id)->orderBy('updated_at', 'DESC')->get();
-                    break;
-                case 'menorpreco':
-                    $anuncios = Anuncio::where('ddd', $id)->orderBy('valor', 'ASC')->get();
-                    break;
-                case 'maiorpreco':
-                    $anuncios = Anuncio::where('ddd', $id)->orderBy('valor', 'DESC')->get();
-                    break;                
-            }
-         }else{
-            $anuncios = Anuncio::where('ddd', $id)->orderBy('updated_at', 'desc')->get();
-         }
+        if($teste != null){
+
+            if(isset($request->f)){
+                switch ($request->f) {
+                    case 'antigo':
+                        $anuncios = Anuncio::where('ddd', $id)->orderBy('updated_at', 'ASC')->get();
+                        break;
+                    case 'recente':
+                        $anuncios = Anuncio::where('ddd', $id)->orderBy('updated_at', 'DESC')->get();
+                        break;
+                    case 'menorpreco':
+                        $anuncios = Anuncio::where('ddd', $id)->orderBy('valor', 'ASC')->get();
+                        break;
+                    case 'maiorpreco':
+                        $anuncios = Anuncio::where('ddd', $id)->orderBy('valor', 'DESC')->get();
+                        break;                
+                }
+             }else{
+                $anuncios = Anuncio::where('ddd', $id)->orderBy('updated_at', 'desc')->get();
+             }
 
 
-        
+            $data['bread2'] = "Região com DDD ".$anuncios[0]->ddd; 
 
+        }else{
+            $anuncios = array();
+        }
 
 
         $data['anuncios'] = $anuncios;
 
-
-
         $data['bread1'] = "Regiao";
-        $data['bread1a'] = "regiao";
-        $data['bread2'] = "Região com DDD ".$anuncios[0]->ddd;   
+        $data['bread1a'] = "categoria";
+          
 
-        return view('anuncio', $data);        
-
-
+        return view('anuncio', $data);  
 
     }
 
@@ -680,38 +684,45 @@ class AnuncioController extends Controller
 
     public function getCategoria($id, Request $request)
 
-
-
     {
-         if(isset($request->f)){
-            switch ($request->f) {
-                case 'antigo':
-                    $anuncios = Anuncio::where('categoria_id', $id)->orderBy('updated_at', 'ASC')->get();
-                    break;
-                case 'recente':
-                    $anuncios = Anuncio::where('categoria_id', $id)->orderBy('updated_at', 'DESC')->get();
-                    break;
-                case 'menorpreco':
-                    $anuncios = Anuncio::where('categoria_id', $id)->orderBy('valor', 'ASC')->get();
-                    break;
-                case 'maiorpreco':
-                    $anuncios = Anuncio::where('categoria_id', $id)->orderBy('valor', 'DESC')->get();
-                    break;                
-            }
-         }else{
-            $anuncios = Anuncio::where('categoria_id', $id)->orderBy('updated_at', 'desc')->get();
-         }                
+        $teste = Anuncio::where('categoria_id', $id)->orderBy('updated_at', 'desc')->first();
+        
+        if($teste !=null){
+                if(isset($request->f)){
+                    switch ($request->f) {
+                        case 'antigo':
+                            $anuncios = Anuncio::where('categoria_id', $id)->orderBy('updated_at', 'ASC')->get();
+                            break;
+                        case 'recente':
+                            $anuncios = Anuncio::where('categoria_id', $id)->orderBy('updated_at', 'DESC')->get();
+                            break;
+                        case 'menorpreco':
+                            $anuncios = Anuncio::where('categoria_id', $id)->orderBy('valor', 'ASC')->get();
+                            break;
+                        case 'maiorpreco':
+                            $anuncios = Anuncio::where('categoria_id', $id)->orderBy('valor', 'DESC')->get();
+                            break;                
+                    }
+                 }else{
+                       $anuncios = Anuncio::where('categoria_id', $id)->orderBy('updated_at', 'desc')->get();            
+                 }  
+
+                 $data['bread2'] = $anuncios[0]->categoria->nome;
+        }else{
+            $anuncios = array();
+        }
+
+                       
 
 
 
         $data['anuncios'] = $anuncios;
 
 
-
         
         $data['bread1'] = "Categorias";
         $data['bread1a'] = "categoria";
-        $data['bread2'] = $anuncios[0]->categoria->nome;       
+               
 
 
 
@@ -759,7 +770,7 @@ class AnuncioController extends Controller
 
 
         $data['bread1'] = "Buscar";
-        $data['bread1a'] = "busca";
+        $data['bread1a'] = "";
         $data['bread2'] = $request->keyword;
        
 
@@ -778,37 +789,36 @@ class AnuncioController extends Controller
 
 
     {
-         if(isset($request->f)){
-            switch ($request->f) {
-                case 'antigo':
-                    $anuncios = Anuncio::where('user_id', $id)->orderBy('updated_at', 'ASC')->get();
-                    break;
-                case 'recente':
-                    $anuncios = Anuncio::where('user_id', $id)->orderBy('updated_at', 'DESC')->get();
-                    break;
-                case 'menorpreco':
-                    $anuncios = Anuncio::where('user_id', $id)->orderBy('valor', 'ASC')->get();
-                    break;
-                case 'maiorpreco':
-                    $anuncios = Anuncio::where('user_id', $id)->orderBy('valor', 'DESC')->get();
-                    break;                
-            }
-         }else{
-            $anuncios = Anuncio::where('user_id', $id)->orderBy('updated_at', 'desc')->get();
-         }                
+        $teste = Anuncio::where('user_id', $id)->orderBy('updated_at', 'desc')->first();
 
-
+        if($teste != null){
+            if(isset($request->f)){
+                switch ($request->f) {
+                    case 'antigo':
+                        $anuncios = Anuncio::where('user_id', $id)->orderBy('updated_at', 'ASC')->get();
+                        break;
+                    case 'recente':
+                        $anuncios = Anuncio::where('user_id', $id)->orderBy('updated_at', 'DESC')->get();
+                        break;
+                    case 'menorpreco':
+                        $anuncios = Anuncio::where('user_id', $id)->orderBy('valor', 'ASC')->get();
+                        break;
+                    case 'maiorpreco':
+                        $anuncios = Anuncio::where('user_id', $id)->orderBy('valor', 'DESC')->get();
+                        break;                
+                }
+             }else{
+                $anuncios = Anuncio::where('user_id', $id)->orderBy('updated_at', 'desc')->get();
+             }
+             $data['bread2'] = $anuncios[0]->user->name;  
+        }else{
+            $anuncios = array();
+        }     
 
         $data['anuncios'] = $anuncios;
 
-
-
-        
         $data['bread1'] = "Usuário";
         $data['bread1a'] = "categoria";
-        $data['bread2'] = $anuncios[0]->user->name;       
-
-
 
         return view('anuncio', $data);
 
