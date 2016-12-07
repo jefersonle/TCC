@@ -181,6 +181,7 @@
 			</div>
 		</div>
 	</div>
+</div>
 	<!--Plug-in Initialisation-->
 	<script type="text/javascript">
     $(document).ready(function() {

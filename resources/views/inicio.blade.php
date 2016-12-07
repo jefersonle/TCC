@@ -57,8 +57,8 @@
     <!-- Banner Header -->
     <div class="main-banner banner text-center">
       <div class="container">    
-            <h1>Lorem ipsum   <span class="segment-heading">    dolor amet </span> lorem ipsum</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <h1>O Maior Portal de Anúncios Agrícola do Brasil</h1>
+            <p>A tecnologia facilitando a vida do home do campo!.</p>
             <a href="{{ url('/anuncio/create') }}">Criar Anúncio</a>
       </div>
     </div>
@@ -196,7 +196,7 @@
                                             <span class="price">{{$anuncio->moeda->cifra}} {{substr_replace($anuncio->valor, ",", strlen($anuncio->valor)-2).substr($anuncio->valor, strlen($anuncio->valor)-2)}}</span>
                                         </a> 
                                         <div class="ad-info">
-                                            <h5>{{ substr($anuncio->titulo,0, 35) }}...</h5>
+                                            <h5 onclick="window.location.href = '{{ url('/anuncio/show') }}/{{ $anuncio->id }}';">{{ substr($anuncio->titulo,0, 30) }}...</h5>
                                             <span>{{ $anuncio->created_at }}</span>
                                         </div>
                                     </div>

@@ -26,7 +26,7 @@ class PerfilRequest extends Request
         return [
             'nome' => 'required|max:255',
             'email' => 'required|email',
-            'senha' => 'min:8|max:255|confirmed',
+            'senha' => 'min:6|max:255|confirmed',
             'cpf' => 'min:11|max:14',
         ];
     }
@@ -37,7 +37,7 @@ class PerfilRequest extends Request
             'nome.required' => 'O campo nome é obrigatório.',
             'email.required' => 'O campo email é obrigatório.',            
             'senha.confirmed' => 'As senhas não coincidem.',
-            'senha.min' => 'A senha deve conter no mínimo 8 dígitos.',
+            'senha.min' => 'A senha deve conter no mínimo 6 dígitos.',
             'cpf.min' => 'O CPF deve conter no mínimo 11 dígitos.',
             'cpf.max' => 'O CPF deve conter no máximo 11 dígitos.',
 

@@ -7,7 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE html>
 <html>
 <head>
-<title>Resale a Business Category Flat Bootstrap Responsive Website Template | Login :: w3layouts</title>
+<title>Agro Anuncios</title>
 <link rel="stylesheet" href="{{ url('/') }}/css/bootstrap.min.css">
 <link rel="stylesheet" href="{{ url('/') }}/css/bootstrap-select.css">
 <link href="{{ url('/') }}/css/style.css" rel="stylesheet" type="text/css" media="all" />
@@ -96,7 +96,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 </span>
                                 <p><a href="{{ url('/password/reset') }}">Esqueci Minha Senha!</a> </p>
                                 <div class="clearfix"> </div>
-                            </div>
+                            </div>                            
                             <form action="{{ url('/login') }}" method="POST">
                                 {!! csrf_field() !!}
                             <div class="log-input">
@@ -111,6 +111,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 </div>
                                 
                                 <div class="clearfix"> </div>
+                            </div>
+                            <div class="log-input">
+                                <div class="log-input-left">
+                                    @foreach ($errors->all() as $message) 
+                                            <div class="clearfix"></div>
+                                            <div class="alert alert-danger" role="alert">{{$message}}</div>
+                                    @endforeach
+                                </div>
                             </div>
                             <input type="submit" value="Entrar">
                         </form>  
